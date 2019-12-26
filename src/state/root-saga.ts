@@ -1,8 +1,20 @@
 import { all, spawn, call } from "redux-saga/effects"
-import { channelSaga, startSaga, stopSaga } from "./countdown/saga"
+import {
+    cdChannel,
+    watchCdStart,
+    watchCdStop,
+    watchCdReset,
+    watchCdRestart,
+} from "./countdown/saga"
 
 export default function*() {
-    const sagas = [channelSaga, startSaga, stopSaga]
+    const sagas = [
+        cdChannel,
+        watchCdStart,
+        watchCdStop,
+        watchCdReset,
+        watchCdRestart,
+    ]
 
     yield all(
         sagas.map(saga =>

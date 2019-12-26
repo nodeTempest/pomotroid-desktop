@@ -13,7 +13,7 @@ const createCdChannel = () =>
         return () => cd.off("stateChange", stateChangeHandler)
     })
 
-export function* channelSaga() {
+export function* cdChannel() {
     const cdChannel = yield call(createCdChannel)
     while (true) {
         const newstate: ICdState = yield take(cdChannel)
@@ -21,17 +21,31 @@ export function* channelSaga() {
     }
 }
 
-export function* startSaga() {
+export function* watchCdStart() {
     while (true) {
         yield take(CdActions.start)
         yield call([cd, cd.start])
     }
 }
 
-export function* stopSaga() {
+export function* watchCdStop() {
     while (true) {
         yield take(CdActions.stop)
         yield call([cd, cd.stop])
+    }
+}
+
+export function* watchCdRestart() {
+    while (true) {
+        const { payload } = yield take(CdActions.restart)
+        yield call([cd, cd.restart], payload)
+    }
+}
+
+export function* watchCdReset() {
+    while (true) {
+        const { payload } = yield take(CdActions.reset)
+        yield call([cd, cd.reset], payload)
     }
 }
 

@@ -54,12 +54,12 @@ export const stopCd = (): ICdStopAction => ({
     type: CdActions.stop,
 })
 
-export const restartCd = (options: ICdOptions): ICdRestartAction => ({
+export const restartCd = (options: ICdOptions = {}): ICdRestartAction => ({
     type: CdActions.restart,
     payload: options,
 })
 
-export const resetCd = (options: ICdOptions): ICdResetAction => ({
+export const resetCd = (options: ICdOptions = {}): ICdResetAction => ({
     type: CdActions.reset,
     payload: options,
 })
