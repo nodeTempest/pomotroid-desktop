@@ -8,6 +8,9 @@ import {
 import { Transition } from "react-transition-group"
 import { TransitionStatus } from "react-transition-group/Transition"
 import styled from "styled-components"
+import { Provider } from "react-redux"
+
+import store from "./state/store"
 
 import PageA from "./components/PageA"
 import PageB from "./components/PageB"
@@ -38,45 +41,47 @@ const FadeWrapper = styled.div<IFadeProps>`
 
 const App = () => {
     return (
-        <Router>
-            <>
-                <div>
-                    {routes.map(route => (
-                        <NavLink
-                            key={route.path}
-                            to={route.path}
-                            activeClassName="active"
-                        >
-                            {route.path}
-                        </NavLink>
-                    ))}
-                </div>
-                {/* wrap elem must have pos relative */}
-                <div>
-                    {routes.map(({ path, Component }) => (
-                        <Route key={path} path={path} exact={path === "/"}>
-                            {({ match }) => (
-                                <Transition
-                                    in={match != null}
-                                    timeout={300}
-                                    unmountOnExit
-                                    mountOnEnter
-                                >
-                                    {state => (
-                                        <FadeWrapper
-                                            state={state}
-                                            duration={300}
-                                        >
-                                            <Component />
-                                        </FadeWrapper>
-                                    )}
-                                </Transition>
-                            )}
-                        </Route>
-                    ))}
-                </div>
-            </>
-        </Router>
+        <Provider store={store}>
+            <Router>
+                <>
+                    <div>
+                        {routes.map(route => (
+                            <NavLink
+                                key={route.path}
+                                to={route.path}
+                                activeClassName="active"
+                            >
+                                {route.path}
+                            </NavLink>
+                        ))}
+                    </div>
+                    {/* wrap elem must have pos relative */}
+                    <div>
+                        {routes.map(({ path, Component }) => (
+                            <Route key={path} path={path} exact={path === "/"}>
+                                {({ match }) => (
+                                    <Transition
+                                        in={match != null}
+                                        timeout={300}
+                                        unmountOnExit
+                                        mountOnEnter
+                                    >
+                                        {state => (
+                                            <FadeWrapper
+                                                state={state}
+                                                duration={300}
+                                            >
+                                                <Component />
+                                            </FadeWrapper>
+                                        )}
+                                    </Transition>
+                                )}
+                            </Route>
+                        ))}
+                    </div>
+                </>
+            </Router>
+        </Provider>
     )
 }
 
