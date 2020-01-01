@@ -30,9 +30,9 @@ const createPattern = (rounds: number): stageTypes[] => {
 }
 
 export const defaultStagesState: IStagesState = {
-    rounds: 3,
+    rounds: 4,
     currentRound: 0,
-    pattern: ["work", "sbreak", "work", "sbreak", "work", "sbreak", "lbreak"],
+    pattern: createPattern(4),
     currentStageIndex: 0,
     durations: {
         work: 25 * MS_IN_MIN,
@@ -51,7 +51,39 @@ initialStagesState.currentStageIndex = 0
 const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
     initialStagesState,
     {
-        [stagesActions.changeDuration]: (state, payload) => state,
+        [stagesActions.changeDuration]: (state, payload) => {
+            Object.keys(payload).forEach(
+                key => (payload[key] = payload[key] * MS_IN_MIN)
+            )
+
+            return {
+                ...state,
+                durations: {
+                    ...state.durations,
+                    payload,
+                },
+            }
+        },
+
+        [stagesActions.changeRounds]: (state, payload) => ({
+            ...state,
+            rounds: payload,
+            pattern: createPattern(payload),
+        }),
+
+        [stagesActions.nextStage]: state => {
+            return {
+                ...state,
+                currentStageIndex:
+                    state.currentStageIndex < state.pattern.length - 1
+                        ? state.currentStageIndex + 1
+                        : 0,
+            }
+        },
+
+        [stagesActions.setDefaults]: () => ({
+            ...defaultStagesState,
+        }),
     }
 )
 
