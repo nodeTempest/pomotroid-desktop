@@ -1,14 +1,13 @@
-export interface IReducerMap<S> {
-    [key: string]: (state: S, payload: any) => S
-}
+import { AnyAction } from "redux"
 
-export interface IAnyAction {
-    type: string
-    payload: any
-}
-
-export const createReducer = <S>(
+export const createReducer = <S, A extends AnyAction>(
     initialState: S,
-    reducerMap: IReducerMap<S>
-) => (state: S = initialState, { type, payload }: IAnyAction) =>
-    reducerMap[type] ? reducerMap[type](state, payload) : state
+    reducerMap: {
+        [P in A["type"]]?: A extends { type: P }
+            ? (state: S, payload: A["payload"]) => S
+            : never
+    }
+): ((state: S | undefined, action: A) => S) => (
+    state = initialState,
+    { type, payload }
+) => (reducerMap[type] ? reducerMap[type](state, payload) : state)

@@ -1,4 +1,4 @@
-import { AnyAction, Reducer, combineReducers } from "redux"
+import { Reducer, combineReducers } from "redux"
 import cdReducer from "./countdown/reducer"
 import { ICdState } from "../custom_modules/countdown"
 import stagesReducer, { IStagesState } from "./stages/reducer"

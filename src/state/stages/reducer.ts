@@ -2,10 +2,11 @@ import { createSelector } from "reselect"
 import { IRootState } from "../root-reducer"
 import { MS_IN_MIN } from "../../constants"
 import { createReducer } from "../common"
+import { stagesActions, StagesActionTypes } from "./actions"
 
-type stageTypes = "work" | "sbreak" | "lbreak"
+export type stageTypes = "work" | "sbreak" | "lbreak"
 
-interface IDurations {
+export interface IDurations {
     work: number
     sbreak: number
     lbreak: number
@@ -47,9 +48,12 @@ export const initialStagesState: IStagesState = JSON.parse(
 initialStagesState.currentRound = 0
 initialStagesState.currentStageIndex = 0
 
-const stagesReducer = createReducer<IStagesState>(initialStagesState, {
-    TEMP: state => state,
-})
+const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
+    initialStagesState,
+    {
+        [stagesActions.changeDuration]: (state, payload) => state,
+    }
+)
 
 export default stagesReducer
 
