@@ -1,6 +1,10 @@
-import { take, put, call } from "redux-saga/effects"
+import { take, put, call, select } from "redux-saga/effects"
 import { eventChannel } from "redux-saga"
+
 import { ICdState } from "../../custom_modules/countdown"
+import { IRootState } from "../root-reducer"
+import { nextStage } from "../stages/actions"
+
 import { updateCd, CdActions } from "./actions"
 import cd from "./cd"
 
@@ -49,12 +53,13 @@ export function* watchCdReset() {
     }
 }
 
-// function* saga2() {
-//     while (true) {
-//         const {
-//             payload: { duration },
-//         } = yield take("STAGE / NEXT")
-//         cd.reset(duration)
-//         cd.start()
-//     }
-// }
+export function* watchUpdateCd() {
+    while (true) {
+        yield take(CdActions.stateChange)
+        const state: IRootState = yield select()
+
+        if (state.cd.over) {
+            yield put(nextStage())
+        }
+    }
+}
