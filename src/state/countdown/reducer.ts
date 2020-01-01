@@ -4,5 +4,7 @@ import { CdActions, CdActionsType } from "./actions"
 
 const initialState: ICdState = cd.getState()
 
-export default (state: ICdState = initialState, action: CdActionsType) =>
+const cdReducer = (state: ICdState = initialState, action: CdActionsType) =>
     action.type === CdActions.stateChange ? action.payload : state
+
+export default cdReducer
