@@ -1,7 +1,6 @@
-import { take, put, call, select } from "redux-saga/effects"
+import { take, put, select } from "redux-saga/effects"
 
-import { resetCd, restartCd } from "../countdown/actions"
-import { IRootState } from "../root-reducer"
+import { resetCd } from "../countdown/actions"
 
 import { currentStageSelector, currentStageDurationsSelector } from "./reducer"
 import { stagesActions } from "./actions"
@@ -15,20 +14,6 @@ export function* watchStagesDurationChange() {
         if (updatingCurrentStage) {
             yield put(resetCd())
         }
-    }
-}
-
-export function* watchNextStage() {
-    while (true) {
-        yield take(stagesActions.nextStage)
-
-        const state: IRootState = yield select()
-        const currentStageDuration = currentStageDurationsSelector(state)
-        const cdRunning = state.cd.isRunning
-
-        cdRunning
-            ? yield put(restartCd({ duration: currentStageDuration }))
-            : yield put(resetCd({ duration: currentStageDuration }))
     }
 }
 

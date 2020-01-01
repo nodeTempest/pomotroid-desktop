@@ -41,7 +41,7 @@ export const defaultStagesState: IStagesState = {
     pattern: createPattern(4),
     currentStageIndex: 0,
     durations: {
-        work: 25 * MS_IN_MIN,
+        work: 5000,
         sbreak: 5 * MS_IN_MIN,
         lbreak: 15 * MS_IN_MIN,
     },

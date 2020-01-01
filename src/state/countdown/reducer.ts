@@ -1,10 +1,45 @@
 import { ICdState } from "../../custom_modules/countdown"
 import cd from "./cd"
 import { CdActions, CdActionsType } from "./actions"
+import { createReducer } from "../common"
 
-const initialState: ICdState = cd.getState()
+export interface IExtraCdState {
+    stoppedByUser: boolean
+}
 
-const cdReducer = (state: ICdState = initialState, action: CdActionsType) =>
-    action.type === CdActions.stateChange ? action.payload : state
+const initialState: ICdState & IExtraCdState = {
+    ...cd.getState(),
+    stoppedByUser: false,
+}
 
-export default cdReducer
+const stagesReducer = createReducer<ICdState & IExtraCdState, CdActionsType>(
+    initialState,
+    {
+        [CdActions.stateChange]: (state, payload) => ({
+            ...state,
+            ...payload,
+        }),
+
+        [CdActions.start]: state => ({
+            ...state,
+            stoppedByUser: false,
+        }),
+
+        [CdActions.stop]: state => ({
+            ...state,
+            stoppedByUser: true,
+        }),
+
+        [CdActions.reset]: state => ({
+            ...state,
+            stoppedByUser: true,
+        }),
+
+        [CdActions.restart]: state => ({
+            ...state,
+            stoppedByUser: false,
+        }),
+    }
+)
+
+export default stagesReducer

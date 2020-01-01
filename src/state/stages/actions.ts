@@ -3,7 +3,7 @@ import { IDurations } from "./reducer"
 export enum stagesActions {
     changeDuration = "STAGES / CHANGE_DURATION",
     changeRounds = "STAGES / CHANGE_ROUNDS",
-    nextStage = "STAGES / NTEXT",
+    nextStage = "STAGES / NEXT",
     setDefaults = "STAGES / SET_DEFAULTS",
 }
 

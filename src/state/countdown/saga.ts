@@ -3,9 +3,10 @@ import { eventChannel } from "redux-saga"
 
 import { ICdState } from "../../custom_modules/countdown"
 import { IRootState } from "../root-reducer"
-import { nextStage } from "../stages/actions"
+import { stagesActions, nextStage } from "../stages/actions"
+import { currentStageDurationsSelector } from "../stages/reducer"
 
-import { updateCd, CdActions } from "./actions"
+import { updateCd, resetCd, restartCd, CdActions } from "./actions"
 import cd from "./cd"
 
 const createCdChannel = () =>
@@ -61,5 +62,19 @@ export function* watchUpdateCd() {
         if (state.cd.over) {
             yield put(nextStage())
         }
+    }
+}
+
+export function* watchNextStage() {
+    while (true) {
+        yield take(stagesActions.nextStage)
+
+        const state: IRootState = yield select()
+        const currentStageDuration = currentStageDurationsSelector(state)
+        const stoppedByUser = state.cd.stoppedByUser
+
+        stoppedByUser
+            ? yield put(resetCd({ duration: currentStageDuration }))
+            : yield put(restartCd({ duration: currentStageDuration }))
     }
 }

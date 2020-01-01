@@ -6,13 +6,10 @@ import {
     watchCdReset,
     watchCdRestart,
     watchUpdateCd,
+    watchNextStage,
 } from "./countdown/saga"
 
-import {
-    watchStagesDurationChange,
-    watchNextStage,
-    watchSetDefaults,
-} from "./stages/saga"
+import { watchStagesDurationChange, watchSetDefaults } from "./stages/saga"
 
 export default function*() {
     const sagas = [
