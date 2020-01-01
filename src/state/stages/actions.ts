@@ -9,7 +9,7 @@ export enum stagesActions {
 
 interface IStagesChangeDurationAction {
     type: typeof stagesActions.changeDuration
-    payload: IDurations
+    payload: Partial<IDurations>
 }
 
 interface IStagesChangeRoundsAction {
@@ -32,7 +32,7 @@ export type StagesActionTypes =
     | IStagesSetDefaultsAction
 
 export const changeStagesDuration = (
-    durations: IDurations
+    durations: Partial<IDurations>
 ): IStagesChangeDurationAction => ({
     type: stagesActions.changeDuration,
     payload: durations,
