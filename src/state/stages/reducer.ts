@@ -47,9 +47,7 @@ export const defaultStagesState: IStagesState = {
     },
 }
 
-export const initialStagesState: IStagesState = JSON.parse(
-    localStorage.getItem("stagesState") || ""
-) || { ...defaultStagesState }
+export const initialStagesState: IStagesState = { ...defaultStagesState }
 
 initialStagesState.currentRound = 0
 initialStagesState.currentStageIndex = 0
