@@ -29,6 +29,12 @@ const createPattern = (rounds: number): stageTypes[] => {
     return [...acc, "lbreak"]
 }
 
+export const formatDurations = (durations: IDurations): IDurations =>
+    Object.keys(durations).reduce(
+        (acc, key) => ((acc[key] = acc[key] * MS_IN_MIN), acc),
+        {} as IDurations
+    )
+
 export const defaultStagesState: IStagesState = {
     rounds: 4,
     currentRound: 0,
@@ -52,15 +58,11 @@ const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
     initialStagesState,
     {
         [stagesActions.changeDuration]: (state, payload) => {
-            Object.keys(payload).forEach(
-                key => (payload[key] = payload[key] * MS_IN_MIN)
-            )
-
             return {
                 ...state,
                 durations: {
                     ...state.durations,
-                    payload,
+                    ...formatDurations(payload),
                 },
             }
         },
