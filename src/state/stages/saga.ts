@@ -8,11 +8,13 @@ import { stagesActions } from "./actions"
 export function* watchStagesDurationChange() {
     while (true) {
         const { payload: durations } = yield take(stagesActions.changeDuration)
+
         const currentStage = yield select(currentStageSelector)
         const updatingCurrentStage = currentStage in durations
 
         if (updatingCurrentStage) {
-            yield put(resetCd())
+            const duration = yield select(currentStageDurationsSelector)
+            yield put(resetCd({ duration }))
         }
     }
 }
@@ -20,7 +22,7 @@ export function* watchStagesDurationChange() {
 export function* watchSetDefaults() {
     while (true) {
         yield take(stagesActions.setDefaults)
-        const currentStageDuration = yield select(currentStageDurationsSelector)
-        yield put(resetCd({ duration: currentStageDuration }))
+        const duration = yield select(currentStageDurationsSelector)
+        yield put(resetCd({ duration }))
     }
 }

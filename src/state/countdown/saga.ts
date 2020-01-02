@@ -69,12 +69,7 @@ export function* watchNextStage() {
     while (true) {
         yield take(stagesActions.nextStage)
 
-        const state: IRootState = yield select()
-        const currentStageDuration = currentStageDurationsSelector(state)
-        const stoppedByUser = state.cd.stoppedByUser
-
-        stoppedByUser
-            ? yield put(resetCd({ duration: currentStageDuration }))
-            : yield put(restartCd({ duration: currentStageDuration }))
+        const duration = yield select(currentStageDurationsSelector)
+        yield put(restartCd({ duration }))
     }
 }
