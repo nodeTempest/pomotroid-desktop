@@ -75,11 +75,20 @@ const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
             }
         },
 
-        [stagesActions.changeRounds]: (state, payload) => ({
-            ...state,
-            rounds: payload,
-            pattern: createPattern(payload),
-        }),
+        [stagesActions.changeRounds]: (state, payload) => {
+            const rounds = payload
+            const { currentRound } = state
+
+            if (rounds < currentRound) {
+                return { ...state }
+            }
+
+            return {
+                ...state,
+                rounds,
+                pattern: createPattern(payload),
+            }
+        },
 
         [stagesActions.nextStage]: state => {
             let { currentStageIndex } = state
