@@ -24,9 +24,9 @@ export interface IStagesState {
 const createPattern = (rounds: number): stageTypes[] => {
     const acc = [] as stageTypes[]
     while (rounds--) {
-        acc.push("work", "sbreak")
+        acc.push("work", rounds === 0 ? "lbreak" : "sbreak")
     }
-    return [...acc, "lbreak"]
+    return acc
 }
 
 export const formatDurationsToMS = (
@@ -47,7 +47,7 @@ export const formatDurationsToMINS = (
 
 export const defaultStagesState: IStagesState = {
     rounds: 4,
-    currentRound: 0,
+    currentRound: 1,
     pattern: createPattern(4),
     currentStageIndex: 0,
     durations: formatDurationsToMS({
@@ -59,7 +59,7 @@ export const defaultStagesState: IStagesState = {
 
 export const initialStagesState: IStagesState = { ...defaultStagesState }
 
-initialStagesState.currentRound = 0
+initialStagesState.currentRound = 1
 initialStagesState.currentStageIndex = 0
 
 const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
@@ -82,12 +82,28 @@ const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
         }),
 
         [stagesActions.nextStage]: state => {
+            let { currentStageIndex } = state
+
+            currentStageIndex++
+
+            if (currentStageIndex >= state.pattern.length) {
+                currentStageIndex = 0
+            }
+
+            let { currentRound, rounds } = state
+
+            if (!(currentStageIndex % 2)) {
+                currentRound++
+            }
+
+            if (currentRound > rounds) {
+                currentRound = 1
+            }
+
             return {
                 ...state,
-                currentStageIndex:
-                    state.currentStageIndex < state.pattern.length - 1
-                        ? state.currentStageIndex + 1
-                        : 0,
+                currentStageIndex,
+                currentRound,
             }
         },
 

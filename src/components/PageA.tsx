@@ -20,6 +20,9 @@ const PageA = () => {
 
     const durations: IDurations = useSelector(durationsSelector)
     const rounds = useSelector((state: IRootState) => state.stages.rounds)
+    const currentRound = useSelector(
+        (state: IRootState) => state.stages.currentRound
+    )
     const currentStage = useSelector(currentStageSelector)
     const remainingTime = useSelector(
         (state: IRootState) => state.cd.remainingTime
@@ -106,7 +109,10 @@ const PageA = () => {
             <br />
             <br />
             <h1>{remainingTime}</h1>
-            <div>{currentStage}</div>
+            <h2>{currentStage}</h2>
+            <div>
+                Round: {currentRound}/{rounds}
+            </div>
         </>
     )
 }
