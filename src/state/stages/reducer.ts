@@ -29,7 +29,7 @@ const createPattern = (rounds: number): stageTypes[] => {
     return acc
 }
 
-export const formatDurationsToMS = (
+export const durationsToModel = (
     durations: Partial<IDurations>
 ): Partial<IDurations> =>
     Object.keys(durations).reduce(
@@ -37,7 +37,7 @@ export const formatDurationsToMS = (
         { ...durations }
     )
 
-export const formatDurationsToMINS = (
+export const durationsToView = (
     durations: Partial<IDurations>
 ): Partial<IDurations> =>
     Object.keys(durations).reduce(
@@ -50,7 +50,7 @@ export const defaultStagesState: IStagesState = {
     currentRound: 1,
     pattern: createPattern(4),
     currentStageIndex: 0,
-    durations: formatDurationsToMS({
+    durations: durationsToModel({
         work: 25,
         sbreak: 5,
         lbreak: 15,
@@ -70,7 +70,7 @@ const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
                 ...state,
                 durations: {
                     ...state.durations,
-                    ...formatDurationsToMS(payload),
+                    ...durationsToModel(payload),
                 },
             }
         },
@@ -153,5 +153,5 @@ export const durationsSelector = createSelector<
     IDurations
 >(
     state => state.stages.durations,
-    durations => formatDurationsToMINS(durations) as IDurations
+    durations => durationsToView(durations) as IDurations
 )
