@@ -29,7 +29,7 @@ const PageA = () => {
         <>
             <h1>Page A</h1>
             <button onClick={() => dispatch(startCd())}>Start</button>
-            <button onClick={() => dispatch(startCd())}>Stop</button>
+            <button onClick={() => dispatch(stopCd())}>Stop</button>
             <button
                 onClick={() =>
                     dispatch(

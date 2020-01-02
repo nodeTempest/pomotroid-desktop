@@ -47,8 +47,8 @@ export class Cd {
     }
 
     private setTimeStamps({ duration, tickInterval }: IOptions = {}) {
-        duration = duration ?? Infinity
-        tickInterval = tickInterval ?? 1000
+        duration = duration || this.timeStamps.duration || Infinity
+        tickInterval = tickInterval || this.timeStamps.tickInterval || 1000
 
         this.timeStamps = {
             duration,
