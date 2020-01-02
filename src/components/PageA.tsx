@@ -5,6 +5,7 @@ import { startCd, stopCd, restartCd, resetCd } from "../state/countdown/actions"
 import {
     durationsSelector,
     currentStageSelector,
+    currentRoundSelector,
     IDurations,
 } from "../state/stages/reducer"
 import { IRootState } from "../state/root-reducer"
@@ -20,9 +21,7 @@ const PageA = () => {
 
     const durations: IDurations = useSelector(durationsSelector)
     const rounds = useSelector((state: IRootState) => state.stages.rounds)
-    const currentRound = useSelector(
-        (state: IRootState) => state.stages.currentRound
-    )
+    const currentRound = useSelector(currentRoundSelector)
     const currentStage = useSelector(currentStageSelector)
     const remainingTime = useSelector(
         (state: IRootState) => state.cd.remainingTime

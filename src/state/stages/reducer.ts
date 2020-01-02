@@ -77,7 +77,9 @@ const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
 
         [stagesActions.changeRounds]: (state, payload) => {
             const rounds = payload
-            const { currentRound } = state
+            const currentRound = currentRoundSelector({
+                stages: state,
+            } as IRootState)
 
             if (rounds < currentRound) {
                 return { ...state }
@@ -99,20 +101,9 @@ const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
                 currentStageIndex = 0
             }
 
-            let { currentRound, rounds } = state
-
-            if (!(currentStageIndex % 2)) {
-                currentRound++
-            }
-
-            if (currentRound > rounds) {
-                currentRound = 1
-            }
-
             return {
                 ...state,
                 currentStageIndex,
-                currentRound,
             }
         },
 
@@ -154,4 +145,9 @@ export const durationsSelector = createSelector<
 >(
     state => state.stages.durations,
     durations => durationsToView(durations) as IDurations
+)
+
+export const currentRoundSelector = createSelector<IRootState, number, number>(
+    state => state.stages.currentStageIndex,
+    currentStageIndex => Math.ceil((currentStageIndex + 1) / 2)
 )
