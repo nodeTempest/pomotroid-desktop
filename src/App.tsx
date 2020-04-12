@@ -28,16 +28,13 @@ const App = () => {
                 <>
                     <GlobalStyle />
                     <NavBar />
-                    {/* wrap elem must have pos relative */}
-                    <div>
-                        {routes.map(({ path, Component }) => (
-                            <Route key={path} path={path} exact={path === "/"}>
-                                {childrenProps => (
-                                    <Component {...childrenProps} />
-                                )}
-                            </Route>
-                        ))}
-                    </div>
+                    <Route
+                        path="/"
+                        render={() => <Redirect to="/page-a" />}
+                        exact
+                    />
+                    <Route path="/page-a" component={PageA} exact />
+                    <Route path="/page-b" component={PageB} />
                 </>
             </Router>
         </Provider>
