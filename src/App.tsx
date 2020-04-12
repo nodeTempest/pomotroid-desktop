@@ -15,6 +15,9 @@ import store from "./state/store"
 import PageA from "./components/PageA"
 import PageB from "./components/PageB"
 
+import Box from "./styled/Box"
+import GlobalStyle from "./styled/GlobalStyle"
+
 const routes = [
     {
         path: "/",
@@ -44,6 +47,7 @@ const App = () => {
         <Provider store={store}>
             <Router>
                 <>
+                    <GlobalStyle />
                     <div>
                         {routes.map(route => (
                             <NavLink
@@ -79,6 +83,9 @@ const App = () => {
                             </Route>
                         ))}
                     </div>
+                    <Box p={30} border={3} borderColor="black">
+                        Hello World
+                    </Box>
                 </>
             </Router>
         </Provider>
