@@ -16,7 +16,9 @@ import {
     stagesSetDefaults,
 } from "../state/stages/actions"
 
-const PageA = () => {
+import { RouteChildrenProps } from "react-router-dom"
+
+const PageA = (props: RouteChildrenProps) => {
     const dispatch = useDispatch()
 
     const durations: IDurations = useSelector(durationsSelector)
