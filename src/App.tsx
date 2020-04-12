@@ -10,32 +10,19 @@ import PageB from "./components/PageB"
 
 import GlobalStyle from "./styled/GlobalStyle"
 
-const routes = [
-    {
-        path: "/",
-        name: "Home",
-        Component: () => <Redirect to="/page-a" />,
-        exact: true,
-    },
-    { path: "/page-a", Component: PageA, exact: true },
-    { path: "/page-b", Component: PageB, exact: false },
-]
-
 const App = () => {
     return (
         <Provider store={store}>
             <Router>
-                <>
-                    <GlobalStyle />
-                    <NavBar />
-                    <Route
-                        path="/"
-                        render={() => <Redirect to="/page-a" />}
-                        exact
-                    />
-                    <Route path="/page-a" component={PageA} exact />
-                    <Route path="/page-b" component={PageB} />
-                </>
+                <GlobalStyle />
+                <NavBar />
+                <Route
+                    path="/"
+                    render={() => <Redirect to="/page-a" />}
+                    exact
+                />
+                <Route path="/page-a" component={PageA} exact />
+                <Route path="/page-b" component={PageB} />
             </Router>
         </Provider>
     )
