@@ -9,20 +9,23 @@ import PageA from "./components/PageA"
 import PageB from "./components/PageB"
 
 import GlobalStyle from "./styled/GlobalStyle"
+import Box from "./styled/Box"
 
 const App = () => {
     return (
         <Provider store={store}>
             <Router>
                 <GlobalStyle />
-                <NavBar />
-                <Route
-                    path="/"
-                    render={() => <Redirect to="/page-a" />}
-                    exact
-                />
-                <Route path="/page-a" component={PageA} exact />
-                <Route path="/page-b" component={PageB} />
+                <Box height={480} width={360} border={3}>
+                    <NavBar />
+                    <Route
+                        path="/"
+                        render={() => <Redirect to="/page-a" />}
+                        exact
+                    />
+                    <Route path="/page-a" component={PageA} exact />
+                    <Route path="/page-b" component={PageB} />
+                </Box>
             </Router>
         </Provider>
     )
