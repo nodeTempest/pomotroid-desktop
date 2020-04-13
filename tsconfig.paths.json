@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "@asstes/*": ["asstes/*"],
+            "@components/*": ["components/*"],
+            "@constants/*": ["constants/*"],
+            "@custom_modules/*": ["custom_modules/*"],
+            "@state/*": ["state/*"],
+            "@styled/*": ["styled/*"]
+        }
+    }
+}

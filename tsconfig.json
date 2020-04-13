@@ -18,5 +18,6 @@
     },
     "include": ["src"],
     "baseUrl": "types",
-    "typeRoots": ["types"]
+    "typeRoots": ["types"],
+    "extends": "./tsconfig.paths.json"
 }
