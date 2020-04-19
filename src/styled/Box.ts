@@ -17,12 +17,14 @@ import {
     typography,
 } from "@material-ui/system"
 
-// BoxProps type is too complicated for TypeScript type inference engine
+// IBoxProps type is too complicated for TypeScript type inference engine
 // too much work is required to specify it
-// best solution is to make it 'any'
-type BoxProps = any
+// best solution is to make it { [index: string]: any }
+interface IBoxProps {
+    [index: string]: any
+}
 
-const boxContainer = compose<BoxProps>(breakpoints, css, composeStyles)
+const boxContainer = compose<IBoxProps>(breakpoints, css, composeStyles)
 
 const styles = boxContainer(
     borders,
@@ -36,7 +38,7 @@ const styles = boxContainer(
     typography
 )
 
-const Box = styled.div<BoxProps>`
+const Box = styled.div<IBoxProps>`
     ${styles}
 `
 

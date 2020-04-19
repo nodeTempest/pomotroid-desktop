@@ -10,6 +10,7 @@ import PageB from "./components/PageB"
 
 import GlobalStyle from "./styled/GlobalStyle"
 import Box from "./styled/Box"
+import Header from "./styled/Header"
 
 const App = () => {
     return (
@@ -25,6 +26,7 @@ const App = () => {
                     />
                     <Route path="/page-a" component={PageA} exact />
                     <Route path="/page-b" component={PageB} />
+                    <Header as="h2">Header</Header>
                 </Box>
             </Router>
         </Provider>
