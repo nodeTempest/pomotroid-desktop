@@ -1,11 +1,9 @@
-import { compose } from "redux"
-
 import styled from "styled-components"
 
 import {
     breakpoints,
     css,
-    compose as composeStyles,
+    compose,
     borders,
     display,
     flexbox,
@@ -15,31 +13,29 @@ import {
     sizing,
     spacing,
     typography,
+    StyleFunction,
 } from "@material-ui/system"
 
-// IBoxProps type is too complicated for TypeScript type inference engine
-// too much work is required to specify it
-// best solution is to make it { [index: string]: any }
-interface IBoxProps {
-    [index: string]: any
-}
+type UnpackStyleFunction<T> = T extends StyleFunction<infer U> ? U : never
 
-const boxContainer = compose<IBoxProps>(breakpoints, css, composeStyles)
-
-const styles = boxContainer(
-    borders,
-    display,
-    flexbox,
-    palette,
-    positions,
-    shadows,
-    sizing,
-    spacing,
-    typography
+const composedStyle = breakpoints(
+    css(
+        compose(
+            borders,
+            display,
+            flexbox,
+            palette,
+            positions,
+            shadows,
+            sizing,
+            spacing,
+            typography
+        )
+    )
 )
 
-const Box = styled.div<IBoxProps>`
-    ${styles}
+const Box = styled.div<UnpackStyleFunction<typeof composedStyle>>`
+    ${composedStyle}
 `
 
 export default Box
