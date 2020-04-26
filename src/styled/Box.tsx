@@ -40,6 +40,7 @@ const createBox = (as: keyof JSX.IntrinsicElements) =>
     styled(as)<StylerProps>(styler)
 
 const BoxMap = {
+    // HTML
     a: createBox("a"),
     abbr: createBox("abbr"),
     address: createBox("address"),
@@ -156,7 +157,7 @@ const BoxMap = {
     video: createBox("video"),
     wbr: createBox("wbr"),
     webview: createBox("webview"),
-
+    // SVG
     svg: createBox("svg"),
     animate: createBox("animate"),
     animateMotion: createBox("animateMotion"),
