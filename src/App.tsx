@@ -4,6 +4,8 @@ import { Provider } from "react-redux"
 
 import { store } from "@state/store"
 
+import { routes } from "@constants/index"
+
 import { NavBar } from "@components/NavBar"
 import { PageA } from "@components/PageA"
 import { PageB } from "@components/PageB"
