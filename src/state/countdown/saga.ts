@@ -1,10 +1,10 @@
 import { take, put, call, select } from "redux-saga/effects"
 import { eventChannel } from "redux-saga"
 
-import { ICdState } from "../../custom_modules/countdown"
-import { IRootState } from "../root-reducer"
-import { stagesActions, nextStage } from "../stages/actions"
-import { currentStageDurationsSelector } from "../stages/reducer"
+import { ICdState } from "@custom_modules/countdown"
+import { IRootState } from "@state/root-reducer"
+import { stagesActions, nextStage } from "@state/stages/actions"
+import { currentStageDurationsSelector } from "@state/stages/reducer"
 
 import { updateCd, resetCd, restartCd, CdActions } from "./actions"
 import cd from "./cd"

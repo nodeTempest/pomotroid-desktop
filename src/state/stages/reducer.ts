@@ -1,7 +1,7 @@
 import { createSelector } from "reselect"
-import { IRootState } from "../root-reducer"
-import { MS_IN_MIN } from "../../constants"
-import { createReducer } from "../common"
+import { IRootState } from "@state/root-reducer"
+import { MS_IN_MIN } from "@constants/index"
+import { createReducer } from "@state/common"
 import { stagesActions, StagesActionTypes } from "./actions"
 
 export type stageTypes = "work" | "sbreak" | "lbreak"

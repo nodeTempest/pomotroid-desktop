@@ -1,6 +1,6 @@
 import { take, put, select } from "redux-saga/effects"
 
-import { resetCd } from "../countdown/actions"
+import { resetCd } from "@state/countdown/actions"
 
 import { currentStageSelector, currentStageDurationsSelector } from "./reducer"
 import { stagesActions } from "./actions"

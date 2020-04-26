@@ -2,14 +2,14 @@ import * as React from "react"
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import { Provider } from "react-redux"
 
-import { store } from "./state/store"
+import { store } from "@state/store"
 
-import { NavBar } from "./components/NavBar"
-import { PageA } from "./components/PageA"
-import { PageB } from "./components/PageB"
+import { NavBar } from "@components/NavBar"
+import { PageA } from "@components/PageA"
+import { PageB } from "@components/PageB"
 
-import { GlobalStyle } from "./styled/GlobalStyle"
-import { Box } from "./styled/Box"
+import { GlobalStyle } from "@styled/GlobalStyle"
+import { Box } from "@styled/Box"
 
 export const App = () => {
     return (
