@@ -27,8 +27,6 @@ const palette = {
     },
 }
 
-const theme = {
+export const theme = {
     palette,
 }
-
-export default theme

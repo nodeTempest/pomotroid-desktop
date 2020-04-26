@@ -62,7 +62,7 @@ export const initialStagesState: IStagesState = { ...defaultStagesState }
 initialStagesState.currentRound = 1
 initialStagesState.currentStageIndex = 0
 
-const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
+export const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
     initialStagesState,
     {
         [stagesActions.changeDuration]: (state, payload) => {
@@ -112,8 +112,6 @@ const stagesReducer = createReducer<IStagesState, StagesActionTypes>(
         }),
     }
 )
-
-export default stagesReducer
 
 // Selectors
 export const currentStageSelector = createSelector<

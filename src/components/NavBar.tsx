@@ -1,8 +1,6 @@
 import * as React from "react"
-import Box from "../styled/Box"
+import { Box } from "../styled/Box"
 
-const NavBar = () => {
+export const NavBar = () => {
     return <Box p={5}>I am Navbar</Box>
 }
-
-export default NavBar

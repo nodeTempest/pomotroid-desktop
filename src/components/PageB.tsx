@@ -9,7 +9,7 @@ const Item2 = () => {
     return <h4>Item 2</h4>
 }
 
-function PageB() {
+export function PageB() {
     const location = useLocation() || {}
 
     // set default page to /about/item-1
@@ -30,5 +30,3 @@ function PageB() {
         </div>
     )
 }
-
-export default PageB

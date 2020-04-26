@@ -11,7 +11,7 @@ import {
 
 import { watchStagesDurationChange, watchSetDefaults } from "./stages/saga"
 
-export default function*() {
+export function* rootSaga() {
     const sagas = [
         cdChannel,
         watchCdStart,

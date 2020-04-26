@@ -1,6 +1,6 @@
 import { createGlobalStyle, css } from "styled-components"
 
-const GlobalStyle = createGlobalStyle`${css`
+export const GlobalStyle = createGlobalStyle`${css`
     *,
     *:before,
     *:after {
@@ -10,5 +10,3 @@ const GlobalStyle = createGlobalStyle`${css`
     }
 `}
 `
-
-export default GlobalStyle

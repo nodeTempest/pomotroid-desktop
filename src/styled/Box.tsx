@@ -222,7 +222,7 @@ interface IProps {
     as?: keyof JSX.IntrinsicElements
 }
 
-const Box: FunctionComponent<IProps & StylerProps> = ({
+export const Box: FunctionComponent<IProps & StylerProps> = ({
     as = "div",
     children,
     ...rest
@@ -230,5 +230,3 @@ const Box: FunctionComponent<IProps & StylerProps> = ({
     const Component = BoxMap[as]
     return <Component {...rest}>{children}</Component>
 }
-
-export default Box

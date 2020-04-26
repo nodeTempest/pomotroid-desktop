@@ -12,7 +12,7 @@ const initialState: ICdState & IExtraCdState = {
     stoppedByUser: false,
 }
 
-const stagesReducer = createReducer<ICdState & IExtraCdState, CdActionsType>(
+export const cdReducer = createReducer<ICdState & IExtraCdState, CdActionsType>(
     initialState,
     {
         [CdActions.stateChange]: (state, payload) => ({
@@ -41,5 +41,3 @@ const stagesReducer = createReducer<ICdState & IExtraCdState, CdActionsType>(
         }),
     }
 )
-
-export default stagesReducer
