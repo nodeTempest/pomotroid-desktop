@@ -7,7 +7,7 @@ import { stagesActions, nextStage } from "@state/stages/actions"
 import { currentStageDurationsSelector } from "@state/stages/reducer"
 
 import { updateCd, resetCd, restartCd, CdActions } from "./actions"
-import cd from "./cd"
+import { cd } from "./cd"
 
 const createCdChannel = () =>
     eventChannel(emit => {

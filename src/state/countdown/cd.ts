@@ -1,5 +1,5 @@
-import Cd from "@custom_modules/countdown"
+import { Cd } from "@custom_modules/countdown"
 
-export default new Cd({
+export const cd = new Cd({
     duration: 5000,
 })
