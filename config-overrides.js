@@ -9,6 +9,8 @@ module.exports = override(
         "@components": resolvePath("src/components"),
         "@constants": resolvePath("src/constants"),
         "@custom_modules": resolvePath("src/custom_modules"),
+        "@layouts": resolvePath("src/layouts"),
+        "@pages": resolvePath("src/pages"),
         "@state": resolvePath("src/state"),
         "@styled": resolvePath("src/styled"),
     })
