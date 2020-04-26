@@ -1,18 +1,10 @@
-interface IRoute {
-    [key: string]: {
-        name: string
-        next: null | IRoute
-    }
-}
-
-export const routes: IRoute = {
+export const routes = {
     app: {
         name: "/app",
         next: null,
     },
     menu: {
         name: "/menu",
-
         next: {
             durations: {
                 name: "/durations",

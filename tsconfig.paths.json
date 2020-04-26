@@ -6,6 +6,8 @@
             "@components/*": ["components/*"],
             "@constants/*": ["constants/*"],
             "@custom_modules/*": ["custom_modules/*"],
+            "@layouts/*": ["layouts/*"],
+            "@pages/*": ["pages/*"],
             "@state/*": ["state/*"],
             "@styled/*": ["styled/*"]
         }
