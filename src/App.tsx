@@ -6,7 +6,6 @@ import { store } from "@state/store"
 
 import { routes } from "@constants/index"
 
-import { NavBar } from "@components/NavBar"
 import { PageA } from "@components/PageA"
 import { PageB } from "@components/PageB"
 
@@ -19,7 +18,6 @@ export const App = () => {
             <Router>
                 <GlobalStyle />
                 <Box height={480} width={360} border={3}>
-                    <NavBar />
                     <Route
                         path="/"
                         render={() => <Redirect to="/page-a" />}
