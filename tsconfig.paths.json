@@ -3,13 +3,21 @@
         "baseUrl": "./src",
         "paths": {
             "@asstes/*": ["asstes/*"],
+            "@asstes": ["asstes/index.ts"],
             "@components/*": ["components/*"],
+            "@components": ["components/index.ts"],
             "@constants/*": ["constants/*"],
+            "@constants": ["constants/index.ts"],
             "@custom_modules/*": ["custom_modules/*"],
+            "@custom_modules": ["custom_modules/index.ts"],
             "@layouts/*": ["layouts/*"],
+            "@layouts": ["layouts/index.ts"],
             "@pages/*": ["pages/*"],
+            "@pages": ["pages/index.ts"],
             "@state/*": ["state/*"],
-            "@styled/*": ["styled/*"]
+            "@state": ["state/index.ts"],
+            "@styled/*": ["styled/*"],
+            "@styled": ["styled/index.ts"]
         }
     }
 }

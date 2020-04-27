@@ -1,6 +1,6 @@
 import { createSelector } from "reselect"
 import { IRootState } from "@state/root-reducer"
-import { MS_IN_MIN } from "@constants/index"
+import { MS_IN_MIN } from "@constants"
 import { createReducer } from "@state/common"
 import { stagesActions, StagesActionTypes } from "./actions"
 

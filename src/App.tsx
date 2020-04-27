@@ -1,9 +1,9 @@
 import * as React from "react"
 import { Route, Redirect, Switch } from "react-router-dom"
 
-import { routes } from "@constants/index"
-import { AppPage, MenuPage } from "@pages/index"
-import { AppLayout } from "@layouts/index"
+import { routes } from "@constants"
+import { AppPage, MenuPage } from "@pages"
+import { AppLayout } from "@layouts"
 import { AppContainer } from "./AppContainer"
 
 export const App = () => {

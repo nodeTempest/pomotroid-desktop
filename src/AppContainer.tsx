@@ -5,7 +5,7 @@ import { Provider } from "react-redux"
 import { ThemeProvider } from "styled-components"
 
 import { store } from "@state/store"
-import { GlobalStyle, theme } from "@styled/index"
+import { GlobalStyle, theme } from "@styled"
 
 export const AppContainer: FunctionComponent<object> = ({ children }) => {
     return (
