@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`${css`
 
     body {
         font-family: OpenSans;
+        font-size: 15px;
     }
 
     @font-face {

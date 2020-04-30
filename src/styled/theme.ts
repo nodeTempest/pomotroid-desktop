@@ -1,7 +1,7 @@
 const palette = {
     bg: {
-        dark: "#3c4356",
-        light: "#2f384b",
+        light: "#3c4356",
+        dark: "#2f384b",
     },
     stages: {
         work: "#fe4d4c",
