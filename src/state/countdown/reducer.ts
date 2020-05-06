@@ -1,4 +1,4 @@
-import { ICdState } from "@custom_modules/countdown"
+import { ICdState } from "@modules"
 import { cd } from "./cd"
 import { CdActions, CdActionsType } from "./actions"
 import { createReducer } from "@state/common"

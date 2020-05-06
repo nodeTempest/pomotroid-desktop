@@ -22,7 +22,7 @@ export interface IOptions {
 
 export type ICdState = IState & ITimeStamps
 
-export class Cd {
+class Cd {
     private timer: number = 0
 
     private readonly emitter = new EventEmitter()
@@ -163,4 +163,4 @@ export class Cd {
     }
 }
 
-export default Cd
+export { Cd }

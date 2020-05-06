@@ -1,6 +1,0 @@
-export * from "./OpenMenuIcon"
-export * from "./CloseWindowIcon"
-export * from "./MinimizeWindowIcon"
-export * from "./NextStageIcon"
-export * from "./OpenMenuIcon"
-export * from "./SoundIcon"

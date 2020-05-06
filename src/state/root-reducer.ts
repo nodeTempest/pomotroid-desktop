@@ -1,6 +1,6 @@
 import { Reducer, combineReducers } from "redux"
 import { cdReducer, IExtraCdState } from "./countdown/reducer"
-import { ICdState } from "@custom_modules/countdown"
+import { ICdState } from "@modules"
 import { stagesReducer, IStagesState } from "./stages/reducer"
 
 export interface IRootState {

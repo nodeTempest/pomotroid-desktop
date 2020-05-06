@@ -1,7 +1,7 @@
 import * as React from "react"
 import { FunctionComponent } from "react"
 
-import { NavBar } from "@components/NavBar"
+import { NavBar } from "@layouts/NavBar"
 import { Box } from "@styled/Box"
 
 export const AppLayout: FunctionComponent<object> = ({ children }) => {

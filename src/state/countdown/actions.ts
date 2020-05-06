@@ -1,4 +1,4 @@
-import { ICdState, IOptions as ICdOptions } from "@custom_modules/countdown"
+import { ICdState, IOptions as ICdOptions } from "@modules"
 
 export enum CdActions {
     stateChange = "CD / STATE_CHANGE",

@@ -2,14 +2,10 @@ import * as React from "react"
 import { Link, useLocation } from "react-router-dom"
 import styled from "styled-components"
 
-import {
-    Box,
-    OpenMenuIcon,
-    MinimizeWindowIcon,
-    CloseWindowIcon,
-    NextStageIcon,
-    SoundIcon,
-} from "@styled"
+import { OpenMenuIcon } from "./OpenMenuIcon"
+import { CloseWindowIcon } from "./CloseWindowIcon"
+import { MinimizeWindowIcon } from "./MinimizeWindowIcon"
+import { Box } from "@styled"
 import { routes } from "@constants"
 
 const StyledLink = styled(Link)`
@@ -34,10 +30,8 @@ export const NavBar = () => {
             </StyledLink>
             <MinimizeWindowIcon />
             <CloseWindowIcon />
-            <NextStageIcon />
-            <SoundIcon />
 
-            <Box color="text.highlight">Pomotroid</Box>
+            {/* <Box color="text.highlight">Pomotroid</Box> */}
         </Box>
     )
 }
