@@ -25,13 +25,20 @@ export const NavBar = () => {
             display="flex"
             justifyContent="space-between"
         >
-            <StyledLink to={onMenu ? routes.app.name : routes.menu.name}>
-                <OpenMenuIcon active={!onMenu} size={25} />
-            </StyledLink>
-            <MinimizeWindowIcon />
-            <CloseWindowIcon />
-
-            {/* <Box color="text.highlight">Pomotroid</Box> */}
+            <Box width={1 / 3}>
+                <StyledLink to={onMenu ? routes.app.name : routes.menu.name}>
+                    <OpenMenuIcon active={!onMenu} size={25} />
+                </StyledLink>
+            </Box>
+            <Box width={1 / 3} color="text.highlight" textAlign="center">
+                Pomotroid
+            </Box>
+            <Box width={1 / 3} display="flex" justifyContent="flex-end">
+                <Box mr={4}>
+                    <MinimizeWindowIcon size={20} />
+                </Box>
+                <CloseWindowIcon size={20} />
+            </Box>
         </Box>
     )
 }
