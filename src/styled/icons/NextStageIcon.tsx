@@ -2,11 +2,7 @@ import React, { FunctionComponent } from "react"
 
 import styled from "styled-components"
 
-interface IStyledProps {
-    size: number
-}
-
-const Svg = styled.svg<IStyledProps>`
+const Svg = styled.svg<IProps>`
     & {
         width: ${props => props.size}px;
         height: ${props => props.size}px;
@@ -14,32 +10,25 @@ const Svg = styled.svg<IStyledProps>`
 
     &:hover path {
         stroke: ${props => props.theme.palette.button.fg.hover};
+        fill: ${props => props.theme.palette.button.fg.hover};
     }
+
     path {
         stroke: ${props => props.theme.palette.button.fg.dark};
-        stroke-width: 8;
+        fill: ${props => props.theme.palette.button.fg.dark};
         transition: all 250ms;
     }
 `
 
 interface IProps {
-    active: boolean
     size?: number
 }
 
-export const OpenMenuIcon: FunctionComponent<IProps> = ({
-    active = 25,
-    size,
-}) => {
-    const activeTopD = "M15 35 L85 35 Z"
-    const activeBotD = "M15 65 L50 65 Z"
-
-    const unactiveTopD = "M35 50 L70 15 Z"
-    const unactiveBotD = "M35 50 L70 85 Z"
+export const NextStageIcon: FunctionComponent<IProps> = ({ size = 25 }) => {
     return (
         <Svg viewBox="0 0 100 100" size={size as number}>
-            <path d={active ? activeTopD : unactiveTopD} />
-            <path d={active ? activeBotD : unactiveBotD} />
+            <path d="M20 15 L20 85 L55 50 L20 15 Z" />
+            <path strokeWidth={6} d="M65 15 L65 85 Z" />
         </Svg>
     )
 }
