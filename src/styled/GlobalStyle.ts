@@ -1,11 +1,5 @@
 import { createGlobalStyle, css } from "styled-components"
-
-// import RobotoThin from "Roboto-Thin.ttf"
-// import RobotoLight from "../assets/fonts/roboto/"
-// import RobotoRegular from "../assets/fonts/roboto/"
-// import RobotoMedium from "../assets/fonts/roboto/"
-// import RobotoBold from "../assets/fonts/roboto/"
-// import RobotoBlack from "../assets/fonts/roboto/"
+import { theme } from "./theme"
 
 export const GlobalStyle = createGlobalStyle`${css`
     *,
@@ -19,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`${css`
     body {
         font-family: OpenSans;
         font-size: 15px;
+        color: ${theme.palette.text.light};
     }
 
     @font-face {
