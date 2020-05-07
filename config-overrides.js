@@ -11,5 +11,6 @@ module.exports = override(
         "@pages": resolvePath("src/pages"),
         "@state": resolvePath("src/state"),
         "@styled": resolvePath("src/styled"),
+        "@utils": resolvePath("src/utils"),
     })
 )

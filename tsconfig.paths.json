@@ -13,7 +13,9 @@
             "@state/*": ["state/*"],
             "@state": ["state/index.ts"],
             "@styled/*": ["styled/*"],
-            "@styled": ["styled/index.ts"]
+            "@styled": ["styled/index.ts"],
+            "@utils/*": ["utils/*"],
+            "@utils": ["utils/index.ts"]
         }
     }
 }

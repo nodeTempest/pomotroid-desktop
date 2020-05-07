@@ -1,5 +1,13 @@
 import React from "react"
 
+import { Countdown } from "./Countdown"
+
 export const AppPage = () => {
-    return <div>AppPage</div>
+    return (
+        <div>
+            <div>
+                <Countdown />
+            </div>
+        </div>
+    )
 }
