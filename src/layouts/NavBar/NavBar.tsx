@@ -18,7 +18,7 @@ export const NavBar = () => {
     const onMenu = location.pathname.includes(routes.menu.name)
 
     return (
-        <Box display="flex" justifyContent="space-between">
+        <Box display="flex" justifyContent="space-between" mb={4}>
             <Box width={1 / 3}>
                 <StyledLink to={onMenu ? routes.app.name : routes.menu.name}>
                     <OpenMenuIcon active={!onMenu} size={25} />

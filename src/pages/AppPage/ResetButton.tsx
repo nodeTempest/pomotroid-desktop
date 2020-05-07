@@ -7,7 +7,7 @@ const Button = styled.button`
     color: ${props => props.theme.palette.button.fg.dark};
     border: none;
     transition: all 250ms;
-    font-size: 12px;
+    font-size: 14px;
 
     &:hover {
         color: ${props => props.theme.palette.button.fg.hover};
