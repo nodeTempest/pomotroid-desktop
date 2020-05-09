@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react"
 import styled from "styled-components"
 
+import { Box } from "@styled"
+
 const Svg = styled.svg<Required<Pick<IProps, "size">>>`
     width: ${props => props.size}px;
     height: ${props => props.size}px;
@@ -78,5 +80,31 @@ export const SoundIcon: FunctionComponent<IProps> = ({
                 </g>
             )}
         </Svg>
+    )
+}
+
+const Input = styled.input`
+    transform: rotate(-90deg);
+    width: 110px;
+`
+
+export const Kek: FunctionComponent<IProps> = ({
+    size = 25,
+    muted = false,
+}) => {
+    return (
+        <Box position="relative" display="flex" justifyContent="center">
+            <Box
+                display="flex"
+                justifyContent="center"
+                position="absolute"
+                bottom="100%"
+                height={140}
+                width="150%"
+            >
+                <Input type="range" />
+            </Box>
+            <SoundIcon size={size} muted={muted} />
+        </Box>
     )
 }

@@ -5,7 +5,7 @@ import { Rounds } from "./Rounds"
 import { PlayButton } from "./PlayButton"
 import { ResetButton } from "./ResetButton"
 import { NextStageIcon } from "./NextStageIcon"
-import { SoundIcon } from "./SoundIcon"
+import { Kek } from "./SoundIcon"
 
 import { Box } from "@styled"
 
@@ -47,7 +47,7 @@ export const AppPage = () => {
                         </button>
                     </Box>
 
-                    <SoundIcon size={20} />
+                    <Kek size={20} />
                 </Box>
             </Box>
         </Box>
