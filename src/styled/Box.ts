@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from "react"
 import styled from "styled-components"
 import {
     breakpoints,
@@ -16,9 +15,6 @@ import {
     StyleFunction,
 } from "@material-ui/system"
 
-type StylerProps = UnpackStyleFunction<typeof styler>
-type UnpackStyleFunction<T> = T extends StyleFunction<infer U> ? U : never
-
 const styler = breakpoints(
     css(
         compose(
@@ -35,8 +31,7 @@ const styler = breakpoints(
     )
 )
 
-const Component = styled.div<StylerProps>(styler)
+type UnpackStyleFunction<T> = T extends StyleFunction<infer U> ? U : never
+type StylerProps = UnpackStyleFunction<typeof styler>
 
-export const Box: FunctionComponent<StylerProps> = ({ children, ...rest }) => {
-    return <Component {...rest}>{children}</Component>
-}
+export const Box = styled.div<StylerProps>(styler)
