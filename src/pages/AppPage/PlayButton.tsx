@@ -15,16 +15,16 @@ const Button = styled.button`
     justify-content: center;
     align-items: center;
 
-    &:hover {
+    :hover {
         background: ${props => props.theme.palette.button.bg.dark};
+
+        path {
+            fill: ${props => props.theme.palette.button.fg.hover};
+        }
     }
 
     path {
         transition: all 250ms;
-    }
-
-    &:hover path {
-        fill: ${props => props.theme.palette.button.fg.hover};
     }
 `
 

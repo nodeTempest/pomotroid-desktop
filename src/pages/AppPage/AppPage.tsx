@@ -40,13 +40,15 @@ export const AppPage = () => {
                         <ResetButton />
                     </Box>
                 </Box>
-                <div>
-                    <Box mr={3} display="inline">
-                        <NextStageIcon size={20} />
+                <Box display="flex">
+                    <Box mr={3}>
+                        <button>
+                            <NextStageIcon size={20} />
+                        </button>
                     </Box>
 
                     <SoundIcon size={20} />
-                </div>
+                </Box>
             </Box>
         </Box>
     )

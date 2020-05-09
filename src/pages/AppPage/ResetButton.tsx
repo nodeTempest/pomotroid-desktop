@@ -9,7 +9,7 @@ const Button = styled.button`
     transition: all 250ms;
     font-size: 14px;
 
-    &:hover {
+    :hover {
         color: ${props => props.theme.palette.button.fg.hover};
     }
 `

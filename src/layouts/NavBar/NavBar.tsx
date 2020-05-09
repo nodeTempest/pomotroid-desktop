@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Link, useLocation } from "react-router-dom"
-import styled from "styled-components"
 
 import { OpenMenuIcon } from "./OpenMenuIcon"
 import { CloseWindowIcon } from "./CloseWindowIcon"
@@ -8,30 +7,40 @@ import { MinimizeWindowIcon } from "./MinimizeWindowIcon"
 import { Box } from "@styled"
 import { routes } from "@constants"
 
-const StyledLink = styled(Link)`
-    display: block;
-    height: fit-content;
-`
-
 export const NavBar = () => {
     const location = useLocation()
     const onMenu = location.pathname.includes(routes.menu.name)
 
     return (
-        <Box display="flex" justifyContent="space-between" mb={4}>
+        <Box
+            display="flex"
+            justifyContent="space-between"
+            mb={4}
+            alignItems="flex-start"
+        >
             <Box width={1 / 3}>
-                <StyledLink to={onMenu ? routes.app.name : routes.menu.name}>
+                <Link to={onMenu ? routes.app.name : routes.menu.name}>
                     <OpenMenuIcon active={!onMenu} size={25} />
-                </StyledLink>
+                </Link>
             </Box>
             <Box width={1 / 3} color="text.highlight" textAlign="center">
                 Pomotroid
             </Box>
-            <Box width={1 / 3} display="flex" justifyContent="flex-end">
+            <Box
+                width={1 / 3}
+                display="flex"
+                justifyContent="flex-end"
+                alignItems="flex-start"
+            >
                 <Box mr={4}>
-                    <MinimizeWindowIcon size={20} />
+                    <button>
+                        <MinimizeWindowIcon size={20} />
+                    </button>
                 </Box>
-                <CloseWindowIcon size={20} />
+
+                <button>
+                    <CloseWindowIcon size={20} />
+                </button>
             </Box>
         </Box>
     )

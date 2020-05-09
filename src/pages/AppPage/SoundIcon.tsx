@@ -1,23 +1,20 @@
 import React, { FunctionComponent } from "react"
-
 import styled from "styled-components"
 
-const Svg = styled.svg<IProps>`
-    & {
-        width: ${props => props.size}px;
-        height: ${props => props.size}px;
-    }
+const Svg = styled.svg<Required<Pick<IProps, "size">>>`
+    width: ${props => props.size}px;
+    height: ${props => props.size}px;
 
-    &:hover g {
+    :hover g {
         fill: ${props => props.theme.palette.button.fg.hover};
         stroke: ${props => props.theme.palette.button.fg.hover};
     }
 
-    &:hover .arcs path:nth-child(1) {
+    :hover .arcs path:nth-child(1) {
         stroke: ${props => props.theme.palette.button.fg.hover};
     }
 
-    &:hover .arcs path:nth-child(2) {
+    :hover .arcs path:nth-child(2) {
         fill: ${props => props.theme.palette.button.fg.hover};
     }
 
@@ -65,7 +62,7 @@ export const SoundIcon: FunctionComponent<IProps> = ({
     muted = false,
 }) => {
     return (
-        <Svg viewBox="0 0 100 100" size={size as number}>
+        <Svg viewBox="0 0 100 100" size={size}>
             <g className="shapes">
                 <rect x="12" y="37" width="25" height="25" />
                 <path d="M50 15 50 85 L15 50 Z" />

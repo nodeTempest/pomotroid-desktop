@@ -2,13 +2,11 @@ import React, { FunctionComponent } from "react"
 
 import styled from "styled-components"
 
-const Svg = styled.svg<IProps>`
-    & {
-        width: ${props => props.size}px;
-        height: ${props => props.size}px;
-    }
+const Svg = styled.svg<Required<IProps>>`
+    width: ${props => props.size}px;
+    height: ${props => props.size}px;
 
-    &:hover path {
+    :hover path {
         stroke: ${props => props.theme.palette.button.fg.hover};
     }
 
@@ -26,7 +24,7 @@ interface IProps {
 
 export const CloseWindowIcon: FunctionComponent<IProps> = ({ size = 25 }) => {
     return (
-        <Svg viewBox="0 0 100 100" size={size as number}>
+        <Svg viewBox="0 0 100 100" size={size}>
             <path d="M15 15 L85 85 Z " />
             <path d="M15 85 L85 15 Z " />
         </Svg>
