@@ -92,19 +92,31 @@ export const Kek: FunctionComponent<IProps> = ({
     size = 25,
     muted = false,
 }) => {
+    const [showVolumeBar, setShowVolumeBar] = React.useState(false)
     return (
-        <Box position="relative" display="flex" justifyContent="center">
-            <Box
-                display="flex"
-                justifyContent="center"
-                position="absolute"
-                bottom="100%"
-                height={140}
-                width="150%"
-            >
-                <Input type="range" />
-            </Box>
-            <SoundIcon size={size} muted={muted} />
+        <Box
+            position="relative"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            onClick={() => setShowVolumeBar(!showVolumeBar)}
+        >
+            {showVolumeBar && (
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    position="absolute"
+                    bottom="100%"
+                    height={140}
+                    width={30}
+                    bgcolor="darkred"
+                >
+                    <Input type="range" />
+                </Box>
+            )}
+            <button>
+                <SoundIcon size={size} muted={muted} />
+            </button>
         </Box>
     )
 }
