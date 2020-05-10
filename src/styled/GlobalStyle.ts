@@ -1,4 +1,4 @@
-import { createGlobalStyle, css } from "styled-components"
+import { createGlobalStyle } from "styled-components"
 import { theme } from "./theme"
 
 import OpenSansLight from "@assets/fonts/OpenSans/OpenSans-Regular.ttf"
@@ -7,7 +7,7 @@ import OpenSansSemiBold from "@assets/fonts/OpenSans/OpenSans-Regular.ttf"
 import OpenSansBold from "@assets/fonts/OpenSans/OpenSans-Regular.ttf"
 import OpenSansExtraBold from "@assets/fonts/OpenSans/OpenSans-Regular.ttf"
 
-export const GlobalStyle = createGlobalStyle`${css`
+export const GlobalStyle = createGlobalStyle`
     *,
     *:before,
     *:after {
@@ -66,5 +66,4 @@ export const GlobalStyle = createGlobalStyle`${css`
         font-weight: 800 900;
         src: url(${OpenSansExtraBold});
     }
-`}
 `
