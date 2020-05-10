@@ -1,6 +1,12 @@
 import { createGlobalStyle, css } from "styled-components"
 import { theme } from "./theme"
 
+import OpenSansLight from "@assets/fonts/OpenSans/OpenSans-Regular.ttf"
+import OpenSansRegular from "@assets/fonts/OpenSans/OpenSans-Regular.ttf"
+import OpenSansSemiBold from "@assets/fonts/OpenSans/OpenSans-Regular.ttf"
+import OpenSansBold from "@assets/fonts/OpenSans/OpenSans-Regular.ttf"
+import OpenSansExtraBold from "@assets/fonts/OpenSans/OpenSans-Regular.ttf"
+
 export const GlobalStyle = createGlobalStyle`${css`
     *,
     *:before,
@@ -34,31 +40,31 @@ export const GlobalStyle = createGlobalStyle`${css`
     @font-face {
         font-family: "OpenSans";
         font-weight: 100 300;
-        src: url(/fonts/OpenSans/OpenSans-Light.ttf);
+        src: url(${OpenSansLight});
     }
 
     @font-face {
         font-family: "OpenSans";
         font-weight: 400;
-        src: url(/fonts/OpenSans/OpenSans-Regular.ttf);
+        src: url(${OpenSansRegular});
     }
 
     @font-face {
         font-family: "OpenSans";
         font-weight: 500 600;
-        src: url(/fonts/OpenSans/OpenSans-SemiBold.ttf);
+        src: url(${OpenSansSemiBold});
     }
 
     @font-face {
         font-family: "OpenSans";
         font-weight: 700;
-        src: url(/fonts/OpenSans/OpenSans-Bold.ttf);
+        src: url(${OpenSansBold});
     }
 
     @font-face {
         font-family: "OpenSans";
         font-weight: 800 900;
-        src: url(/fonts/OpenSans/OpenSans-ExtraBold.ttf);
+        src: url(${OpenSansExtraBold});
     }
 `}
 `

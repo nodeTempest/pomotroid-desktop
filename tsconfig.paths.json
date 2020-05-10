@@ -2,6 +2,8 @@
     "compilerOptions": {
         "baseUrl": "./src",
         "paths": {
+            "@assets/*": ["assets/*"],
+            "@assets": ["assets/index.ts"],
             "@constants/*": ["constants/*"],
             "@constants": ["constants/index.ts"],
             "@modules/*": ["modules/*"],

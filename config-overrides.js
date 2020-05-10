@@ -5,6 +5,7 @@ const resolvePath = src => path.resolve(__dirname, src)
 
 module.exports = override(
     addWebpackAlias({
+        "@assets": resolvePath("src/assets"),
         "@constants": resolvePath("src/constants"),
         "@modules": resolvePath("src/modules"),
         "@layouts": resolvePath("src/layouts"),
