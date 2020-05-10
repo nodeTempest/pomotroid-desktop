@@ -1,11 +1,14 @@
-import * as React from "react"
-import { FunctionComponent } from "react"
+import React, { FunctionComponent } from "react"
 
-export const MenuLayout: FunctionComponent<object> = ({ children }) => {
+import { MenuTabs } from "./MenuTabs"
+
+import { Box } from "@styled"
+
+export const MenuLayout: FunctionComponent<{}> = ({ children }) => {
     return (
-        <div>
-            <div>Memu Layout</div>
-            {children}
-        </div>
+        <Box height={1}>
+            <Box height={0.93}>{children}</Box>
+            <MenuTabs />
+        </Box>
     )
 }

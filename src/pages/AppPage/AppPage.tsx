@@ -16,8 +16,8 @@ export const AppPage = () => {
             flexDirection="column"
             justifyContent="space-between"
             alignItems="center"
-            height={0.9}
             p={4}
+            height={1}
         >
             <Box mt={6}>
                 <Countdown />
