@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState } from "react"
 import styled from "styled-components"
-
-import { Box } from "@styled"
+import { SwitchTransition, CSSTransition } from "react-transition-group"
 
 const Button = styled.button`
     border-radius: 50%;
@@ -21,6 +20,19 @@ const Button = styled.button`
 
     path {
         transition: all 250ms;
+    }
+
+    &.fade-enter {
+        opacity: 0;
+    }
+    &.fade-enter-active {
+        opacity: 1;
+    }
+    &.fade-exit {
+        opacity: 1;
+    }
+    &.fade-exit-active {
+        opacity: 0;
     }
 `
 
@@ -49,21 +61,31 @@ const ButtonPaused = styled(Button)`
 export const PlayButton: FunctionComponent<{}> = () => {
     const [paused, setPaused] = useState(false)
     return (
-        <div>
-            <ButtonActive>
-                <svg viewBox="0 0 100 100" width="20" height="20">
-                    <path
-                        d="M20 15 L20 85 L55 50 L20 15 Z"
-                        transform="translate(20, 0)"
-                    />
-                </svg>
-            </ButtonActive>
-            <ButtonPaused>
-                <svg viewBox="0 0 100 100" width="20" height="20">
-                    <path d="M35 20 L35 80 Z" />
-                    <path d="M65 20 L65 80 Z" />
-                </svg>
-            </ButtonPaused>
-        </div>
+        <SwitchTransition mode={"out-in"}>
+            <CSSTransition
+                key={+paused}
+                timeout={250}
+                classNames={"fade"}
+                onClick={() => setPaused(!paused)}
+            >
+                {!paused ? (
+                    <ButtonActive>
+                        <svg viewBox="0 0 100 100" width="20" height="20">
+                            <path
+                                d="M20 15 L20 85 L55 50 L20 15 Z"
+                                transform="translate(20, 0)"
+                            />
+                        </svg>
+                    </ButtonActive>
+                ) : (
+                    <ButtonPaused>
+                        <svg viewBox="0 0 100 100" width="20" height="20">
+                            <path d="M35 20 L35 80 Z" />
+                            <path d="M65 20 L65 80 Z" />
+                        </svg>
+                    </ButtonPaused>
+                )}
+            </CSSTransition>
+        </SwitchTransition>
     )
 }
