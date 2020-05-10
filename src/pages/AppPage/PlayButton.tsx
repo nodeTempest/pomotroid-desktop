@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState } from "react"
 import styled from "styled-components"
 
-import { theme } from "@styled"
+import { Box } from "@styled"
 
 const Button = styled.button`
     border-radius: 50%;
@@ -17,10 +17,6 @@ const Button = styled.button`
 
     :hover {
         background: ${props => props.theme.palette.button.bg.dark};
-
-        path {
-            fill: ${props => props.theme.palette.button.fg.hover};
-        }
     }
 
     path {
@@ -28,16 +24,46 @@ const Button = styled.button`
     }
 `
 
+const ButtonActive = styled(Button)`
+    :hover path {
+        fill: ${props => props.theme.palette.button.fg.hover};
+    }
+
+    path {
+        fill: ${props => props.theme.palette.button.fg.light};
+    }
+`
+
+const ButtonPaused = styled(Button)`
+    :hover path {
+        stroke: ${props => props.theme.palette.button.fg.hover};
+    }
+
+    path {
+        stroke: ${props => props.theme.palette.button.fg.light};
+        stroke-linejoin: round;
+        stroke-width: 12;
+    }
+`
+
 export const PlayButton: FunctionComponent<{}> = () => {
+    const [paused, setPaused] = useState(false)
     return (
-        <Button>
-            <svg viewBox="0 0 100 100" width="20" height="20">
-                <path
-                    d="M20 15 L20 85 L55 50 L20 15 Z"
-                    transform="translate(20, 0)"
-                    fill={theme.palette.button.fg.light}
-                />
-            </svg>
-        </Button>
+        <div>
+            <ButtonActive>
+                <svg viewBox="0 0 100 100" width="20" height="20">
+                    <path
+                        d="M20 15 L20 85 L55 50 L20 15 Z"
+                        transform="translate(20, 0)"
+                    />
+                </svg>
+            </ButtonActive>
+            <ButtonPaused>
+                <svg viewBox="0 0 100 100" width="20" height="20">
+                    <path d="M35 20 L35 80 Z" />
+                    <path d="M65 20 L65 80 Z" />
+                </svg>
+            </ButtonPaused>
+        </div>
     )
 }
