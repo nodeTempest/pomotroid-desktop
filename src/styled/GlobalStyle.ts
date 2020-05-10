@@ -37,6 +37,10 @@ export const GlobalStyle = createGlobalStyle`
         display: block;
     }
 
+    input {
+        outline: none;
+    }
+
     @font-face {
         font-family: "OpenSans";
         font-weight: 100 300;
