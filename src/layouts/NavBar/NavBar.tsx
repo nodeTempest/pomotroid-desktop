@@ -15,8 +15,10 @@ export const NavBar = () => {
         <Box
             display="flex"
             justifyContent="space-between"
-            mb={4}
+            pt={4}
+            px={4}
             alignItems="flex-start"
+            height="10%"
         >
             <Box width={1 / 3}>
                 <Link to={onMenu ? routes.app.name : routes.menu.name}>

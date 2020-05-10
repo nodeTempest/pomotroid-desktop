@@ -6,15 +6,7 @@ import { Box } from "@styled/Box"
 
 export const AppLayout: FunctionComponent<object> = ({ children }) => {
     return (
-        <Box
-            height={480}
-            width={360}
-            border={1}
-            ml={10}
-            mt={10}
-            bgcolor="bg.dark"
-            p={4}
-        >
+        <Box height={480} width={360} ml={10} mt={10} bgcolor="bg.dark">
             <NavBar />
             {children}
         </Box>

@@ -17,14 +17,13 @@ export const AppPage = () => {
             justifyContent="space-between"
             alignItems="center"
             height={0.9}
+            p={4}
         >
-            <Box mt={9}>
+            <Box mt={6}>
                 <Countdown />
             </Box>
 
-            <Box mt={-2}>
-                <PlayButton />
-            </Box>
+            <PlayButton />
 
             <Box
                 display="flex"
