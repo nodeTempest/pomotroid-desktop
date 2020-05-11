@@ -46,7 +46,7 @@ export const MenuTabs: FunctionComponent<{}> = () => {
     const { path } = useRouteMatch()
 
     return (
-        <Box bgcolor="black" height={0.09} display="flex">
+        <Box bgcolor="bg.dark" height={0.09} display="flex">
             <StyledNavLink to={path + menuRoutes.durations.name}>
                 <ClockIcon size={24} />
             </StyledNavLink>

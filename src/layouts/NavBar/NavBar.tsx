@@ -18,7 +18,7 @@ export const NavBar = () => {
             pt={4}
             px={4}
             alignItems="flex-start"
-            height={0.1}
+            height={0.14}
         >
             <Box width={1 / 3}>
                 <Link to={onMenu ? routes.app.name : routes.menu.name}>
