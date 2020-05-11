@@ -20,9 +20,7 @@ const palette = {
             hover: "#fe4d4c",
         },
         bg: {
-            dark: "#3c4356",
-            light: "#2f384b",
-            hover: "#2f384b",
+            hover: "#3c4356",
         },
     },
 }

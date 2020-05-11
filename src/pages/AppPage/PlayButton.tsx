@@ -15,7 +15,7 @@ const Button = styled.button`
     align-items: center;
 
     :hover {
-        background: ${props => props.theme.palette.button.bg.dark};
+        background: ${props => props.theme.palette.button.bg.hover};
     }
 
     path {

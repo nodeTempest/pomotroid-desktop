@@ -20,7 +20,7 @@ const StyledNavLink = styled(NavLink)`
     transition: all 250ms;
 
     :hover {
-        background-color: ${props => props.theme.palette.button.bg.dark};
+        background-color: ${props => props.theme.palette.button.bg.hover};
     }
 
     :after {
