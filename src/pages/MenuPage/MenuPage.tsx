@@ -9,10 +9,11 @@ const menuRoutes = routes.menu.next
 
 export const MenuPage: FunctionComponent<RouteComponentProps> = ({
     match: { path },
+    location,
 }) => {
     return (
         <MenuLayout>
-            <Switch>
+            <Switch location={location}>
                 <Redirect
                     exact
                     from={path}
