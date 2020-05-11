@@ -7,7 +7,7 @@ import { Box } from "@styled"
 export const MenuLayout: FunctionComponent<{}> = ({ children }) => {
     return (
         <Box height={1}>
-            <Box height={0.93}>{children}</Box>
+            <Box height={0.92}>{children}</Box>
             <MenuTabs />
         </Box>
     )
