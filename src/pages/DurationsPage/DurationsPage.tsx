@@ -49,7 +49,7 @@ const Button = styled.button`
 export const DurationsPage: FunctionComponent<{}> = () => {
     return (
         <>
-            <Box textAlign="center" mb={2}>
+            <Box textAlign="center" mb={3}>
                 Timer
             </Box>
             <Box mb={2}>
