@@ -5,6 +5,7 @@ const Svg = styled.svg`
     circle {
         stroke: ${props => props.theme.palette.button.fg.dark};
         stroke-width: 7;
+        fill: none;
     }
 
     path {

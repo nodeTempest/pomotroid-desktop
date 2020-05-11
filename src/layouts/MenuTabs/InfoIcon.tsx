@@ -4,6 +4,7 @@ import styled from "styled-components"
 const Svg = styled.svg`
     stroke: ${props => props.theme.palette.button.fg.dark};
     stroke-width: 7;
+    fill: none;
 `
 
 interface IProps {
