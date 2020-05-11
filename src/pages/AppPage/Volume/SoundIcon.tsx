@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react"
 import styled from "styled-components"
-import { CSSTransition } from "react-transition-group"
 
 const Svg = styled.svg<Required<Pick<IProps, "size">>>`
     width: ${props => props.size}px;
@@ -45,24 +44,14 @@ const Svg = styled.svg<Required<Pick<IProps, "size">>>`
         stroke-width: 10;
         stroke-linejoin: round;
         stroke: ${props => props.theme.palette.button.fg.dark};
-        transition: all 250ms;
     }
 
     .cross path:nth-child(2) {
         stroke: ${props => props.theme.palette.bg.dark};
     }
 
-    .cross-enter {
-        transform: translate(-85%, -85%);
-    }
-    .cross-enter-active {
-        transform: translate(0, 0);
-    }
-    .cross-exit {
-        transform: translate(0, 0);
-    }
-    .cross-exit-active {
-        transform: translate(-85%, -85%);
+    .cross path {
+        transition: all 250ms;
     }
 `
 
@@ -86,17 +75,13 @@ export const SoundIcon: FunctionComponent<IProps> = ({
                 <path d="M50 15 A36 36, 0, 0 1, 50 85" />
                 <path d="M50 33 A18 18, 0, 0 1, 50 67" />
             </g>
-            <CSSTransition
-                classNames="cross"
-                in={muted}
-                timeout={250}
-                unmountOnExit
-            >
-                <g className="cross">
-                    <path d="M15 15 L90 90 Z" />
-                    <path transform="translate(14, 0)" d="M0 0 L100 100 Z" />
-                </g>
-            </CSSTransition>
+            <g className="cross">
+                <path d={muted ? "M15 15 L90 90 Z" : "M15 15 L15 15 Z"} />
+                <path
+                    transform="translate(14, 0)"
+                    d={muted ? "M0 0 L100 100 Z" : "M0 0 L0 0 Z"}
+                />
+            </g>
         </Svg>
     )
 }
