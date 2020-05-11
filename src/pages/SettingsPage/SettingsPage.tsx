@@ -64,7 +64,7 @@ const CheckBox: FunctionComponent<ICheckBoxProps> = ({
 
 export const SettingsPage: FunctionComponent<{}> = () => {
     return (
-        <div>
+        <>
             <Box textAlign="center" mb={3}>
                 Settings
             </Box>
@@ -72,6 +72,6 @@ export const SettingsPage: FunctionComponent<{}> = () => {
             <CheckBox checked={false} text="Auto-start Timer" />
             <CheckBox checked={false} text="Desktop Notifications" />
             <CheckBox checked={false} text="Minimize to Tray" />
-        </div>
+        </>
     )
 }
