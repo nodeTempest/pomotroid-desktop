@@ -4,6 +4,7 @@ import { SwitchTransition, CSSTransition } from "react-transition-group"
 import styled from "styled-components"
 
 import { getLevelName } from "@utils"
+import { routes } from "@constants"
 
 const TransitionContainer = styled.div`
     transition: all 250ms;
@@ -23,11 +24,13 @@ const TransitionContainer = styled.div`
 
 export const FadeTransition: FunctionComponent<{}> = ({ children }) => {
     const { pathname } = useLocation()
+    const defaultPage = routes.menu.next.durations.name
+
     return (
         <SwitchTransition mode="out-in">
             <CSSTransition
                 classNames="fade"
-                key={getLevelName(pathname, 1)}
+                key={getLevelName(pathname, 1) || defaultPage.replace("/", "")}
                 timeout={250}
                 appear={false}
             >
