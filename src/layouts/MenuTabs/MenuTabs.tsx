@@ -55,7 +55,7 @@ export const MenuTabs: FunctionComponent<{}> = () => {
                 <CogIcon size={25} />
             </StyledNavLink>
 
-            <StyledNavLink to={path + menuRoutes.info.name}>
+            <StyledNavLink to={path + menuRoutes.about.name}>
                 <InfoIcon size={24} />
             </StyledNavLink>
         </Box>

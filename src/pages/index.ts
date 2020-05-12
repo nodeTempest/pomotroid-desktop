@@ -1,5 +1,5 @@
 export * from "./AppPage"
 export * from "./DurationsPage"
-export * from "./InfoPage"
+export * from "./AboutPage"
 export * from "./MenuPage"
 export * from "./SettingsPage"

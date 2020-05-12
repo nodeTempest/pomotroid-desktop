@@ -3,7 +3,7 @@ import { Redirect, Route, Switch, RouteComponentProps } from "react-router-dom"
 
 import { MenuLayout } from "@layouts"
 import { routes } from "@routing"
-import { DurationsPage, InfoPage, SettingsPage } from "@pages"
+import { DurationsPage, AboutPage, SettingsPage } from "@pages"
 
 const menuRoutes = routes.menu.next
 
@@ -24,8 +24,8 @@ export const MenuPage: FunctionComponent<RouteComponentProps> = ({
                     component={DurationsPage}
                 />
                 <Route
-                    path={path + menuRoutes.info.name}
-                    component={InfoPage}
+                    path={path + menuRoutes.about.name}
+                    component={AboutPage}
                 />
                 <Route
                     path={path + menuRoutes.settings.name}

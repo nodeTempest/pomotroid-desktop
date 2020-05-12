@@ -14,8 +14,8 @@ export const routes = {
                 name: "/settings",
                 next: null,
             },
-            info: {
-                name: "/info",
+            about: {
+                name: "/about",
                 next: null,
             },
         },

@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react"
 import { Box } from "@styled"
 import pomotroidLogo from "@assets/logo.svg"
 
-export const InfoPage: FunctionComponent<{}> = () => {
+export const AboutPage: FunctionComponent<{}> = () => {
     return (
         <>
             <Box textAlign="center" mb={3}>
