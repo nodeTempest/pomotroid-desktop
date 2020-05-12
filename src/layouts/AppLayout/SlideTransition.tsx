@@ -3,8 +3,6 @@ import styled from "styled-components"
 import { useLocation } from "react-router-dom"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
-import { NavBar } from "@layouts/NavBar"
-import { Box } from "@styled/Box"
 import { getLevelName } from "@utils"
 import { routes } from "@constants"
 
@@ -55,24 +53,5 @@ export const SlideTransition: FunctionComponent<{}> = ({ children }) => {
                 </TransitionContainer>
             </CSSTransition>
         </TransitionGroup>
-    )
-}
-
-export const AppLayout: FunctionComponent<{}> = ({ children }) => {
-    return (
-        <Box
-            overflow="hidden"
-            height={480}
-            width={360}
-            ml={10}
-            mt={10}
-            bgcolor="bg.dark"
-            position="relative"
-        >
-            <NavBar />
-            <Box height={0.86} width={1} position="relative">
-                <SlideTransition>{children}</SlideTransition>
-            </Box>
-        </Box>
     )
 }
