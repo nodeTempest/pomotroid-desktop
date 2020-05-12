@@ -9,7 +9,7 @@ import { getLevelName } from "@utils"
 import { routes } from "@constants"
 
 interface ITransitionContainer {
-    onAppPage: boolean
+    renderAppPage: boolean
 }
 
 // need to freeze app page for transitions
@@ -20,17 +20,18 @@ const TransitionContainer = styled.div<ITransitionContainer>`
     height: 100%;
     width: 100%;
     position: absolute;
-    transition: all ${props => (props.onAppPage ? 0 : 250)}ms;
+    transition: all ${props => (props.renderAppPage ? 0 : 250)}ms;
 
     &.slide-enter {
         transform: translateX(-100%);
     }
     &.slide-enter-active {
         transform: translateX(0%);
+        z-index: ${props => +!props.renderAppPage};
     }
     &.slide-exit {
         transform: translateX(0%);
-        transition-delay: ${props => (props.onAppPage ? 250 : 0)}ms;
+        transition-delay: ${props => props.renderAppPage && 250}ms;
     }
     &.slide-exit-active {
         transform: translateX(-100%);
@@ -48,7 +49,7 @@ export const SlideTransition: FunctionComponent<{}> = ({ children }) => {
                 timeout={250}
             >
                 <TransitionContainer
-                    onAppPage={pathname.includes(routes.app.name)}
+                    renderAppPage={pathname.includes(routes.app.name)}
                 >
                     {children}
                 </TransitionContainer>

@@ -12,6 +12,7 @@ import { Box } from "@styled"
 export const AppPage = () => {
     return (
         <Box
+            bgcolor="bg.dark"
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
