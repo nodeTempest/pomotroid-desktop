@@ -2,14 +2,7 @@ import React, { FunctionComponent } from "react"
 
 import styled from "styled-components"
 
-interface IStyledProps {
-    size: number
-}
-
-const Svg = styled.svg<IStyledProps>`
-    width: ${props => props.size}px;
-    height: ${props => props.size}px;
-
+const Svg = styled.svg`
     :hover path {
         stroke: ${props => props.theme.palette.button.fg.hover};
     }
@@ -36,7 +29,7 @@ export const OpenMenuIcon: FunctionComponent<IProps> = ({
     const unactiveTopD = "M35 50 L70 15 Z"
     const unactiveBotD = "M35 50 L70 85 Z"
     return (
-        <Svg viewBox="0 0 100 100" size={size}>
+        <Svg width={size} height={size} viewBox="0 0 100 100">
             <path d={active ? activeTopD : unactiveTopD} />
             <path d={active ? activeBotD : unactiveBotD} />
         </Svg>

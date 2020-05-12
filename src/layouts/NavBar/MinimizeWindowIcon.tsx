@@ -2,10 +2,7 @@ import React, { FunctionComponent } from "react"
 
 import styled from "styled-components"
 
-const Svg = styled.svg<Required<IProps>>`
-    width: ${props => props.size}px;
-    height: ${props => props.size}px;
-
+const Svg = styled.svg`
     :hover path {
         stroke: ${props => props.theme.palette.button.fg.hover};
     }
@@ -26,7 +23,7 @@ export const MinimizeWindowIcon: FunctionComponent<IProps> = ({
     size = 25,
 }) => {
     return (
-        <Svg viewBox="0 0 100 100" size={size}>
+        <Svg width={size} height={size} viewBox="0 0 100 100">
             <path d="M15 50 L85 50 Z " />
         </Svg>
     )
