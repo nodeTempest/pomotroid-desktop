@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 import styled from "styled-components"
 
-import { getLevelName } from "@utils"
+import { getPathNameLevel } from "@utils"
 import { routes } from "@constants"
 
 const TransitionContainer = styled.div`
@@ -30,7 +30,10 @@ export const FadeTransition: FunctionComponent<{}> = ({ children }) => {
         <SwitchTransition mode="out-in">
             <CSSTransition
                 classNames="fade"
-                key={getLevelName(pathname, 1) || defaultPage.replace("/", "")}
+                key={
+                    getPathNameLevel(pathname, 1) ||
+                    defaultPage.replace("/", "")
+                }
                 timeout={250}
                 appear={false}
             >

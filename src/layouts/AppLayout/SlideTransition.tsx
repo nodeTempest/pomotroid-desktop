@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { useLocation } from "react-router-dom"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
-import { getLevelName } from "@utils"
+import { getPathNameLevel } from "@utils"
 import { routes } from "@constants"
 
 interface ITransitionContainer {
@@ -43,7 +43,7 @@ export const SlideTransition: FunctionComponent<{}> = ({ children }) => {
         <TransitionGroup component={null}>
             <CSSTransition
                 classNames="slide"
-                key={getLevelName(pathname, 0)}
+                key={getPathNameLevel(pathname, 0)}
                 timeout={250}
             >
                 <TransitionContainer
