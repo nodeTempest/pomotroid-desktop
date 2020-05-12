@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
 import { getPathNameLevel } from "@utils"
-import { routes } from "@constants"
+import { routes } from "@routing"
 
 interface ITransitionContainer {
     renderAppPage: boolean

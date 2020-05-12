@@ -5,7 +5,7 @@ import { OpenMenuIcon } from "./OpenMenuIcon"
 import { CloseWindowIcon } from "./CloseWindowIcon"
 import { MinimizeWindowIcon } from "./MinimizeWindowIcon"
 import { Box } from "@styled"
-import { routes } from "@constants"
+import { routes } from "@routing"
 
 export const NavBar = () => {
     const location = useLocation()

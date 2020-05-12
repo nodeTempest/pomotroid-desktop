@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { Redirect, Route, Switch, RouteComponentProps } from "react-router-dom"
 
 import { MenuLayout } from "@layouts"
-import { routes } from "@constants"
+import { routes } from "@routing"
 import { DurationsPage, InfoPage, SettingsPage } from "@pages"
 
 const menuRoutes = routes.menu.next

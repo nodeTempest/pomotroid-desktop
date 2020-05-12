@@ -4,7 +4,7 @@ import { SwitchTransition, CSSTransition } from "react-transition-group"
 import styled from "styled-components"
 
 import { getPathNameLevel } from "@utils"
-import { routes } from "@constants"
+import { routes } from "@routing"
 
 const TransitionContainer = styled.div`
     transition: all 250ms;

@@ -12,6 +12,8 @@
             "@layouts": ["layouts/index.ts"],
             "@pages/*": ["pages/*"],
             "@pages": ["pages/index.ts"],
+            "@routing/*": ["routing/*"],
+            "@routing": ["routing/index.ts"],
             "@state/*": ["state/*"],
             "@state": ["state/index.ts"],
             "@styled/*": ["styled/*"],

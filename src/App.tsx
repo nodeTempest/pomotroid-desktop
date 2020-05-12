@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { Route, Redirect, Switch, useLocation } from "react-router-dom"
 
-import { routes } from "@constants"
+import { routes } from "@routing"
 import { AppPage, MenuPage } from "@pages"
 import { AppLayout } from "@layouts"
 import { AppContainer } from "./AppContainer"

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react"
 import { NavLink, useRouteMatch, useLocation } from "react-router-dom"
 import styled from "styled-components"
 
-import { routes } from "@constants"
+import { routes } from "@routing"
 import { Box } from "@styled"
 
 import { ClockIcon } from "./ClockIcon"
