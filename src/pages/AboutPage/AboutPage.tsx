@@ -10,7 +10,7 @@ export const AboutPage: FunctionComponent<{}> = () => {
                 About
             </Box>
             <Box display="flex" justifyContent="center" mb={2}>
-                <img src={pomotroidLogo} width="90" height="90" />
+                <img alt="logo" src={pomotroidLogo} width="90" height="90" />
             </Box>
             <Box fontSize={25} textAlign="center" color="text.highlight" mb={3}>
                 Pomotroid
