@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react"
-import { NavLink, useRouteMatch, useLocation } from "react-router-dom"
+import { NavLink, useRouteMatch } from "react-router-dom"
 import styled from "styled-components"
 
 import { routes } from "@routing"
