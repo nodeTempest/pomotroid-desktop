@@ -9,6 +9,8 @@ import {
     select,
 } from "redux-saga/effects"
 
+import { RootState } from "@state"
+
 import {
     startCountdown,
     pauseCountdown,
@@ -52,12 +54,15 @@ export function* watchCountdown() {
     while (true) {
         yield take(startCountdown)
 
-        // const msecs: number = yield select(state => state.app.remainingTime)
-        // const task = yield fork(countdownTask, msecs)
+        const msecs: number = yield select(
+            (state: RootState) => state.app.remainingTime
+        )
+        const task = yield fork(countdownTask, msecs)
 
-        // const { type } = yield take([pauseCountdown, countOver])
-        // if (type === pauseCountdown) {
-        //     yield cancel(task)
-        // }
+        const { type } = yield take([pauseCountdown, countOver])
+
+        if (type === pauseCountdown.toString()) {
+            yield cancel(task)
+        }
     }
 }
