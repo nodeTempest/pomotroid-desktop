@@ -3,7 +3,8 @@ import styled from "styled-components"
 
 import { Box } from "@styled"
 
-import { stageTypes } from "@state/stages/reducer"
+// refactor
+type stageTypes = "work" | "sbreak" | "lbreak"
 
 const getStageColor = (props: any) =>
     props.stageType

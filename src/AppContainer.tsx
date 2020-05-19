@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom"
 import { Provider } from "react-redux"
 import { ThemeProvider } from "styled-components"
 
-import { store } from "@state/store"
+import { store } from "@state"
 import { GlobalStyle, theme } from "@styled"
 
 export const AppContainer: FunctionComponent<{}> = ({ children }) => {

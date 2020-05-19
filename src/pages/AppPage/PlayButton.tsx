@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import styled from "styled-components"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 
@@ -58,17 +58,28 @@ const ButtonPaused = styled(Button)`
     }
 `
 
-export const PlayButton: FunctionComponent<{}> = () => {
-    const [paused, setPaused] = useState(false)
+interface IProps {
+    paused?: boolean
+    onChange?: (paused: boolean) => void
+}
+
+export const PlayButton: FunctionComponent<IProps> = ({
+    paused = false,
+    onChange,
+}) => {
     return (
         <SwitchTransition mode={"out-in"}>
             <CSSTransition
                 key={+paused}
                 timeout={250}
                 classNames={"fade"}
-                onClick={() => setPaused(!paused)}
+                onClick={() => {
+                    if (onChange) {
+                        onChange(!paused)
+                    }
+                }}
             >
-                {!paused ? (
+                {paused ? (
                     <ButtonActive>
                         <svg viewBox="0 0 100 100" width="20" height="20">
                             <path

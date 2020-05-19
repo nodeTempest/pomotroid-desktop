@@ -1,4 +1,7 @@
 import React from "react"
+import { useDispatch, useSelector } from "react-redux"
+
+import { RootState, startCountdown, pauseCountdown } from "@state"
 
 import { Countdown } from "./Countdown"
 import { Rounds } from "./Rounds"
@@ -10,6 +13,13 @@ import { Volume } from "./Volume"
 import { Box } from "@styled"
 
 export const AppPage = () => {
+    const dispatch = useDispatch()
+
+    const { paused } = useSelector((state: RootState) => state.app)
+
+    const togglePause = (paused: boolean) =>
+        dispatch(paused ? pauseCountdown() : startCountdown())
+
     return (
         <Box
             bgcolor="bg.dark"
@@ -24,7 +34,7 @@ export const AppPage = () => {
                 <Countdown />
             </Box>
 
-            <PlayButton />
+            <PlayButton paused={paused} onChange={togglePause} />
 
             <Box
                 display="flex"
