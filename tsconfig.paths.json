@@ -6,8 +6,6 @@
             "@assets": ["assets/index.ts"],
             "@constants/*": ["constants/*"],
             "@constants": ["constants/index.ts"],
-            "@modules/*": ["modules/*"],
-            "@modules": ["modules/index.ts"],
             "@layouts/*": ["layouts/*"],
             "@layouts": ["layouts/index.ts"],
             "@pages/*": ["pages/*"],

@@ -7,7 +7,6 @@ module.exports = override(
     addWebpackAlias({
         "@assets": resolvePath("src/assets"),
         "@constants": resolvePath("src/constants"),
-        "@modules": resolvePath("src/modules"),
         "@layouts": resolvePath("src/layouts"),
         "@pages": resolvePath("src/pages"),
         "@routing": resolvePath("src/routing"),
