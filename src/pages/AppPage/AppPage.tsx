@@ -15,7 +15,9 @@ import { Box } from "@styled"
 export const AppPage = () => {
     const dispatch = useDispatch()
 
-    const { paused } = useSelector((state: RootState) => state.app)
+    const { paused, remainingTime } = useSelector(
+        (state: RootState) => state.app
+    )
 
     const togglePause = (paused: boolean) =>
         dispatch(paused ? pauseCountdown() : startCountdown())
@@ -31,7 +33,7 @@ export const AppPage = () => {
             height={1}
         >
             <Box mt={6}>
-                <Countdown />
+                <Countdown stage="work" timeMs={remainingTime} />
             </Box>
 
             <PlayButton paused={paused} onChange={togglePause} />

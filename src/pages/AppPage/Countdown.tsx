@@ -1,9 +1,18 @@
 import React, { FunctionComponent } from "react"
-import { theme } from "@styled"
+import moment from "moment"
 
+import { theme } from "@styled"
 import { describeArc } from "@utils"
 
-export const Countdown: FunctionComponent<{}> = () => {
+// refactor
+type stageTypes = "work" | "sbreak" | "lbreak"
+
+interface IProps {
+    stage: stageTypes
+    timeMs: number
+}
+
+export const Countdown: FunctionComponent<IProps> = ({ timeMs }) => {
     return (
         <svg viewBox="0 0 100 100" width="230" height="230">
             <path
@@ -21,7 +30,7 @@ export const Countdown: FunctionComponent<{}> = () => {
                 fontSize="20"
                 fill={theme.palette.text.light}
             >
-                25 : 00
+                {moment.utc(timeMs).format("mm : ss")}
             </text>
             <text
                 x="50"
