@@ -17,13 +17,18 @@ export const store = configureStore({
     ],
 })
 
-sagaMiddleware.run(rootSaga)
+let sagaTask = sagaMiddleware.run(rootSaga)
 
-// if (process.env.NODE_ENV === 'development' && module.hot) {
-//   module.hot.accept('./rootReducer', () => {
-//     const newRootReducer = require('./rootReducer').default
-//     store.replaceReducer(newRootReducer)
-//   })
-// }
+if (process.env.NODE_ENV !== "production" && module.hot) {
+    module.hot.accept("./rootReducer", () => {
+        store.replaceReducer(rootReducer)
+    })
+    module.hot.accept("./rootSaga", () => {
+        sagaTask.cancel()
+        sagaTask.toPromise().then(() => {
+            sagaTask = sagaMiddleware.run(rootSaga)
+        })
+    })
+}
 
 export type AppDispatch = typeof store.dispatch
