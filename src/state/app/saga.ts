@@ -50,22 +50,21 @@ function* countdownWorker(msecs: number) {
 }
 
 function* nextStageWorker() {
-    const newStageTime: ReturnType<typeof currentStageDurationSelector> = yield select(
+    const newStageDuration: ReturnType<typeof currentStageDurationSelector> = yield select(
         currentStageDurationSelector
     )
-    yield put(startCountdown(newStageTime))
+
+    yield put(startCountdown(newStageDuration))
 }
 
 export function* watchCountdown() {
     while (true) {
         const action: PayloadAction<number> = yield take(startCountdown)
         const task = yield fork(countdownWorker, action.payload)
+        yield put(updateCountdown(action.payload))
 
-        const { type } = yield take([pauseCountdown, nextStage])
-
-        if (type === pauseCountdown.toString()) {
-            yield cancel(task)
-        }
+        yield take([pauseCountdown, nextStage])
+        yield cancel(task)
     }
 }
 

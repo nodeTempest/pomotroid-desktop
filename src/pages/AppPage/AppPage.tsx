@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { RootState, startCountdown, pauseCountdown } from "@state"
+import { RootState, startCountdown, pauseCountdown, nextStage } from "@state"
 
 import { Countdown } from "./Countdown"
 import { Rounds } from "./Rounds"
@@ -54,7 +54,7 @@ export const AppPage = () => {
                 </Box>
                 <Box display="flex">
                     <Box mr={3}>
-                        <button>
+                        <button onClick={() => dispatch(nextStage())}>
                             <NextStageIcon size={20} />
                         </button>
                     </Box>
