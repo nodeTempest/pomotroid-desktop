@@ -1,13 +1,34 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { MINUTE } from "@constants"
 
-interface IApp {
+import { createStagesPattern } from "./utils"
+
+export type stagesType = "work" | "sbreak" | "lbreak"
+
+export interface IApp {
     remainingTime: number
     paused: boolean
+    stagesPattern: stagesType[]
+    currentStageIndex: number
+    durations: IDurations
+}
+
+export interface IDurations {
+    work: number
+    sbreak: number
+    lbreak: number
 }
 
 const initialState: IApp = {
-    remainingTime: 10 * 1000,
+    remainingTime: 25 * MINUTE,
     paused: true,
+    stagesPattern: createStagesPattern(4),
+    currentStageIndex: 0,
+    durations: {
+        work: 25 * MINUTE,
+        sbreak: 5 * MINUTE,
+        lbreak: 15 * MINUTE,
+    },
 }
 
 const issuesDisplaySlice = createSlice({
