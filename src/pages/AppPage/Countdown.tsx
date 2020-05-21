@@ -13,6 +13,13 @@ interface IProps {
 }
 
 export const Countdown: FunctionComponent<IProps> = ({ timeMs }) => {
+    // because moment.js floors seconds
+    // when timer is stopped between ticks time must be ceiled
+    const time = moment.utc(timeMs)
+    if (time.milliseconds()) {
+        time.add(1, "seconds")
+    }
+
     return (
         <svg viewBox="0 0 100 100" width="230" height="230">
             <path
@@ -30,7 +37,7 @@ export const Countdown: FunctionComponent<IProps> = ({ timeMs }) => {
                 fontSize="20"
                 fill={theme.palette.text.light}
             >
-                {moment.utc(timeMs).format("mm : ss")}
+                {time.format("mm : ss")}
             </text>
             <text
                 x="50"
