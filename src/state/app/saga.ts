@@ -4,21 +4,22 @@ import {
     fork,
     put,
     take,
+    takeEvery,
     cancel,
     cancelled,
     select,
 } from "redux-saga/effects"
-
-import { RootState } from "@state"
+import { PayloadAction } from "@reduxjs/toolkit"
 
 import {
     startCountdown,
     pauseCountdown,
     updateCountdown,
-    countOver,
+    nextStage,
 } from "./slice"
+import { currentStageDurationSelector } from "./selectors"
 
-function* countdownTask(msecs: number) {
+function* countdownWorker(msecs: number) {
     const countdown = () =>
         eventChannel(emit => {
             const counter = setInterval(() => {
@@ -28,9 +29,7 @@ function* countdownTask(msecs: number) {
                 }
             }, 10)
 
-            return () => {
-                clearInterval(counter)
-            }
+            return () => clearInterval(counter)
         })
 
     const chan = yield call(countdown)
@@ -45,24 +44,31 @@ function* countdownTask(msecs: number) {
             chan.close()
             yield put(updateCountdown(msecs))
         } else {
-            yield put(countOver())
+            yield put(nextStage())
         }
     }
 }
 
+function* nextStageWorker() {
+    const newStageTime: ReturnType<typeof currentStageDurationSelector> = yield select(
+        currentStageDurationSelector
+    )
+    yield put(startCountdown(newStageTime))
+}
+
 export function* watchCountdown() {
     while (true) {
-        yield take(startCountdown)
+        const action: PayloadAction<number> = yield take(startCountdown)
+        const task = yield fork(countdownWorker, action.payload)
 
-        const msecs: number = yield select(
-            (state: RootState) => state.app.remainingTime
-        )
-        const task = yield fork(countdownTask, msecs)
-
-        const { type } = yield take([pauseCountdown, countOver])
+        const { type } = yield take([pauseCountdown, nextStage])
 
         if (type === pauseCountdown.toString()) {
             yield cancel(task)
         }
     }
+}
+
+export function* watchNextStage() {
+    yield takeEvery(nextStage, nextStageWorker)
 }

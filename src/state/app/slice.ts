@@ -20,14 +20,14 @@ export interface IDurations {
 }
 
 const initialState: IApp = {
-    remainingTime: 25 * MINUTE,
+    remainingTime: 0.1 * MINUTE,
     paused: true,
     stagesPattern: createStagesPattern(4),
     currentStageIndex: 0,
     durations: {
-        work: 25 * MINUTE,
-        sbreak: 5 * MINUTE,
-        lbreak: 15 * MINUTE,
+        work: 0.1 * MINUTE,
+        sbreak: 0.1 * MINUTE,
+        lbreak: 0.1 * MINUTE,
     },
 }
 
@@ -35,7 +35,8 @@ const issuesDisplaySlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-        startCountdown(state) {
+        startCountdown(state, action: PayloadAction<number>) {
+            state.remainingTime = action.payload
             state.paused = false
         },
         pauseCountdown(state) {
@@ -44,9 +45,11 @@ const issuesDisplaySlice = createSlice({
         updateCountdown(state, action: PayloadAction<number>) {
             state.remainingTime = action.payload
         },
-        countOver(state) {
-            state.paused = true
-            state.remainingTime = initialState.remainingTime
+        nextStage(state) {
+            state.currentStageIndex++
+            if (state.currentStageIndex === state.stagesPattern.length) {
+                state.currentStageIndex = 0
+            }
         },
     },
 })
@@ -55,7 +58,7 @@ export const {
     startCountdown,
     pauseCountdown,
     updateCountdown,
-    countOver,
+    nextStage,
 } = issuesDisplaySlice.actions
 
 export const { reducer: appReducer } = issuesDisplaySlice

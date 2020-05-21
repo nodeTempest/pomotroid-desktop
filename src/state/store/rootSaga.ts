@@ -1,8 +1,8 @@
 import { all, spawn, call } from "redux-saga/effects"
-import { watchCountdown } from "@state/app"
+import { watchCountdown, watchNextStage } from "@state/app"
 
 export function* rootSaga() {
-    const sagas = [watchCountdown]
+    const sagas = [watchCountdown, watchNextStage]
 
     yield all(
         sagas.map(saga =>

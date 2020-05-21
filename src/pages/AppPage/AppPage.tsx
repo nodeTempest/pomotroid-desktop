@@ -20,7 +20,7 @@ export const AppPage = () => {
     )
 
     const togglePause = (paused: boolean) =>
-        dispatch(paused ? pauseCountdown() : startCountdown())
+        dispatch(paused ? pauseCountdown() : startCountdown(remainingTime))
 
     return (
         <Box

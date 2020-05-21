@@ -17,7 +17,7 @@ export const currentStageSelector = createSelector<
     (pattern, index) => pattern[index]
 )
 
-export const currentStageDurationsSelector = createSelector<
+export const currentStageDurationSelector = createSelector<
     RootState,
     stagesType,
     IDurations,
