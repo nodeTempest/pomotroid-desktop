@@ -10,7 +10,7 @@ interface IProps {
     timeMs: number
 }
 
-export const Countdown: FunctionComponent<IProps> = ({ timeMs }) => {
+export const Countdown: FunctionComponent<IProps> = ({ stage, timeMs }) => {
     // because moment.js floors seconds
     // when timer is stopped between ticks time must be ceiled
     const time = moment.utc(timeMs)
@@ -18,12 +18,21 @@ export const Countdown: FunctionComponent<IProps> = ({ timeMs }) => {
         time.add(1, "seconds")
     }
 
+    const displayStageName =
+        stage === "work"
+            ? "WORK"
+            : stage === "sbreak"
+            ? "SHORT BREAK"
+            : stage === "lbreak"
+            ? "LONG BREAK"
+            : ""
+
     return (
         <svg viewBox="0 0 100 100" width="230" height="230">
             <path
                 strokeWidth={4}
                 d={describeArc(50, 50, 45, 0, 270)}
-                stroke={theme.palette.stages.work}
+                stroke={theme.palette.stages[stage]}
                 fill="none"
                 strokeLinecap="round"
             />
@@ -42,10 +51,10 @@ export const Countdown: FunctionComponent<IProps> = ({ timeMs }) => {
                 y="70"
                 alignmentBaseline="central"
                 textAnchor="middle"
-                fontSize="8"
+                fontSize="7"
                 fill={theme.palette.text.light}
             >
-                WORK
+                {displayStageName}
             </text>
         </svg>
     )

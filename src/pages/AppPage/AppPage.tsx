@@ -6,6 +6,7 @@ import {
     startCountdown,
     pauseCountdown,
     nextStage,
+    currentStageSelector,
 } from "@state"
 
 import { Countdown } from "./Countdown"
@@ -24,6 +25,8 @@ export const AppPage = () => {
         (state: RootStateType) => state.app
     )
 
+    const currentStage = useSelector(currentStageSelector)
+
     const togglePause = (paused: boolean) =>
         dispatch(paused ? pauseCountdown() : startCountdown(remainingTime))
 
@@ -38,7 +41,7 @@ export const AppPage = () => {
             height={1}
         >
             <Box mt={6}>
-                <Countdown stage="work" timeMs={remainingTime} />
+                <Countdown stage={currentStage} timeMs={remainingTime} />
             </Box>
 
             <PlayButton paused={paused} onChange={togglePause} />
