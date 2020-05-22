@@ -7,6 +7,8 @@ import {
     pauseCountdown,
     nextStage,
     currentStageSelector,
+    totalRoundsSelector,
+    currentRoundSelector,
 } from "@state"
 
 import { Countdown } from "./Countdown"
@@ -24,8 +26,9 @@ export const AppPage = () => {
     const { paused, remainingTime } = useSelector(
         (state: RootStateType) => state.app
     )
-
     const currentStage = useSelector(currentStageSelector)
+    const totalRounds = useSelector(totalRoundsSelector)
+    const currentRound = useSelector(currentRoundSelector)
 
     const togglePause = (paused: boolean) =>
         dispatch(paused ? pauseCountdown() : startCountdown(remainingTime))
@@ -54,7 +57,10 @@ export const AppPage = () => {
             >
                 <Box>
                     <Box mb={2}>
-                        <Rounds />
+                        <Rounds
+                            currentRound={currentRound}
+                            totalRounds={totalRounds}
+                        />
                     </Box>
                     <Box mb={2}>
                         <ResetButton />
