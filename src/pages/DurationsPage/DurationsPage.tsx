@@ -2,17 +2,15 @@ import React, { FunctionComponent } from "react"
 import styled from "styled-components"
 
 import { Box } from "@styled"
-
-// refactor
-type stageTypes = "work" | "sbreak" | "lbreak"
+import { stagesType } from "@state"
 
 const getStageColor = (props: any) =>
-    props.stageType
-        ? props.theme.palette.stages[props.stageType]
+    props.stage
+        ? props.theme.palette.stages[props.stage]
         : props.theme.palette.button.fg.dark
 
 interface IStyledInput {
-    stageType?: stageTypes
+    stage?: stagesType
 }
 
 const StyledInput = styled.input.attrs(() => ({
@@ -68,7 +66,7 @@ export const DurationsPage: FunctionComponent<{}> = () => {
                         27 : 00
                     </Box>
                 </Box>
-                <StyledInput stageType="work" value={20} onChange={() => 0} />
+                <StyledInput stage="work" value={20} onChange={() => 0} />
             </Box>
             <Box mb={2}>
                 <Box color="text.dark" textAlign="center" mb={2} fontSize={13}>
@@ -85,7 +83,7 @@ export const DurationsPage: FunctionComponent<{}> = () => {
                         05 : 00
                     </Box>
                 </Box>
-                <StyledInput stageType="sbreak" value={40} onChange={() => 0} />
+                <StyledInput stage="sbreak" value={40} onChange={() => 0} />
             </Box>
             <Box mb={2}>
                 <Box color="text.dark" textAlign="center" mb={2} fontSize={13}>
@@ -102,7 +100,7 @@ export const DurationsPage: FunctionComponent<{}> = () => {
                         42 : 00
                     </Box>
                 </Box>
-                <StyledInput stageType="lbreak" value={75} onChange={() => 0} />
+                <StyledInput stage="lbreak" value={75} onChange={() => 0} />
             </Box>
             <Box mb={2}>
                 <Box color="text.dark" textAlign="center" mb={2} fontSize={13}>

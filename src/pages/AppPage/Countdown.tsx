@@ -3,12 +3,10 @@ import moment from "moment"
 
 import { theme } from "@styled"
 import { describeArc } from "@utils"
-
-// refactor
-type stageTypes = "work" | "sbreak" | "lbreak"
+import { stagesType } from "@state"
 
 interface IProps {
-    stage: stageTypes
+    stage: stagesType
     timeMs: number
 }
 
