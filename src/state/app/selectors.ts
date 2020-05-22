@@ -1,13 +1,13 @@
 import { createSelector } from "@reduxjs/toolkit"
 import * as R from "ramda"
 
-import { RootState } from "@state"
+import { RootStateType } from "@state"
 import { MINUTE } from "@constants"
 
 import { stagesType, IDurations } from "./slice"
 
 export const currentStageSelector = createSelector<
-    RootState,
+    RootStateType,
     stagesType[],
     number,
     stagesType
@@ -18,7 +18,7 @@ export const currentStageSelector = createSelector<
 )
 
 export const currentStageDurationSelector = createSelector<
-    RootState,
+    RootStateType,
     stagesType,
     IDurations,
     IDurations[stagesType]
@@ -28,13 +28,17 @@ export const currentStageDurationSelector = createSelector<
     (stage, durations) => durations[stage]
 )
 
-export const currentRoundSelector = createSelector<RootState, number, number>(
+export const currentRoundSelector = createSelector<
+    RootStateType,
+    number,
+    number
+>(
     state => state.app.currentStageIndex,
     currentStageIndex => 1 + Math.floor(currentStageIndex / 2)
 )
 
 export const durationsSelector = createSelector<
-    RootState,
+    RootStateType,
     IDurations,
     IDurations
 >(

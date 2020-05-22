@@ -1,7 +1,12 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { RootState, startCountdown, pauseCountdown, nextStage } from "@state"
+import {
+    RootStateType,
+    startCountdown,
+    pauseCountdown,
+    nextStage,
+} from "@state"
 
 import { Countdown } from "./Countdown"
 import { Rounds } from "./Rounds"
@@ -16,7 +21,7 @@ export const AppPage = () => {
     const dispatch = useDispatch()
 
     const { paused, remainingTime } = useSelector(
-        (state: RootState) => state.app
+        (state: RootStateType) => state.app
     )
 
     const togglePause = (paused: boolean) =>
