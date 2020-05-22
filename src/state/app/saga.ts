@@ -23,6 +23,7 @@ import {
     nextStage,
     resetCurrentStage,
 } from "./slice"
+import { currentStageDurationSelector } from "./selectors"
 
 function* timerWorker(msecs: number) {
     const timer = () =>
@@ -79,8 +80,8 @@ export function* countdownFlow() {
         const remainingTime: number = yield select(
             (state: RootStateType) => state.app.remainingTime
         )
-
         yield put(startTimer(remainingTime))
+
         yield take(pauseCountdown)
         yield put(clearTimer())
     }
@@ -90,15 +91,16 @@ function* resetCurrentStageWorker() {
     const paused: boolean = yield select(
         (state: RootStateType) => state.app.paused
     )
+    const currentStageDuration: number = yield select(
+        currentStageDurationSelector
+    )
 
     if (!paused) {
-        const remainingTime: number = yield select(
-            (state: RootStateType) => state.app.remainingTime
-        )
         yield put(clearTimer())
-        yield put(startTimer(remainingTime))
-        yield put(updateRemainingTime(remainingTime))
+        yield put(startTimer(currentStageDuration))
     }
+
+    yield put(updateRemainingTime(currentStageDuration))
 }
 
 export function* resetCurrentStageWatcher() {

@@ -52,11 +52,8 @@ const issuesDisplaySlice = createSlice({
             if (state.currentStageIndex === state.stagesPattern.length) {
                 state.currentStageIndex = 0
             }
-            state.remainingTime = getCurrentStageDuration(state)
         },
-        resetCurrentStage(state) {
-            state.remainingTime = getCurrentStageDuration(state)
-        },
+        resetCurrentStage() {},
     },
 })
 
