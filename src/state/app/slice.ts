@@ -51,6 +51,7 @@ const issuesDisplaySlice = createSlice({
                 state.currentStageIndex = 0
             }
         },
+        resetCurrentStage() {},
     },
 })
 
@@ -59,6 +60,7 @@ export const {
     pauseCountdown,
     updateCountdown,
     nextStage,
+    resetCurrentStage,
 } = issuesDisplaySlice.actions
 
 export const { reducer: appReducer } = issuesDisplaySlice

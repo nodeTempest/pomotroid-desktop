@@ -16,6 +16,7 @@ import {
     pauseCountdown,
     updateCountdown,
     nextStage,
+    resetCurrentStage,
 } from "./slice"
 import { currentStageDurationSelector } from "./selectors"
 
@@ -57,17 +58,28 @@ function* nextStageWorker() {
     yield put(startCountdown(newStageDuration))
 }
 
+function* resetCurrentStageWorker() {
+    const currentStageDuration: ReturnType<typeof currentStageDurationSelector> = yield select(
+        currentStageDurationSelector
+    )
+    yield put(startCountdown(currentStageDuration))
+}
+
 export function* watchCountdown() {
     while (true) {
         const action: PayloadAction<number> = yield take(startCountdown)
         const task = yield fork(countdownWorker, action.payload)
         yield put(updateCountdown(action.payload))
 
-        yield take([pauseCountdown, nextStage])
+        yield take([pauseCountdown, nextStage, resetCurrentStage])
         yield cancel(task)
     }
 }
 
 export function* watchNextStage() {
     yield takeEvery(nextStage, nextStageWorker)
+}
+
+export function* watchResetCurrentStage() {
+    yield takeEvery(resetCurrentStage, resetCurrentStageWorker)
 }

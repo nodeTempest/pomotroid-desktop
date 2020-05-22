@@ -11,6 +11,12 @@ const Button = styled.button`
     }
 `
 
-export const ResetButton: FunctionComponent<{}> = () => {
-    return <Button>Reset</Button>
+interface IProps {
+    onClick?: (e: React.MouseEvent) => void
+}
+
+export const ResetButton: FunctionComponent<IProps> = ({
+    onClick = () => {},
+}) => {
+    return <Button onClick={onClick}>Reset</Button>
 }

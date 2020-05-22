@@ -9,6 +9,7 @@ import {
     currentStageSelector,
     totalRoundsSelector,
     currentRoundSelector,
+    resetCurrentStage,
 } from "@state"
 
 import { Countdown } from "./Countdown"
@@ -32,6 +33,7 @@ export const AppPage = () => {
 
     const togglePause = (paused: boolean) =>
         dispatch(paused ? pauseCountdown() : startCountdown(remainingTime))
+    const handleReset = () => dispatch(resetCurrentStage())
 
     return (
         <Box
@@ -63,7 +65,7 @@ export const AppPage = () => {
                         />
                     </Box>
                     <Box mb={2}>
-                        <ResetButton />
+                        <ResetButton onClick={handleReset} />
                     </Box>
                 </Box>
                 <Box display="flex">
