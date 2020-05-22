@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react"
 import styled from "styled-components"
+import { useDispatch, useSelector } from "react-redux"
 
 import { Box } from "@styled"
-import { stagesType } from "@state"
+import { stagesType, changeDuration, durationsSelector } from "@state"
 
 const getStageColor = (props: any) =>
     props.stage
@@ -11,6 +12,9 @@ const getStageColor = (props: any) =>
 
 interface IStyledInput {
     stage?: stagesType
+    min: number
+    max: number
+    value: number
 }
 
 const StyledInput = styled.input.attrs(() => ({
@@ -22,8 +26,10 @@ const StyledInput = styled.input.attrs(() => ({
     background: ${props => {
         const fillColor = getStageColor(props)
         const emptyColor = props.theme.palette.bg.dark
+        const { min, max, value } = props
+        const progress = ((value - min) / (max - min)) * 100
 
-        return `linear-gradient(to right, ${fillColor} 0%, ${fillColor} ${props.value}%, ${emptyColor} ${props.value}%, ${emptyColor} 100%)`
+        return `linear-gradient(to right, ${fillColor} 0%, ${fillColor} ${progress}%, ${emptyColor} ${progress}%, ${emptyColor} 100%)`
     }};
 
     ::-webkit-slider-thumb {
@@ -46,6 +52,13 @@ const Button = styled.button`
 `
 
 export const DurationsPage: FunctionComponent<{}> = () => {
+    const dispatch = useDispatch()
+
+    const durations = useSelector(durationsSelector)
+
+    const handleWorkDurationChange: React.ChangeEventHandler<HTMLInputElement> = e =>
+        dispatch(changeDuration({ stage: "work", minutes: +e.target.value }))
+
     return (
         <>
             <Box textAlign="center" mb={3}>
@@ -63,10 +76,16 @@ export const DurationsPage: FunctionComponent<{}> = () => {
                         py={0.5}
                         fontSize={13}
                     >
-                        27 : 00
+                        {durations.work} : 00
                     </Box>
                 </Box>
-                <StyledInput stage="work" value={20} onChange={() => 0} />
+                <StyledInput
+                    min={1}
+                    max={60}
+                    stage="work"
+                    value={durations.work}
+                    onChange={handleWorkDurationChange}
+                />
             </Box>
             <Box mb={2}>
                 <Box color="text.dark" textAlign="center" mb={2} fontSize={13}>
@@ -83,7 +102,13 @@ export const DurationsPage: FunctionComponent<{}> = () => {
                         05 : 00
                     </Box>
                 </Box>
-                <StyledInput stage="sbreak" value={40} onChange={() => 0} />
+                <StyledInput
+                    min={1}
+                    max={60}
+                    stage="sbreak"
+                    value={40}
+                    onChange={() => 0}
+                />
             </Box>
             <Box mb={2}>
                 <Box color="text.dark" textAlign="center" mb={2} fontSize={13}>
@@ -100,7 +125,13 @@ export const DurationsPage: FunctionComponent<{}> = () => {
                         42 : 00
                     </Box>
                 </Box>
-                <StyledInput stage="lbreak" value={75} onChange={() => 0} />
+                <StyledInput
+                    min={1}
+                    max={60}
+                    stage="lbreak"
+                    value={75}
+                    onChange={() => 0}
+                />
             </Box>
             <Box mb={2}>
                 <Box color="text.dark" textAlign="center" mb={2} fontSize={13}>
@@ -117,7 +148,7 @@ export const DurationsPage: FunctionComponent<{}> = () => {
                         4
                     </Box>
                 </Box>
-                <StyledInput value={10} onChange={() => 0} />
+                <StyledInput min={1} max={60} value={10} onChange={() => 0} />
             </Box>
             <Box display="flex" justifyContent="center" pt={0.5}>
                 <Button>Reset Defaults</Button>

@@ -8,10 +8,12 @@ import {
     cancel,
     cancelled,
     select,
+    throttle,
 } from "redux-saga/effects"
-import { PayloadAction } from "@reduxjs/toolkit"
 
+import { PayloadAction } from "@reduxjs/toolkit"
 import { RootStateType } from "@state"
+import { MINUTE } from "@constants"
 
 import {
     startTimer,
@@ -22,8 +24,10 @@ import {
     updateRemainingTime,
     nextStage,
     resetCurrentStage,
+    changeDuration,
+    IChangeDuration,
 } from "./slice"
-import { currentStageDurationSelector } from "./selectors"
+import { currentStageSelector, currentStageDurationSelector } from "./selectors"
 
 function* timerWorker(ms: number) {
     const timer = () => {
@@ -113,4 +117,24 @@ export function* nextStageWatcher() {
         yield take(nextStage)
         yield put(resetCurrentStage())
     }
+}
+
+function* changeDurationWorker(action: PayloadAction<IChangeDuration>) {
+    const { stage, minutes } = action.payload
+    const currenStage: ReturnType<typeof currentStageSelector> = yield select(
+        currentStageSelector
+    )
+    if (currenStage === stage) {
+        const paused = yield select((state: RootStateType) => state.app.paused)
+
+        if (!paused) {
+            yield put(pauseCountdown())
+        }
+
+        yield put(updateRemainingTime(minutes * MINUTE))
+    }
+}
+
+export function* changeDurationWatcher() {
+    yield throttle(500, changeDuration, changeDurationWorker)
 }

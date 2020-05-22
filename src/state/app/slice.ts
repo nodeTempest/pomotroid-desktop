@@ -19,15 +19,20 @@ export interface IDurations {
     lbreak: number
 }
 
+export interface IChangeDuration {
+    stage: stagesType
+    minutes: number
+}
+
 const initialState: IApp = {
-    remainingTime: 0.1 * MINUTE,
+    remainingTime: 1 * MINUTE,
     paused: true,
     stagesPattern: createStagesPattern(4),
     currentStageIndex: 0,
     durations: {
-        work: 0.1 * MINUTE,
-        sbreak: 0.1 * MINUTE,
-        lbreak: 0.1 * MINUTE,
+        work: 1 * MINUTE,
+        sbreak: 1 * MINUTE,
+        lbreak: 1 * MINUTE,
     },
 }
 
@@ -47,13 +52,17 @@ const issuesDisplaySlice = createSlice({
         updateRemainingTime(state, action: PayloadAction<number>) {
             state.remainingTime = action.payload
         },
+        resetCurrentStage() {},
         nextStage(state) {
             state.currentStageIndex++
             if (state.currentStageIndex === state.stagesPattern.length) {
                 state.currentStageIndex = 0
             }
         },
-        resetCurrentStage() {},
+        changeDuration(state, action: PayloadAction<IChangeDuration>) {
+            const { stage, minutes } = action.payload
+            state.durations[stage] = minutes * MINUTE
+        },
     },
 })
 
@@ -66,6 +75,7 @@ export const {
     updateRemainingTime,
     nextStage,
     resetCurrentStage,
+    changeDuration,
 } = issuesDisplaySlice.actions
 
 export const { reducer: appReducer } = issuesDisplaySlice
