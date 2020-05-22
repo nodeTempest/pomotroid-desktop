@@ -18,6 +18,7 @@
         "jsx-boolean-value": false,
         "member-ordering": false,
         "member-access": false,
-        "jsx-no-lambda": false
+        "jsx-no-lambda": false,
+        "no-empty": false
     }
 }
