@@ -25,30 +25,31 @@ import {
 } from "./slice"
 import { currentStageDurationSelector } from "./selectors"
 
-function* timerWorker(msecs: number) {
-    const timer = () =>
-        eventChannel(emit => {
+function* timerWorker(ms: number) {
+    const timer = () => {
+        return eventChannel(emit => {
             const counter = setInterval(() => {
-                msecs -= 10
-                if (msecs % 1000 === 0) {
-                    emit(msecs >= 0 ? msecs : END)
+                ms -= 10
+                if (ms % 1000 === 0) {
+                    emit(ms >= 0 ? ms : END)
                 }
             }, 10)
 
             return () => clearInterval(counter)
         })
+    }
 
     const chan = yield call(timer)
 
     try {
         while (true) {
-            const msecs = yield take(chan)
-            yield put(updateRemainingTime(msecs))
+            const ms = yield take(chan)
+            yield put(updateRemainingTime(ms))
         }
     } finally {
         if (yield cancelled()) {
             chan.close()
-            yield put(updateRemainingTime(msecs))
+            yield put(updateRemainingTime(ms))
         } else {
             yield put(timerIsOver())
         }
