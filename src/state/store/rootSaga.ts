@@ -1,12 +1,8 @@
 import { all, spawn, call } from "redux-saga/effects"
-import {
-    watchCountdown,
-    watchNextStage,
-    watchResetCurrentStage,
-} from "@state/app"
+import * as appSagas from "@state/app/saga"
 
 export function* rootSaga() {
-    const sagas = [watchCountdown, watchNextStage, watchResetCurrentStage]
+    const sagas = Object.values(appSagas)
 
     yield all(
         sagas.map(saga =>

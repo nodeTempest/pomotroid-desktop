@@ -11,17 +11,21 @@ import {
 } from "redux-saga/effects"
 import { PayloadAction } from "@reduxjs/toolkit"
 
+import { RootStateType } from "@state"
+
 import {
+    startTimer,
+    clearTimer,
+    timerIsOver,
     startCountdown,
     pauseCountdown,
-    updateCountdown,
+    updateRemainingTime,
     nextStage,
     resetCurrentStage,
 } from "./slice"
-import { currentStageDurationSelector } from "./selectors"
 
-function* countdownWorker(msecs: number) {
-    const countdown = () =>
+function* timerWorker(msecs: number) {
+    const timer = () =>
         eventChannel(emit => {
             const counter = setInterval(() => {
                 msecs -= 10
@@ -33,53 +37,77 @@ function* countdownWorker(msecs: number) {
             return () => clearInterval(counter)
         })
 
-    const chan = yield call(countdown)
+    const chan = yield call(timer)
 
     try {
         while (true) {
             const msecs = yield take(chan)
-            yield put(updateCountdown(msecs))
+            yield put(updateRemainingTime(msecs))
         }
     } finally {
         if (yield cancelled()) {
             chan.close()
-            yield put(updateCountdown(msecs))
+            yield put(updateRemainingTime(msecs))
         } else {
-            yield put(nextStage())
+            yield put(timerIsOver())
         }
     }
 }
 
-function* nextStageWorker() {
-    const newStageDuration: ReturnType<typeof currentStageDurationSelector> = yield select(
-        currentStageDurationSelector
-    )
-
-    yield put(startCountdown(newStageDuration))
-}
-
-function* resetCurrentStageWorker() {
-    const currentStageDuration: ReturnType<typeof currentStageDurationSelector> = yield select(
-        currentStageDurationSelector
-    )
-    yield put(startCountdown(currentStageDuration))
-}
-
-export function* watchCountdown() {
+export function* timerWatcher() {
     while (true) {
-        const action: PayloadAction<number> = yield take(startCountdown)
-        const task = yield fork(countdownWorker, action.payload)
-        yield put(updateCountdown(action.payload))
+        const action: PayloadAction<number> = yield take(startTimer)
+        const task = yield fork(timerWorker, action.payload)
 
-        yield take([pauseCountdown, nextStage, resetCurrentStage])
-        yield cancel(task)
+        const { type } = yield take([clearTimer, timerIsOver])
+        if (type === clearTimer.toString()) {
+            yield cancel(task)
+        }
     }
 }
 
-export function* watchNextStage() {
-    yield takeEvery(nextStage, nextStageWorker)
+export function* timerIsOverWatcher() {
+    while (true) {
+        yield take(timerIsOver)
+        yield put(nextStage())
+    }
 }
 
-export function* watchResetCurrentStage() {
+export function* countdownFlow() {
+    while (true) {
+        yield take(startCountdown)
+        const remainingTime: number = yield select(
+            (state: RootStateType) => state.app.remainingTime
+        )
+
+        yield put(startTimer(remainingTime))
+        yield take(pauseCountdown)
+        yield put(clearTimer())
+    }
+}
+
+function* resetCurrentStageWorker() {
+    const paused: boolean = yield select(
+        (state: RootStateType) => state.app.paused
+    )
+
+    if (!paused) {
+        const remainingTime: number = yield select(
+            (state: RootStateType) => state.app.remainingTime
+        )
+        yield put(clearTimer())
+        yield put(startTimer(remainingTime))
+        yield put(updateRemainingTime(remainingTime))
+    }
+}
+
+export function* resetCurrentStageWatcher() {
     yield takeEvery(resetCurrentStage, resetCurrentStageWorker)
+}
+
+export function* nextStageWatcher() {
+    while (true) {
+        yield take(nextStage)
+        yield put(resetCurrentStage())
+    }
 }

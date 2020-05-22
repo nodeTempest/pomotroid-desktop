@@ -31,8 +31,8 @@ export const AppPage = () => {
     const totalRounds = useSelector(totalRoundsSelector)
     const currentRound = useSelector(currentRoundSelector)
 
-    const togglePause = (paused: boolean) =>
-        dispatch(paused ? pauseCountdown() : startCountdown(remainingTime))
+    const handlePause = (paused: boolean) =>
+        dispatch(paused ? pauseCountdown() : startCountdown())
     const handleReset = () => dispatch(resetCurrentStage())
 
     return (
@@ -49,7 +49,7 @@ export const AppPage = () => {
                 <Countdown stage={currentStage} timeMs={remainingTime} />
             </Box>
 
-            <PlayButton paused={paused} onChange={togglePause} />
+            <PlayButton paused={paused} onChange={handlePause} />
 
             <Box
                 display="flex"

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { MINUTE } from "@constants"
 
-import { createStagesPattern } from "./utils"
+import { createStagesPattern, getCurrentStageDuration } from "./utils"
 
 export type stagesType = "work" | "sbreak" | "lbreak"
 
@@ -35,14 +35,16 @@ const issuesDisplaySlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-        startCountdown(state, action: PayloadAction<number>) {
-            state.remainingTime = action.payload
+        startTimer(_, __: PayloadAction<number>) {},
+        clearTimer() {},
+        timerIsOver() {},
+        startCountdown(state) {
             state.paused = false
         },
         pauseCountdown(state) {
             state.paused = true
         },
-        updateCountdown(state, action: PayloadAction<number>) {
+        updateRemainingTime(state, action: PayloadAction<number>) {
             state.remainingTime = action.payload
         },
         nextStage(state) {
@@ -50,15 +52,21 @@ const issuesDisplaySlice = createSlice({
             if (state.currentStageIndex === state.stagesPattern.length) {
                 state.currentStageIndex = 0
             }
+            state.remainingTime = getCurrentStageDuration(state)
         },
-        resetCurrentStage() {},
+        resetCurrentStage(state) {
+            state.remainingTime = getCurrentStageDuration(state)
+        },
     },
 })
 
 export const {
+    startTimer,
+    clearTimer,
+    timerIsOver,
     startCountdown,
     pauseCountdown,
-    updateCountdown,
+    updateRemainingTime,
     nextStage,
     resetCurrentStage,
 } = issuesDisplaySlice.actions
