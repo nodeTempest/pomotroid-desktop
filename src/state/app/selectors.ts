@@ -28,6 +28,15 @@ export const currentStageDurationSelector = createSelector<
     (stage, durations) => durations[stage]
 )
 
+export const totalRoundsSelector = createSelector<
+    RootStateType,
+    stagesType[],
+    number
+>(
+    state => state.app.stagesPattern,
+    pattern => pattern.length / 2
+)
+
 export const currentRoundSelector = createSelector<
     RootStateType,
     number,
