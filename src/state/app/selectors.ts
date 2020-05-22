@@ -5,13 +5,17 @@ import { RootStateType } from "@state"
 import { MINUTE } from "@constants"
 
 import { stagesType, IDurations, IApp } from "./slice"
-import { getCurrentStage } from "./utils"
 
 export const currentStageSelector = createSelector<
     RootStateType,
-    IApp,
+    stagesType[],
+    number,
     stagesType
->(state => state.app, getCurrentStage)
+>(
+    state => state.app.stagesPattern,
+    state => state.app.currentStageIndex,
+    (pattern, index) => pattern[index]
+)
 
 export const currentStageDurationSelector = createSelector<
     RootStateType,

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { MINUTE } from "@constants"
 
-import { createStagesPattern, getCurrentStageDuration } from "./utils"
+import { createStagesPattern } from "./utils"
 
 export type stagesType = "work" | "sbreak" | "lbreak"
 
