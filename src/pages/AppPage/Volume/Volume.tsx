@@ -27,7 +27,12 @@ const Input = styled.input`
     }
 `
 
-export const Volume: React.FC = () => {
+interface IProps {
+    value: number
+    onChange: (newValue: number) => void
+}
+
+export const Volume: React.FC<IProps> = ({ value, onChange }) => {
     const [showVolumeBar, setShowVolumeBar] = React.useState(false)
 
     const timerId = React.useRef<number>(null) as React.MutableRefObject<number>
@@ -63,7 +68,11 @@ export const Volume: React.FC = () => {
                     overflow="hidden"
                     alignItems="center"
                 >
-                    <Input type="range" />
+                    <Input
+                        type="range"
+                        value={value}
+                        onChange={e => onChange(+e.target.value)}
+                    />
                 </Box>
             )}
             <button>

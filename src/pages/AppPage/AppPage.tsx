@@ -10,6 +10,7 @@ import {
     totalRoundsSelector,
     currentRoundSelector,
     resetCurrentStage,
+    setVolume,
 } from "@state"
 
 import { Countdown } from "./Countdown"
@@ -30,12 +31,15 @@ export const AppPage = () => {
     const currentStage = useSelector(currentStageSelector)
     const totalRounds = useSelector(totalRoundsSelector)
     const currentRound = useSelector(currentRoundSelector)
+    const volume = useSelector((state: RootStateType) => state.settings.volume)
 
     const handlePause = (paused: boolean) =>
         dispatch(paused ? pauseCountdown() : startCountdown())
 
     const handleReset = () => dispatch(resetCurrentStage())
     const handleNextStage = () => dispatch(nextStage())
+    const handleVolumeChange = (newValue: number) =>
+        dispatch(setVolume(newValue))
 
     return (
         <Box
@@ -77,7 +81,7 @@ export const AppPage = () => {
                         </button>
                     </Box>
 
-                    <Volume />
+                    <Volume value={volume} onChange={handleVolumeChange} />
                 </Box>
             </Box>
         </Box>
