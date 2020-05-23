@@ -30,6 +30,7 @@ import {
     setDefaults,
 } from "./slice"
 import { currentStageSelector, currentStageDurationSelector } from "./selectors"
+import { sfx } from "./sfx"
 
 function* timerWorker(ms: number) {
     const timer = () => {
@@ -114,11 +115,18 @@ export function* resetCurrentStageWatcher() {
     yield takeEvery(resetCurrentStage, resetCurrentStageWorker)
 }
 
+function* nextStageWorker() {
+    yield put(resetCurrentStage())
+
+    const currentStage: ReturnType<typeof currentStageSelector> = yield select(
+        currentStageSelector
+    )
+
+    sfx[currentStage].play()
+}
+
 export function* nextStageWatcher() {
-    while (true) {
-        yield take(nextStage)
-        yield put(resetCurrentStage())
-    }
+    yield takeEvery(nextStage, nextStageWorker)
 }
 
 function* changeDurationWorker(action: PayloadAction<IChangeDuration>) {
