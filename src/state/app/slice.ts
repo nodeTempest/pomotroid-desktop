@@ -3,20 +3,20 @@ import { MINUTE } from "@constants"
 
 import { createStagesPattern } from "./utils"
 
-export type stagesType = "work" | "sbreak" | "lbreak"
+export type StagesType = "work" | "sbreak" | "lbreak"
 
 export interface IApp {
     remainingTime: number
     paused: boolean
-    stagesPattern: stagesType[]
+    stagesPattern: StagesType[]
     currentStageIndex: number
     durations: DurationsType
 }
 
-export type DurationsType = Record<stagesType, number>
+export type DurationsType = Record<StagesType, number>
 
 export interface IChangeDuration {
-    stage: stagesType
+    stage: StagesType
     minutes: number
 }
 

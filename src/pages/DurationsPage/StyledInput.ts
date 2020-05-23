@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-import { stagesType } from "@state"
+import { StagesType } from "@state"
 
 const getStageColor = (props: any) =>
     props.stage
@@ -8,7 +8,7 @@ const getStageColor = (props: any) =>
         : props.theme.palette.button.fg.dark
 
 interface IStyledInput {
-    stage?: stagesType
+    stage?: StagesType
     min: number
     max: number
     value: number

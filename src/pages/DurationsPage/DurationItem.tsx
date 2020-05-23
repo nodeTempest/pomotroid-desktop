@@ -1,12 +1,12 @@
 import React from "react"
 
 import { Box } from "@styled"
-import { stagesType, IChangeDuration } from "@state"
+import { StagesType, IChangeDuration } from "@state"
 
 import { StyledInput } from "./StyledInput"
 
 interface IProps {
-    stage: stagesType
+    stage: StagesType
     value: number
     min: number
     max: number

@@ -4,13 +4,13 @@ import * as R from "ramda"
 import { RootStateType } from "@state"
 import { MINUTE } from "@constants"
 
-import { stagesType, DurationsType } from "./slice"
+import { StagesType, DurationsType } from "./slice"
 
 export const currentStageSelector = createSelector<
     RootStateType,
-    stagesType[],
+    StagesType[],
     number,
-    stagesType
+    StagesType
 >(
     state => state.app.stagesPattern,
     state => state.app.currentStageIndex,
@@ -19,9 +19,9 @@ export const currentStageSelector = createSelector<
 
 export const currentStageDurationSelector = createSelector<
     RootStateType,
-    stagesType,
+    StagesType,
     DurationsType,
-    DurationsType[stagesType]
+    DurationsType[StagesType]
 >(
     currentStageSelector,
     state => state.app.durations,
@@ -30,7 +30,7 @@ export const currentStageDurationSelector = createSelector<
 
 export const totalRoundsSelector = createSelector<
     RootStateType,
-    stagesType[],
+    StagesType[],
     number
 >(
     state => state.app.stagesPattern,

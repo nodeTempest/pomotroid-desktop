@@ -3,10 +3,10 @@ import moment from "moment"
 
 import { theme } from "@styled"
 import { describeArc } from "@utils"
-import { stagesType } from "@state"
+import { StagesType } from "@state"
 
 interface IProps {
-    stage: stagesType
+    stage: StagesType
     timeMs: number
 }
 
