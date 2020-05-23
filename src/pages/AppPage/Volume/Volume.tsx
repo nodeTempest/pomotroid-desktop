@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useRef } from "react"
 import styled from "styled-components"
 
 import { Box } from "@styled"
@@ -33,12 +33,15 @@ interface IProps {
 }
 
 export const Volume: React.FC<IProps> = ({ value, onChange }) => {
-    const [showVolumeBar, setShowVolumeBar] = React.useState(false)
+    const [showVolumeBar, setShowVolumeBar] = useState(false)
 
-    const timerId = React.useRef<number>(null) as React.MutableRefObject<number>
-    const containerRef = React.useRef<HTMLDivElement>(null)
+    const timerId = useRef<number>(null) as React.MutableRefObject<number>
+    const containerRef = useRef<HTMLDivElement>(null)
 
     useOnClickOutside(containerRef, () => setShowVolumeBar(false))
+
+    const [mouseDownValue, setMouseDownValue] = useState(value)
+    const [mouseUpValue, setMouseUpValue] = useState(value)
 
     return (
         <Box
@@ -72,11 +75,21 @@ export const Volume: React.FC<IProps> = ({ value, onChange }) => {
                         type="range"
                         value={value}
                         onChange={e => onChange(+e.target.value)}
+                        onMouseDown={() => setMouseDownValue(value)}
+                        onMouseUp={() => setMouseUpValue(value)}
                     />
                 </Box>
             )}
-            <button>
-                <SoundIcon size={20} muted={false} />
+            <button
+                onClick={() => {
+                    if (mouseUpValue !== 0) {
+                        value !== 0 ? onChange(0) : onChange(mouseUpValue)
+                    } else {
+                        value !== 0 ? onChange(0) : onChange(mouseDownValue)
+                    }
+                }}
+            >
+                <SoundIcon size={20} muted={value === 0} />
             </button>
         </Box>
     )

@@ -57,18 +57,9 @@ interface IProps {
     muted?: boolean
 }
 
-export const SoundIcon: React.FC<IProps> = ({
-    size = 25,
-    // muted = false,
-}) => {
-    const [muted, setMuted] = React.useState(false)
+export const SoundIcon: React.FC<IProps> = ({ size = 25, muted }) => {
     return (
-        <Svg
-            width={size}
-            height={size}
-            onClick={() => setMuted(!muted)}
-            viewBox="0 0 100 100"
-        >
+        <Svg width={size} height={size} viewBox="0 0 100 100">
             <g className="shapes">
                 <rect x="12" y="37" width="25" height="25" />
                 <path d="M50 15 50 85 L15 50 Z" />
