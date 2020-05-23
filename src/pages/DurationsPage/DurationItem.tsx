@@ -1,23 +1,25 @@
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
 
 import { Box } from "@styled"
-import { changeDuration, durationsSelector, stagesType } from "@state"
+import { stagesType, IChangeDuration } from "@state"
 
 import { StyledInput } from "./StyledInput"
 
 interface IProps {
     stage: stagesType
+    value: number
+    min: number
+    max: number
+    onChange: (value: IChangeDuration) => void
 }
 
-export const DurationItem: React.FC<IProps> = ({ stage }) => {
-    const dispatch = useDispatch()
-
-    const durations = useSelector(durationsSelector)
-
-    const handleDurationChange: React.ChangeEventHandler<HTMLInputElement> = e =>
-        dispatch(changeDuration({ stage, minutes: +e.target.value }))
-
+export const DurationItem: React.FC<IProps> = ({
+    stage,
+    value,
+    min,
+    max,
+    onChange,
+}) => {
     return (
         <Box mb={2}>
             <Box color="text.dark" textAlign="center" mb={2} fontSize={13}>
@@ -31,15 +33,15 @@ export const DurationItem: React.FC<IProps> = ({ stage }) => {
                     py={0.5}
                     fontSize={13}
                 >
-                    {durations[stage]} : 00
+                    {value} : 00
                 </Box>
             </Box>
             <StyledInput
-                min={1}
-                max={60}
+                min={min}
+                max={max}
                 stage={stage}
-                value={durations[stage]}
-                onChange={handleDurationChange}
+                value={value}
+                onChange={e => onChange({ stage, minutes: +e.target.value })}
             />
         </Box>
     )

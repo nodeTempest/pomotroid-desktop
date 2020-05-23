@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react"
 import styled from "styled-components"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { Box } from "@styled"
-import { durationsSelector } from "@state"
+import { changeDuration, durationsSelector, IChangeDuration } from "@state"
 
 import { StyledInput } from "./StyledInput"
 import { DurationItem } from "./DurationItem"
@@ -21,6 +21,11 @@ const Button = styled.button`
 export const DurationsPage: FunctionComponent<{}> = () => {
     const durations = useSelector(durationsSelector)
 
+    const dispatch = useDispatch()
+
+    const handleDurationChange = (value: IChangeDuration) =>
+        dispatch(changeDuration(value))
+
     return (
         <>
             <Box textAlign="center" mb={3}>
@@ -30,6 +35,10 @@ export const DurationsPage: FunctionComponent<{}> = () => {
                 <DurationItem
                     key={stage}
                     stage={stage as keyof typeof durations}
+                    value={durations[stage]}
+                    min={1}
+                    max={60}
+                    onChange={handleDurationChange}
                 />
             ))}
             <Box mb={2}>
