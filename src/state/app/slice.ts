@@ -10,14 +10,10 @@ export interface IApp {
     paused: boolean
     stagesPattern: stagesType[]
     currentStageIndex: number
-    durations: IDurations
+    durations: DurationsType
 }
 
-export interface IDurations {
-    work: number
-    sbreak: number
-    lbreak: number
-}
+export type DurationsType = Record<stagesType, number>
 
 export interface IChangeDuration {
     stage: stagesType
