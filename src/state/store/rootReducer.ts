@@ -9,9 +9,14 @@ const appPersistConfig = {
     whitelist: ["durations", "stagesPattern"],
 }
 
+const settingsPersistConfig = {
+    key: "settings",
+    storage,
+}
+
 export const rootReducer = combineReducers({
     app: persistReducer(appPersistConfig, appReducer),
-    settings: settingsReducer,
+    settings: persistReducer(settingsPersistConfig, settingsReducer),
 })
 
 export type RootStateType = ReturnType<typeof rootReducer>

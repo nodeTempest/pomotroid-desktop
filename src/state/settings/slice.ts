@@ -8,10 +8,6 @@ const initialState: ISettings = {
     volume: 20,
 }
 
-const defaultState: ISettings = {
-    volume: 20,
-}
-
 const issuesDisplaySlice = createSlice({
     name: "settings",
     initialState,
