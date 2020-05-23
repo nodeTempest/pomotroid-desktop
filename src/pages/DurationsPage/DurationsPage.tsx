@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -18,7 +18,7 @@ const Button = styled.button`
     }
 `
 
-export const DurationsPage: FunctionComponent<{}> = () => {
+export const DurationsPage: React.FC = () => {
     const durations = useSelector(durationsSelector)
 
     const dispatch = useDispatch()

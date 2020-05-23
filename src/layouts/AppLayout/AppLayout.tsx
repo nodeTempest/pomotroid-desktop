@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 
 import { NavBar } from "@layouts"
 import { Box } from "@styled"
 
 import { SlideTransition } from "./SlideTransition"
 
-export const AppLayout: FunctionComponent<{}> = ({ children }) => {
+export const AppLayout: React.FC = ({ children }) => {
     return (
         <Box
             overflow="hidden"

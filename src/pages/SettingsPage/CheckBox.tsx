@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import styled from "styled-components"
 
 import { Box } from "@styled"
@@ -33,7 +33,7 @@ interface ICheckBoxProps {
     onChange?: (checked: boolean) => void
 }
 
-export const CheckBox: FunctionComponent<ICheckBoxProps> = ({
+export const CheckBox: React.FC<ICheckBoxProps> = ({
     checked,
     onChange,
     text,

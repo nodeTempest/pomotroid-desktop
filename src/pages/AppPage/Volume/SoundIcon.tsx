@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import styled from "styled-components"
 
 const Svg = styled.svg`
@@ -57,7 +57,7 @@ interface IProps {
     muted?: boolean
 }
 
-export const SoundIcon: FunctionComponent<IProps> = ({
+export const SoundIcon: React.FC<IProps> = ({
     size = 25,
     // muted = false,
 }) => {

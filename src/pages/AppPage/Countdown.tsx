@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import moment from "moment"
 
 import { theme } from "@styled"
@@ -10,7 +10,7 @@ interface IProps {
     timeMs: number
 }
 
-export const Countdown: FunctionComponent<IProps> = ({ stage, timeMs }) => {
+export const Countdown: React.FC<IProps> = ({ stage, timeMs }) => {
     // because moment.js floors seconds
     // when timer is stopped between ticks time must be ceiled
     const time = moment.utc(timeMs)

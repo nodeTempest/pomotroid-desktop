@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 
 import { Box } from "@styled"
 
@@ -7,10 +7,7 @@ interface IProps {
     totalRounds: number
 }
 
-export const Rounds: FunctionComponent<IProps> = ({
-    currentRound,
-    totalRounds,
-}) => {
+export const Rounds: React.FC<IProps> = ({ currentRound, totalRounds }) => {
     return (
         <Box textAlign="right">
             {currentRound}/{totalRounds}

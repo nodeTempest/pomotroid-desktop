@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 
 import { Box } from "@styled"
 import pomotroidLogo from "@assets/logo.svg"
 
-export const AboutPage: FunctionComponent<{}> = () => {
+export const AboutPage: React.FC = () => {
     return (
         <>
             <Box textAlign="center" mb={3}>

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { Link, useLocation } from "react-router-dom"
 
 import { OpenMenuIcon } from "./OpenMenuIcon"
@@ -7,7 +7,7 @@ import { MinimizeWindowIcon } from "./MinimizeWindowIcon"
 import { Box } from "@styled"
 import { routes } from "@routing"
 
-export const NavBar: FunctionComponent<{}> = () => {
+export const NavBar: React.FC = () => {
     const location = useLocation()
     const onMenu = location.pathname.includes(routes.menu.name)
 

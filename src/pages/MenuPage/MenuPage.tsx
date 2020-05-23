@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { Redirect, Route, Switch, RouteComponentProps } from "react-router-dom"
 
 import { MenuLayout } from "@layouts"
@@ -7,7 +7,7 @@ import { DurationsPage, AboutPage, SettingsPage } from "@pages"
 
 const menuRoutes = routes.menu.next
 
-export const MenuPage: FunctionComponent<RouteComponentProps> = ({
+export const MenuPage: React.FC<RouteComponentProps> = ({
     match: { path },
     location,
 }) => {

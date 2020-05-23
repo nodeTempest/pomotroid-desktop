@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import styled from "styled-components"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 
@@ -63,10 +63,7 @@ interface IProps {
     onChange?: (paused: boolean) => void
 }
 
-export const PlayButton: FunctionComponent<IProps> = ({
-    paused = false,
-    onChange,
-}) => {
+export const PlayButton: React.FC<IProps> = ({ paused = false, onChange }) => {
     return (
         <SwitchTransition mode={"out-in"}>
             <CSSTransition

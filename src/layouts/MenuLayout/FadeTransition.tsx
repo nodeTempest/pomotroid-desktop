@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { useLocation } from "react-router-dom"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 import styled from "styled-components"
@@ -22,7 +22,7 @@ const TransitionContainer = styled.div`
     }
 `
 
-export const FadeTransition: FunctionComponent<{}> = ({ children }) => {
+export const FadeTransition: React.FC = ({ children }) => {
     const { pathname } = useLocation()
     const defaultPage = routes.menu.next.durations.name
 

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { NavLink, useRouteMatch } from "react-router-dom"
 import styled from "styled-components"
 
@@ -42,7 +42,7 @@ const StyledNavLink = styled(NavLink)`
 
 const menuRoutes = routes.menu.next
 
-export const MenuTabs: FunctionComponent<{}> = () => {
+export const MenuTabs: React.FC = () => {
     const { path } = useRouteMatch()
 
     return (

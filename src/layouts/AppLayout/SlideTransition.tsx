@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import styled from "styled-components"
 import { useLocation } from "react-router-dom"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
@@ -36,7 +36,7 @@ const TransitionContainer = styled.div<ITransitionContainer>`
     }
 `
 
-export const SlideTransition: FunctionComponent<{}> = ({ children }) => {
+export const SlideTransition: React.FC = ({ children }) => {
     const { pathname } = useLocation()
 
     return (

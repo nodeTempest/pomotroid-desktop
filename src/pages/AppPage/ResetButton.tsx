@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import styled from "styled-components"
 
 const Button = styled.button`
@@ -15,8 +15,6 @@ interface IProps {
     onClick?: (e: React.MouseEvent) => void
 }
 
-export const ResetButton: FunctionComponent<IProps> = ({
-    onClick = () => {},
-}) => {
+export const ResetButton: React.FC<IProps> = ({ onClick = () => {} }) => {
     return <Button onClick={onClick}>Reset</Button>
 }

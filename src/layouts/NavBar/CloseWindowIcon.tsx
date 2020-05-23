@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 
 import styled from "styled-components"
 
@@ -19,7 +19,7 @@ interface IProps {
     size?: number
 }
 
-export const CloseWindowIcon: FunctionComponent<IProps> = ({ size = 25 }) => {
+export const CloseWindowIcon: React.FC<IProps> = ({ size = 25 }) => {
     return (
         <Svg width={size} height={size} viewBox="0 0 100 100">
             <path d="M15 15 L85 85 Z " />

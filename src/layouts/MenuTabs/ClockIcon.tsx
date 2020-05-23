@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import styled from "styled-components"
 
 const Svg = styled.svg`
@@ -19,7 +19,7 @@ interface IProps {
     size?: number
 }
 
-export const ClockIcon: FunctionComponent<IProps> = ({ size = 25 }) => {
+export const ClockIcon: React.FC<IProps> = ({ size = 25 }) => {
     return (
         <Svg width={size} height={size} viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="35" />

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import styled from "styled-components"
 
 import { Box } from "@styled"
@@ -27,7 +27,7 @@ const Input = styled.input`
     }
 `
 
-export const Volume: FunctionComponent<{}> = () => {
+export const Volume: React.FC = () => {
     const [showVolumeBar, setShowVolumeBar] = React.useState(false)
 
     const timerId = React.useRef<number>(null) as React.MutableRefObject<number>

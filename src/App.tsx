@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 import { Route, Redirect, Switch, useLocation } from "react-router-dom"
 
 import { routes } from "@routing"
@@ -6,7 +6,7 @@ import { AppPage, MenuPage } from "@pages"
 import { AppLayout } from "@layouts"
 import { AppContainer } from "./AppContainer"
 
-const AppEntry: FunctionComponent<{}> = () => {
+const AppEntry: React.FC = () => {
     const location = useLocation()
     return (
         <AppLayout>
@@ -19,7 +19,7 @@ const AppEntry: FunctionComponent<{}> = () => {
     )
 }
 
-export const App: FunctionComponent<{}> = () => (
+export const App: React.FC = () => (
     <AppContainer>
         <AppEntry />
     </AppContainer>

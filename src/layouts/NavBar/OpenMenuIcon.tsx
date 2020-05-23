@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React from "react"
 
 import styled from "styled-components"
 
@@ -19,10 +19,7 @@ interface IProps {
     size?: number
 }
 
-export const OpenMenuIcon: FunctionComponent<IProps> = ({
-    active,
-    size = 25,
-}) => {
+export const OpenMenuIcon: React.FC<IProps> = ({ active, size = 25 }) => {
     const activeTopD = "M15 35 L85 35 Z"
     const activeBotD = "M15 65 L50 65 Z"
 
