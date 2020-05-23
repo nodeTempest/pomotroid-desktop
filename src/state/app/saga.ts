@@ -126,12 +126,7 @@ function* changeDurationWorker(action: PayloadAction<IChangeDuration>) {
         currentStageSelector
     )
     if (currenStage === stage) {
-        const paused = yield select((state: RootStateType) => state.app.paused)
-
-        if (!paused) {
-            yield put(pauseCountdown())
-        }
-
+        yield put(pauseCountdown())
         yield put(updateRemainingTime(minutes * MINUTE))
     }
 }
