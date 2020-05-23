@@ -9,6 +9,7 @@ import {
     durationsSelector,
     totalRoundsSelector,
     IChangeDuration,
+    setDefaults,
 } from "@state"
 
 import { StyledInput } from "./StyledInput"
@@ -35,6 +36,8 @@ export const DurationsPage: React.FC = () => {
 
     const handleTotalRoundsChange = (value: number) =>
         dispatch(changeTotalRounds(value))
+
+    const handleSetDefaults = () => dispatch(setDefaults())
 
     return (
         <>
@@ -74,7 +77,7 @@ export const DurationsPage: React.FC = () => {
                 />
             </Box>
             <Box display="flex" justifyContent="center" pt={0.5}>
-                <Button>Reset Defaults</Button>
+                <Button onClick={handleSetDefaults}>Reset Defaults</Button>
             </Box>
         </>
     )

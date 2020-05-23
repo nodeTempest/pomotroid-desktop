@@ -27,6 +27,7 @@ import {
     changeDuration,
     IChangeDuration,
     changeTotalRounds,
+    setDefaults,
 } from "./slice"
 import { currentStageSelector, currentStageDurationSelector } from "./selectors"
 
@@ -147,4 +148,17 @@ function* changeTotalRoundsWorker() {
 
 export function* changeTotalRoundsWatcher() {
     yield takeEvery(changeTotalRounds, changeTotalRoundsWorker)
+}
+
+function* setDefaultsWorker() {
+    const currentStageDuration: number = yield select(
+        currentStageDurationSelector
+    )
+
+    yield put(clearTimer())
+    yield put(updateRemainingTime(currentStageDuration))
+}
+
+export function* setDefaultsWatcher() {
+    yield takeEvery(setDefaults, setDefaultsWorker)
 }

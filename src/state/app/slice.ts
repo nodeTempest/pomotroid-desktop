@@ -32,6 +32,18 @@ const initialState: IApp = {
     },
 }
 
+const defaultState: IApp = {
+    remainingTime: 25 * MINUTE,
+    paused: true,
+    stagesPattern: createStagesPattern(4),
+    currentStageIndex: 0,
+    durations: {
+        work: 25 * MINUTE,
+        sbreak: 5 * MINUTE,
+        lbreak: 15 * MINUTE,
+    },
+}
+
 const issuesDisplaySlice = createSlice({
     name: "app",
     initialState,
@@ -76,6 +88,14 @@ const issuesDisplaySlice = createSlice({
                 state.currentStageIndex = 0
             }
         },
+
+        setDefaults(state) {
+            for (const key in defaultState) {
+                if (key) {
+                    state[key] = defaultState[key]
+                }
+            }
+        },
     },
 })
 
@@ -90,6 +110,7 @@ export const {
     resetCurrentStage,
     changeDuration,
     changeTotalRounds,
+    setDefaults,
 } = issuesDisplaySlice.actions
 
 export const { reducer: appReducer } = issuesDisplaySlice
