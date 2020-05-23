@@ -26,6 +26,7 @@ import {
     resetCurrentStage,
     changeDuration,
     IChangeDuration,
+    changeTotalRounds,
 } from "./slice"
 import { currentStageSelector, currentStageDurationSelector } from "./selectors"
 
@@ -137,4 +138,18 @@ function* changeDurationWorker(action: PayloadAction<IChangeDuration>) {
 
 export function* changeDurationWatcher() {
     yield throttle(500, changeDuration, changeDurationWorker)
+}
+
+function* changeTotalRoundsWorker() {
+    const currentIndex: number = yield select(
+        (state: RootStateType) => state.app.currentStageIndex
+    )
+
+    if (currentIndex === 0) {
+        yield put(pauseCountdown())
+    }
+}
+
+export function* changeTotalRoundsWatcher() {
+    yield takeEvery(changeTotalRounds, changeTotalRoundsWorker)
 }

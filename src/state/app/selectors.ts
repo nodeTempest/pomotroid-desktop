@@ -4,7 +4,8 @@ import * as R from "ramda"
 import { RootStateType } from "@state"
 import { MINUTE } from "@constants"
 
-import { StagesType, DurationsType } from "./slice"
+import { StagesType, DurationsType, IApp } from "./slice"
+import { getCurrentRound } from "./utils"
 
 export const currentStageSelector = createSelector<
     RootStateType,
@@ -37,13 +38,9 @@ export const totalRoundsSelector = createSelector<
     pattern => pattern.length / 2
 )
 
-export const currentRoundSelector = createSelector<
-    RootStateType,
-    number,
-    number
->(
-    state => state.app.currentStageIndex,
-    currentStageIndex => 1 + Math.floor(currentStageIndex / 2)
+export const currentRoundSelector = createSelector<RootStateType, IApp, number>(
+    state => state.app,
+    getCurrentRound
 )
 
 export const durationsSelector = createSelector<

@@ -3,7 +3,13 @@ import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
 
 import { Box } from "@styled"
-import { changeDuration, durationsSelector, IChangeDuration } from "@state"
+import {
+    changeDuration,
+    changeTotalRounds,
+    durationsSelector,
+    totalRoundsSelector,
+    IChangeDuration,
+} from "@state"
 
 import { StyledInput } from "./StyledInput"
 import { DurationItem } from "./DurationItem"
@@ -19,12 +25,16 @@ const Button = styled.button`
 `
 
 export const DurationsPage: React.FC = () => {
-    const durations = useSelector(durationsSelector)
-
     const dispatch = useDispatch()
+
+    const durations = useSelector(durationsSelector)
+    const totalRounds = useSelector(totalRoundsSelector)
 
     const handleDurationChange = (value: IChangeDuration) =>
         dispatch(changeDuration(value))
+
+    const handleTotalRoundsChange = (value: number) =>
+        dispatch(changeTotalRounds(value))
 
     return (
         <>
@@ -53,10 +63,15 @@ export const DurationsPage: React.FC = () => {
                         py={0.5}
                         fontSize={13}
                     >
-                        4
+                        {totalRounds}
                     </Box>
                 </Box>
-                <StyledInput min={1} max={60} value={10} onChange={() => 0} />
+                <StyledInput
+                    min={1}
+                    max={12}
+                    value={totalRounds}
+                    onChange={e => handleTotalRoundsChange(+e.target.value)}
+                />
             </Box>
             <Box display="flex" justifyContent="center" pt={0.5}>
                 <Button>Reset Defaults</Button>
