@@ -33,7 +33,9 @@ export const AppPage = () => {
 
     const handlePause = (paused: boolean) =>
         dispatch(paused ? pauseCountdown() : startCountdown())
+
     const handleReset = () => dispatch(resetCurrentStage())
+    const handleNextStage = () => dispatch(nextStage())
 
     return (
         <Box
@@ -70,7 +72,7 @@ export const AppPage = () => {
                 </Box>
                 <Box display="flex">
                     <Box mr={3}>
-                        <button onClick={() => dispatch(nextStage())}>
+                        <button onClick={handleNextStage}>
                             <NextStageIcon size={20} />
                         </button>
                     </Box>

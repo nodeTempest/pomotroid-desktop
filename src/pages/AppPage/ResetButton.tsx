@@ -12,9 +12,9 @@ const Button = styled.button`
 `
 
 interface IProps {
-    onClick?: (e: React.MouseEvent) => void
+    onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export const ResetButton: React.FC<IProps> = ({ onClick = () => {} }) => {
+export const ResetButton: React.FC<IProps> = ({ onClick }) => {
     return <Button onClick={onClick}>Reset</Button>
 }
