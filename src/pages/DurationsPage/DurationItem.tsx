@@ -1,4 +1,5 @@
 import React from "react"
+import moment from "moment"
 
 import { Box } from "@styled"
 import { StagesType, IChangeDuration } from "@state"
@@ -33,7 +34,7 @@ export const DurationItem: React.FC<IProps> = ({
                     py={0.5}
                     fontSize={13}
                 >
-                    {value} : 00
+                    {moment({ minutes: value }).format("mm : ss")}
                 </Box>
             </Box>
             <StyledInput
