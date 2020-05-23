@@ -118,11 +118,11 @@ export function* resetCurrentStageWatcher() {
 function* nextStageWorker() {
     yield put(resetCurrentStage())
 
-    const currentStage: ReturnType<typeof currentStageSelector> = yield select(
-        currentStageSelector
-    )
+    // const currentStage: ReturnType<typeof currentStageSelector> = yield select(
+    //     currentStageSelector
+    // )
 
-    sfx[currentStage].play()
+    // sfx[currentStage].play()
 }
 
 export function* nextStageWatcher() {

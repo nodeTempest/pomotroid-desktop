@@ -1,5 +1,14 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
 import createSagaMiddleware from "redux-saga"
+import {
+    persistStore,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from "redux-persist"
 
 import { rootReducer } from "./rootReducer"
 import { rootSaga } from "./rootSaga"
@@ -11,11 +20,22 @@ export const store = configureStore({
     middleware: [
         ...getDefaultMiddleware({
             immutableCheck: true,
-            serializableCheck: true,
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
+            },
         }),
         sagaMiddleware,
     ],
 })
+
+export const persistor = persistStore(store)
 
 let sagaTask = sagaMiddleware.run(rootSaga)
 

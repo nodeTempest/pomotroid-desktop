@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit"
 import { MINUTE } from "@constants"
+import { REHYDRATE } from "redux-persist"
 
 import { createStagesPattern, getCurrentRound } from "./utils"
 
@@ -21,14 +22,14 @@ export interface IChangeDuration {
 }
 
 const initialState: IApp = {
-    remainingTime: 1 * MINUTE,
+    remainingTime: 25 * MINUTE,
     paused: true,
     stagesPattern: createStagesPattern(4),
     currentStageIndex: 0,
     durations: {
-        work: 1 * MINUTE,
-        sbreak: 1 * MINUTE,
-        lbreak: 1 * MINUTE,
+        work: 25 * MINUTE,
+        sbreak: 5 * MINUTE,
+        lbreak: 15 * MINUTE,
     },
 }
 
@@ -43,6 +44,10 @@ const defaultState: IApp = {
         lbreak: 15 * MINUTE,
     },
 }
+
+const bootstrapReducerAction = createAction<
+    Pick<IApp, "stagesPattern" | "durations">
+>(REHYDRATE)
 
 const issuesDisplaySlice = createSlice({
     name: "app",
@@ -96,6 +101,12 @@ const issuesDisplaySlice = createSlice({
                 }
             }
         },
+    },
+    extraReducers: builder => {
+        builder.addCase(bootstrapReducerAction, (state, action) => {
+            const { durations } = action.payload
+            state.remainingTime = durations.work
+        })
     },
 })
 
