@@ -12,7 +12,7 @@ import {
 } from "redux-saga/effects"
 
 import { PayloadAction } from "@reduxjs/toolkit"
-import { RootStateType } from "@state"
+import { RootStateType, sfx } from "@state"
 import { MINUTE } from "@constants"
 
 import {
@@ -30,7 +30,6 @@ import {
     setDefaults,
 } from "./slice"
 import { currentStageSelector, currentStageDurationSelector } from "./selectors"
-import { sfx } from "./sfx"
 
 function* timerWorker(ms: number) {
     const timer = () => {
