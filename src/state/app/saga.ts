@@ -28,24 +28,23 @@ import {
     IChangeDuration,
     changeTotalRounds,
     setDefaults,
+    IApp,
 } from "./slice"
 import { currentStageSelector, currentStageDurationSelector } from "./selectors"
 
+const timerChannel = (ms: number) => {
+    return eventChannel(emit => {
+        const timerId = setInterval(() => {
+            ms -= 1000
+            emit(ms >= 0 ? ms : END)
+        }, 1000)
+
+        return () => clearInterval(timerId)
+    })
+}
+
 function* timerWorker(ms: number) {
-    const timer = () => {
-        return eventChannel(emit => {
-            const counter = setInterval(() => {
-                ms -= 10
-                if (ms % 1000 === 0) {
-                    emit(ms >= 0 ? ms : END)
-                }
-            }, 10)
-
-            return () => clearInterval(counter)
-        })
-    }
-
-    const chan = yield call(timer)
+    const chan = yield call(timerChannel, ms)
 
     try {
         while (true) {
@@ -55,7 +54,6 @@ function* timerWorker(ms: number) {
     } finally {
         if (yield cancelled()) {
             chan.close()
-            yield put(updateRemainingTime(ms))
         } else {
             yield put(timerIsOver())
         }
@@ -95,77 +93,155 @@ export function* countdownFlow() {
 }
 
 function* resetCurrentStageWorker() {
-    const paused: boolean = yield select(
-        (state: RootStateType) => state.app.paused
-    )
-    const currentStageDuration: number = yield select(
-        currentStageDurationSelector
+    const { paused, remainingTime }: IApp = yield select(
+        (state: RootStateType) => state.app
     )
 
     if (!paused) {
         yield put(clearTimer())
-        yield put(startTimer(currentStageDuration))
+        yield put(startTimer(remainingTime))
     }
-
-    yield put(updateRemainingTime(currentStageDuration))
 }
 
 export function* resetCurrentStageWatcher() {
     yield takeEvery(resetCurrentStage, resetCurrentStageWorker)
 }
 
-function* nextStageWorker() {
-    yield put(resetCurrentStage())
+// function* timerWorker(ms: number) {
+//     const timer = () => {
+//         return eventChannel(emit => {
+//             const counter = setInterval(() => {
+//                 ms -= 10
+//                 if (ms % 1000 === 0) {
+//                     emit(ms >= 0 ? ms : END)
+//                 }
+//             }, 10)
 
-    const currentStage: ReturnType<typeof currentStageSelector> = yield select(
-        currentStageSelector
-    )
+//             return () => clearInterval(counter)
+//         })
+//     }
 
-    sfx[currentStage].play()
-}
+//     const chan = yield call(timer)
 
-export function* nextStageWatcher() {
-    yield takeEvery(nextStage, nextStageWorker)
-}
+//     try {
+//         while (true) {
+//             const ms = yield take(chan)
+//             yield put(updateRemainingTime(ms))
+//         }
+//     } finally {
+//         if (yield cancelled()) {
+//             chan.close()
+//             yield put(updateRemainingTime(ms))
+//         } else {
+//             yield put(timerIsOver())
+//         }
+//     }
+// }
 
-function* changeDurationWorker(action: PayloadAction<IChangeDuration>) {
-    const { stage, minutes } = action.payload
-    const currenStage: ReturnType<typeof currentStageSelector> = yield select(
-        currentStageSelector
-    )
-    if (currenStage === stage) {
-        yield put(pauseCountdown())
-        yield put(updateRemainingTime(minutes * MINUTE))
-    }
-}
+// export function* timerWatcher() {
+//     while (true) {
+//         const action: PayloadAction<number> = yield take(startTimer)
+//         const task = yield fork(timerWorker, action.payload)
 
-export function* changeDurationWatcher() {
-    yield throttle(500, changeDuration, changeDurationWorker)
-}
+//         const { type } = yield take([clearTimer, timerIsOver])
+//         if (type === clearTimer.toString()) {
+//             yield cancel(task)
+//         }
+//     }
+// }
 
-function* changeTotalRoundsWorker() {
-    const currentIndex: number = yield select(
-        (state: RootStateType) => state.app.currentStageIndex
-    )
+// export function* timerIsOverWatcher() {
+//     while (true) {
+//         yield take(timerIsOver)
+//         yield put(nextStage())
+//     }
+// }
 
-    if (currentIndex === 0) {
-        yield put(pauseCountdown())
-    }
-}
+// export function* countdownFlow() {
+//     while (true) {
+//         yield take(startCountdown)
+//         const remainingTime: number = yield select(
+//             (state: RootStateType) => state.app.remainingTime
+//         )
+//         yield put(startTimer(remainingTime))
 
-export function* changeTotalRoundsWatcher() {
-    yield takeEvery(changeTotalRounds, changeTotalRoundsWorker)
-}
+//         yield take(pauseCountdown)
+//         yield put(clearTimer())
+//     }
+// }
 
-function* setDefaultsWorker() {
-    const currentStageDuration: number = yield select(
-        currentStageDurationSelector
-    )
+// function* resetCurrentStageWorker() {
+//     const paused: boolean = yield select(
+//         (state: RootStateType) => state.app.paused
+//     )
+//     const currentStageDuration: number = yield select(
+//         currentStageDurationSelector
+//     )
 
-    yield put(clearTimer())
-    yield put(updateRemainingTime(currentStageDuration))
-}
+//     if (!paused) {
+//         yield put(clearTimer())
+//         yield put(startTimer(currentStageDuration))
+//     }
 
-export function* setDefaultsWatcher() {
-    yield takeEvery(setDefaults, setDefaultsWorker)
-}
+//     yield put(updateRemainingTime(currentStageDuration))
+// }
+
+// export function* resetCurrentStageWatcher() {
+//     yield takeEvery(resetCurrentStage, resetCurrentStageWorker)
+// }
+
+// function* nextStageWorker() {
+//     yield put(resetCurrentStage())
+
+//     const currentStage: ReturnType<typeof currentStageSelector> = yield select(
+//         currentStageSelector
+//     )
+
+//     sfx[currentStage].play()
+// }
+
+// export function* nextStageWatcher() {
+//     yield takeEvery(nextStage, nextStageWorker)
+// }
+
+// function* changeDurationWorker(action: PayloadAction<IChangeDuration>) {
+//     const { stage, minutes } = action.payload
+//     const currenStage: ReturnType<typeof currentStageSelector> = yield select(
+//         currentStageSelector
+//     )
+//     if (currenStage === stage) {
+//         yield put(pauseCountdown())
+//         yield put(updateRemainingTime(minutes * MINUTE))
+//     }
+// }
+
+// export function* changeDurationWatcher() {
+//     yield throttle(500, changeDuration, changeDurationWorker)
+// }
+
+// function* changeTotalRoundsWorker() {
+//     const currentIndex: number = yield select(
+//         (state: RootStateType) => state.app.currentStageIndex
+//     )
+
+//     if (currentIndex === 0) {
+//         yield put(pauseCountdown())
+//     }
+// }
+
+// export function* changeTotalRoundsWatcher() {
+//     yield takeEvery(changeTotalRounds, changeTotalRoundsWorker)
+// }
+
+// function* setDefaultsWorker() {
+//     const currentStageDuration: number = yield select(
+//         currentStageDurationSelector
+//     )
+
+//     yield put(clearTimer())
+//     yield put(updateRemainingTime(currentStageDuration))
+// }
+
+// export function* setDefaultsWatcher() {
+//     yield takeEvery(setDefaults, setDefaultsWorker)
+// }
