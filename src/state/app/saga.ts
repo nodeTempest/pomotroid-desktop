@@ -107,6 +107,20 @@ export function* resetCurrentStageWatcher() {
     yield takeEvery(resetCurrentStage, resetCurrentStageWorker)
 }
 
+function* nextStageWorker() {
+    yield put(resetCurrentStage())
+
+    const currentStage: ReturnType<typeof currentStageSelector> = yield select(
+        currentStageSelector
+    )
+
+    sfx[currentStage].play()
+}
+
+export function* nextStageWatcher() {
+    yield takeEvery(nextStage, nextStageWorker)
+}
+
 // function* timerWorker(ms: number) {
 //     const timer = () => {
 //         return eventChannel(emit => {
