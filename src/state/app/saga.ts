@@ -14,9 +14,6 @@ import { PayloadAction } from "@reduxjs/toolkit"
 import { RootStateType, sfx } from "@state"
 
 import {
-    startTimer,
-    clearTimer,
-    timerIsOver,
     startCountdown,
     pauseCountdown,
     updateRemainingTime,
@@ -28,6 +25,7 @@ import {
     setDefaults,
     IApp,
 } from "./slice"
+import { startTimer, clearTimer, timerIsOver } from "./middlewareActions"
 import { currentStageSelector } from "./selectors"
 
 const timerChannel = (ms: number) => {

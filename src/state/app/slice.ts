@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+
+import { bootstrapReducerAction } from "@state"
 import { MINUTE } from "@constants"
-import { REHYDRATE } from "redux-persist"
 
 import {
     createStagesPattern,
@@ -38,18 +39,10 @@ const initialState: IApp = {
     },
 }
 
-const bootstrapReducerAction = createAction(REHYDRATE)
-
 const issuesDisplaySlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-        startTimer(_, __: PayloadAction<number>) {},
-
-        clearTimer() {},
-
-        timerIsOver() {},
-
         startCountdown(state) {
             state.paused = false
         },
@@ -104,9 +97,6 @@ const issuesDisplaySlice = createSlice({
 })
 
 export const {
-    startTimer,
-    clearTimer,
-    timerIsOver,
     startCountdown,
     pauseCountdown,
     updateRemainingTime,
