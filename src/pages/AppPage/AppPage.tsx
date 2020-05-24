@@ -7,6 +7,7 @@ import {
     pauseCountdown,
     nextStage,
     currentStageSelector,
+    currentStageDurationSelector,
     totalRoundsSelector,
     currentRoundSelector,
     resetCurrentStage,
@@ -29,6 +30,7 @@ export const AppPage = () => {
         (state: RootStateType) => state.app
     )
     const currentStage = useSelector(currentStageSelector)
+    const currentStageDuration = useSelector(currentStageDurationSelector)
     const totalRounds = useSelector(totalRoundsSelector)
     const currentRound = useSelector(currentRoundSelector)
     const volume = useSelector((state: RootStateType) => state.settings.volume)
@@ -52,7 +54,12 @@ export const AppPage = () => {
             height={1}
         >
             <Box mt={6}>
-                <Countdown stage={currentStage} timeMs={remainingTime} />
+                <Countdown
+                    paused={paused}
+                    stage={currentStage}
+                    timeMs={remainingTime}
+                    currentStageDuration={currentStageDuration}
+                />
             </Box>
 
             <PlayButton paused={paused} onChange={handlePause} />
