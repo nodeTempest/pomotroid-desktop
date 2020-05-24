@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit"
 import { MINUTE } from "@constants"
-import { REHYDRATE, RehydrateAction } from "redux-persist"
+import { REHYDRATE } from "redux-persist"
 
 import { createStagesPattern, getCurrentRound } from "./utils"
 
@@ -33,9 +33,7 @@ const initialState: IApp = {
     },
 }
 
-const bootstrapReducerAction = createAction<
-    Pick<IApp, "stagesPattern" | "durations">
->(REHYDRATE)
+const bootstrapReducerAction = createAction(REHYDRATE)
 
 const issuesDisplaySlice = createSlice({
     name: "app",
@@ -91,11 +89,8 @@ const issuesDisplaySlice = createSlice({
         },
     },
     extraReducers: builder => {
-        builder.addCase(bootstrapReducerAction, (state, action) => {
-            if ((action as RehydrateAction).key === "app") {
-                const { durations } = action.payload
-                state.remainingTime = durations.work
-            }
+        builder.addCase(bootstrapReducerAction, state => {
+            state.remainingTime = state.durations.work
         })
     },
 })
