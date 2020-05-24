@@ -55,7 +55,7 @@ export const DurationsPage: React.FC = () => {
                 />
             ))}
             <RoundsChangeItem
-                defaulValue={totalRounds}
+                defaultValue={totalRounds}
                 min={1}
                 max={12}
                 onChange={handleTotalRoundsChange}

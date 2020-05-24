@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useDebounce } from "react-use"
 
 import { Box } from "@styled"
@@ -6,19 +6,20 @@ import { Box } from "@styled"
 import { StyledInput } from "./StyledInput"
 
 interface IProps {
-    defaulValue: number
+    defaultValue: number
     min: number
     max: number
     onChange: (value: number) => void
 }
 
 export const RoundsChangeItem: React.FC<IProps> = ({
-    defaulValue,
+    defaultValue,
     min,
     max,
     onChange,
 }) => {
-    const [value, setValue] = useState(defaulValue)
+    const [value, setValue] = useState(defaultValue)
+
     const [, cancel] = useDebounce(
         () => {
             onChange(value)
@@ -26,9 +27,14 @@ export const RoundsChangeItem: React.FC<IProps> = ({
         500,
         [value]
     )
-    React.useEffect(() => {
+
+    useEffect(() => {
         cancel()
     }, [])
+
+    useEffect(() => {
+        setValue(defaultValue)
+    }, [defaultValue, setValue])
 
     return (
         <Box mb={2}>
