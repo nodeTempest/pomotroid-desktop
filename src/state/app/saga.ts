@@ -121,6 +121,20 @@ export function* nextStageWatcher() {
     yield takeEvery(nextStage, nextStageWorker)
 }
 
+function* changeDurationWorker(action: PayloadAction<IChangeDuration>) {
+    const { stage } = action.payload
+    const currenStage: ReturnType<typeof currentStageSelector> = yield select(
+        currentStageSelector
+    )
+    if (currenStage === stage) {
+        yield put(pauseCountdown())
+    }
+}
+
+export function* changeDurationWatcher() {
+    yield takeEvery(changeDuration, changeDurationWorker)
+}
+
 // function* timerWorker(ms: number) {
 //     const timer = () => {
 //         return eventChannel(emit => {

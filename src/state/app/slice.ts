@@ -4,6 +4,7 @@ import { REHYDRATE } from "redux-persist"
 
 import {
     createStagesPattern,
+    getCurrentStage,
     getCurrentStageDuration,
     getCurrentRound,
 } from "./utils"
@@ -75,6 +76,10 @@ const issuesDisplaySlice = createSlice({
         changeDuration(state, action: PayloadAction<IChangeDuration>) {
             const { stage, minutes } = action.payload
             state.durations[stage] = minutes * MINUTE
+
+            if (getCurrentStage(state) === stage) {
+                state.remainingTime = getCurrentStageDuration(state)
+            }
         },
 
         changeTotalRounds(state, action: PayloadAction<number>) {
