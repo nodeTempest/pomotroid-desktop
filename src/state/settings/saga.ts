@@ -1,17 +1,27 @@
-import { takeEvery } from "redux-saga/effects"
+import { take, takeEvery, select } from "redux-saga/effects"
 import { PayloadAction } from "@reduxjs/toolkit"
+import { REHYDRATE } from "redux-persist"
+
+import { RootStateType } from "@state"
 
 import { setVolume } from "./slice"
-import { sfx } from "./sfx"
+import { setSfxVolume } from "./sfx"
 
-function* setVolumeWorker(action: PayloadAction<number>) {
-    for (const key in sfx) {
-        if (key) {
-            sfx[key].volume = action.payload / 100
-        }
+export function* setVolumeWatcher() {
+    while (true) {
+        const action: PayloadAction<number> = yield take(setVolume)
+        setSfxVolume(action.payload)
     }
 }
 
-export function* setVolumeWatcher() {
-    yield takeEvery(setVolume, setVolumeWorker)
+function* bottstrapReducerWorker() {
+    const volume: number = yield select(
+        (state: RootStateType) => state.settings.volume
+    )
+
+    setSfxVolume(volume)
+}
+
+export function* bottstrapReducerWatcher() {
+    yield takeEvery(REHYDRATE, bottstrapReducerWorker)
 }

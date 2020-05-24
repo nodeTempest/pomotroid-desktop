@@ -7,3 +7,6 @@ export const sfx = {
     sbreak: new Audio(sbreak),
     lbreak: new Audio(lbreak),
 }
+
+export const setSfxVolume = (value: number) =>
+    Object.keys(sfx).forEach(key => (sfx[key] = value))
