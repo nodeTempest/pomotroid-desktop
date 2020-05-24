@@ -1,5 +1,6 @@
 import React from "react"
 import moment from "moment"
+import { useDebounce } from "react-use"
 
 import { Box } from "@styled"
 import { StagesType, IChangeDuration } from "@state"
@@ -16,11 +17,23 @@ interface IProps {
 
 export const DurationItem: React.FC<IProps> = ({
     stage,
-    value,
+    value: propsValue,
     min,
     max,
     onChange,
 }) => {
+    const [value, setValue] = React.useState(propsValue)
+    const [, cancel] = useDebounce(
+        () => {
+            onChange({ stage, minutes: value })
+        },
+        500,
+        [value]
+    )
+    React.useEffect(() => {
+        cancel()
+    }, [])
+
     return (
         <Box mb={2}>
             <Box color="text.dark" textAlign="center" mb={2} fontSize={13}>
@@ -42,7 +55,7 @@ export const DurationItem: React.FC<IProps> = ({
                 max={max}
                 stage={stage}
                 value={value}
-                onChange={e => onChange({ stage, minutes: +e.target.value })}
+                onChange={e => setValue(+e.target.value)}
             />
         </Box>
     )
