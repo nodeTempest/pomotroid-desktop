@@ -1,6 +1,6 @@
-import { combineReducers, createAction } from "@reduxjs/toolkit"
+import { combineReducers } from "@reduxjs/toolkit"
 import storage from "redux-persist/lib/storage"
-import { persistReducer, REHYDRATE } from "redux-persist"
+import { persistReducer } from "redux-persist"
 import { appReducer, settingsReducer } from "@state"
 
 const appPersistConfig = {
@@ -20,5 +20,3 @@ export const rootReducer = combineReducers({
 })
 
 export type RootStateType = ReturnType<typeof rootReducer>
-
-export const bootstrapReducerAction = createAction(REHYDRATE)

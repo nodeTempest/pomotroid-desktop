@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction, createAction } from "@reduxjs/toolkit"
+import { REHYDRATE } from "redux-persist"
 
-import { bootstrapReducerAction } from "@state"
 import { MINUTE } from "@constants"
 
 import {
@@ -38,6 +38,8 @@ const initialState: IApp = {
         lbreak: 15 * MINUTE,
     },
 }
+
+const bootstrapReducerAction = createAction(REHYDRATE)
 
 const issuesDisplaySlice = createSlice({
     name: "app",
