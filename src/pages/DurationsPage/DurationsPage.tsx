@@ -12,8 +12,8 @@ import {
     setDefaults,
 } from "@state"
 
-import { StyledInput } from "./StyledInput"
 import { DurationItem } from "./DurationItem"
+import { RoundsChangeItem } from "./RoundsChangeItem"
 
 const Button = styled.button`
     color: ${props => props.theme.palette.button.fg.dark};
@@ -48,34 +48,18 @@ export const DurationsPage: React.FC = () => {
                 <DurationItem
                     key={stage}
                     stage={stage as keyof typeof durations}
-                    value={durations[stage]}
+                    defaultValue={durations[stage]}
                     min={1}
                     max={60}
                     onChange={handleDurationChange}
                 />
             ))}
-            <Box mb={2}>
-                <Box color="text.dark" textAlign="center" mb={2} fontSize={13}>
-                    Rounds
-                </Box>
-                <Box display="flex" justifyContent="center">
-                    <Box
-                        bgcolor="bg.dark"
-                        borderRadius={4}
-                        px={2}
-                        py={0.5}
-                        fontSize={13}
-                    >
-                        {totalRounds}
-                    </Box>
-                </Box>
-                <StyledInput
-                    min={1}
-                    max={12}
-                    value={totalRounds}
-                    onChange={e => handleTotalRoundsChange(+e.target.value)}
-                />
-            </Box>
+            <RoundsChangeItem
+                defaulValue={totalRounds}
+                min={1}
+                max={12}
+                onChange={handleTotalRoundsChange}
+            />
             <Box display="flex" justifyContent="center" pt={0.5}>
                 <Button onClick={handleSetDefaults}>Reset Defaults</Button>
             </Box>

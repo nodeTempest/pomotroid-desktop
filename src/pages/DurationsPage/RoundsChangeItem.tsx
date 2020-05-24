@@ -1,31 +1,27 @@
 import React from "react"
-import moment from "moment"
 import { useDebounce } from "react-use"
 
 import { Box } from "@styled"
-import { StagesType, IChangeDuration } from "@state"
 
 import { StyledInput } from "./StyledInput"
 
 interface IProps {
-    stage: StagesType
-    defaultValue: number
+    defaulValue: number
     min: number
     max: number
-    onChange: (value: IChangeDuration) => void
+    onChange: (value: number) => void
 }
 
-export const DurationItem: React.FC<IProps> = ({
-    stage,
-    defaultValue,
+export const RoundsChangeItem: React.FC<IProps> = ({
+    defaulValue,
     min,
     max,
     onChange,
 }) => {
-    const [value, setValue] = React.useState(defaultValue)
+    const [value, setValue] = React.useState(defaulValue)
     const [, cancel] = useDebounce(
         () => {
-            onChange({ stage, minutes: value })
+            onChange(value)
         },
         500,
         [value]
@@ -37,7 +33,7 @@ export const DurationItem: React.FC<IProps> = ({
     return (
         <Box mb={2}>
             <Box color="text.dark" textAlign="center" mb={2} fontSize={13}>
-                Work
+                Rounds
             </Box>
             <Box display="flex" justifyContent="center">
                 <Box
@@ -47,13 +43,12 @@ export const DurationItem: React.FC<IProps> = ({
                     py={0.5}
                     fontSize={13}
                 >
-                    {moment({ minutes: value }).format("mm : ss")}
+                    {value}
                 </Box>
             </Box>
             <StyledInput
                 min={min}
                 max={max}
-                stage={stage}
                 value={value}
                 onChange={e => setValue(+e.target.value)}
             />
