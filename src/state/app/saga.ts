@@ -135,6 +135,20 @@ export function* changeDurationWatcher() {
     yield takeEvery(changeDuration, changeDurationWorker)
 }
 
+function* changeTotalRoundsWorker() {
+    const currentIndex: number = yield select(
+        (state: RootStateType) => state.app.currentStageIndex
+    )
+
+    if (currentIndex === 0) {
+        yield put(pauseCountdown())
+    }
+}
+
+export function* changeTotalRoundsWatcher() {
+    yield takeEvery(changeTotalRounds, changeTotalRoundsWorker)
+}
+
 // function* timerWorker(ms: number) {
 //     const timer = () => {
 //         return eventChannel(emit => {
