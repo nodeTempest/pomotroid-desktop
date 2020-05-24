@@ -11,13 +11,6 @@ interface IProps {
 }
 
 export const Countdown: React.FC<IProps> = ({ stage, timeMs }) => {
-    // because moment.js floors seconds
-    // when timer is stopped between ticks time must be ceiled
-    const time = moment.utc(timeMs)
-    if (time.milliseconds()) {
-        time.add(1, "seconds")
-    }
-
     const displayStageName =
         stage === "work"
             ? "WORK"
@@ -44,7 +37,7 @@ export const Countdown: React.FC<IProps> = ({ stage, timeMs }) => {
                 fontSize="20"
                 fill={theme.palette.text.light}
             >
-                {time.format("mm : ss")}
+                {moment.utc(timeMs).format("mm : ss")}
             </text>
             <text
                 x="50"

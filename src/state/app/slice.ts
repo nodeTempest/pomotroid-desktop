@@ -28,12 +28,12 @@ export interface IChangeDuration {
 }
 
 const initialState: IApp = {
-    remainingTime: 25 * MINUTE,
+    remainingTime: 0.05 * MINUTE,
     paused: true,
     stagesPattern: createStagesPattern(4),
     currentStageIndex: 0,
     durations: {
-        work: 25 * MINUTE,
+        work: 0.05 * MINUTE,
         sbreak: 5 * MINUTE,
         lbreak: 15 * MINUTE,
     },
