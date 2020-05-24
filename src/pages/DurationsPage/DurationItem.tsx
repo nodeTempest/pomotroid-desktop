@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import moment from "moment"
 import { useDebounce } from "react-use"
 
@@ -22,7 +22,7 @@ export const DurationItem: React.FC<IProps> = ({
     max,
     onChange,
 }) => {
-    const [value, setValue] = React.useState(defaultValue)
+    const [value, setValue] = useState(defaultValue)
     const [, cancel] = useDebounce(
         () => {
             onChange({ stage, minutes: value })

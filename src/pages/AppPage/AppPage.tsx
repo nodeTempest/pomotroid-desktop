@@ -81,7 +81,10 @@ export const AppPage = () => {
                         </button>
                     </Box>
 
-                    <Volume value={volume} onChange={handleVolumeChange} />
+                    <Volume
+                        defaultValue={volume}
+                        onChange={handleVolumeChange}
+                    />
                 </Box>
             </Box>
         </Box>

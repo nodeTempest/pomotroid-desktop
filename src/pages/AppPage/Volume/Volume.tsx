@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react"
 import styled from "styled-components"
+import { useThrottleFn } from "react-use"
 
 import { Box } from "@styled"
 import { useOnClickOutside } from "@utils"
@@ -28,11 +29,14 @@ const Input = styled.input`
 `
 
 interface IProps {
-    value: number
+    defaultValue: number
     onChange: (newValue: number) => void
 }
 
-export const Volume: React.FC<IProps> = ({ value, onChange }) => {
+export const Volume: React.FC<IProps> = ({ defaultValue, onChange }) => {
+    const [value, setValue] = useState(defaultValue)
+    useThrottleFn(value => onChange(value), 100, [value])
+
     const [showVolumeBar, setShowVolumeBar] = useState(false)
 
     const timerId = useRef<number>(null) as React.MutableRefObject<number>
@@ -74,7 +78,7 @@ export const Volume: React.FC<IProps> = ({ value, onChange }) => {
                     <Input
                         type="range"
                         value={value}
-                        onChange={e => onChange(+e.target.value)}
+                        onChange={e => setValue(+e.target.value)}
                         onMouseDown={() => setMouseDownValue(value)}
                         onMouseUp={() => setMouseUpValue(value)}
                     />
@@ -83,9 +87,9 @@ export const Volume: React.FC<IProps> = ({ value, onChange }) => {
             <button
                 onClick={() => {
                     if (mouseUpValue !== 0) {
-                        value !== 0 ? onChange(0) : onChange(mouseUpValue)
+                        value !== 0 ? setValue(0) : setValue(mouseUpValue)
                     } else {
-                        value !== 0 ? onChange(0) : onChange(mouseDownValue)
+                        value !== 0 ? setValue(0) : setValue(mouseDownValue)
                     }
                 }}
             >

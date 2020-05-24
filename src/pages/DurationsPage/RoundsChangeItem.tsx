@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDebounce } from "react-use"
 
 import { Box } from "@styled"
@@ -18,7 +18,7 @@ export const RoundsChangeItem: React.FC<IProps> = ({
     max,
     onChange,
 }) => {
-    const [value, setValue] = React.useState(defaulValue)
+    const [value, setValue] = useState(defaulValue)
     const [, cancel] = useDebounce(
         () => {
             onChange(value)
