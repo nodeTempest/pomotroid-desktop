@@ -1,9 +1,8 @@
 import React, { useState, useRef } from "react"
 import styled from "styled-components"
-import { useThrottleFn } from "react-use"
+import { useThrottleFn, useClickAway } from "react-use"
 
 import { Box } from "@styled"
-import { useOnClickOutside } from "@utils"
 
 import { SoundIcon } from "./SoundIcon"
 
@@ -42,7 +41,7 @@ export const Volume: React.FC<IProps> = ({ defaultValue, onChange }) => {
     const timerId = useRef<number>(null) as React.MutableRefObject<number>
     const containerRef = useRef<HTMLDivElement>(null)
 
-    useOnClickOutside(containerRef, () => setShowVolumeBar(false))
+    useClickAway(containerRef, () => setShowVolumeBar(false))
 
     const [mouseDownValue, setMouseDownValue] = useState(value)
     const [mouseUpValue, setMouseUpValue] = useState(value)
