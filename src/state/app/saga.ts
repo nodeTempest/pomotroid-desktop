@@ -132,12 +132,12 @@ export function* changeDurationWatcher() {
 }
 
 function* changeTotalRoundsWorker() {
-    const currentIndex: number = yield select(
-        (state: RootStateType) => state.app.currentStageIndex
+    const paused: boolean = yield select(
+        (state: RootStateType) => state.app.paused
     )
 
-    if (currentIndex === 0) {
-        yield put(pauseCountdown())
+    if (paused) {
+        yield put(clearTimer())
     }
 }
 

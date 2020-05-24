@@ -84,6 +84,7 @@ const issuesDisplaySlice = createSlice({
             if (roundsNumber < getCurrentRound(state)) {
                 state.currentStageIndex = 0
                 state.remainingTime = getCurrentStageDuration(state)
+                state.paused = true
             }
         },
 
