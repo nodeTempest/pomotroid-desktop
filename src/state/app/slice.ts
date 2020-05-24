@@ -93,11 +93,7 @@ const issuesDisplaySlice = createSlice({
         },
 
         setDefaults(state) {
-            for (const key in initialState) {
-                if (key) {
-                    state[key] = initialState[key]
-                }
-            }
+            Object.keys(state).forEach(key => (state[key] = initialState[key]))
         },
     },
     extraReducers: builder => {

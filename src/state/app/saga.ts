@@ -149,6 +149,14 @@ export function* changeTotalRoundsWatcher() {
     yield takeEvery(changeTotalRounds, changeTotalRoundsWorker)
 }
 
+function* setDefaultsWorker() {
+    yield put(clearTimer())
+}
+
+export function* setDefaultsWatcher() {
+    yield takeEvery(setDefaults, setDefaultsWorker)
+}
+
 // function* timerWorker(ms: number) {
 //     const timer = () => {
 //         return eventChannel(emit => {
