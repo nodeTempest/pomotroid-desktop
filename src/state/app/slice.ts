@@ -28,12 +28,12 @@ export interface IChangeDuration {
 }
 
 const initialState: IApp = {
-    remainingTime: 0.05 * MINUTE,
+    remainingTime: 25 * MINUTE,
     paused: true,
     stagesPattern: createStagesPattern(4),
     currentStageIndex: 0,
     durations: {
-        work: 0.05 * MINUTE,
+        work: 25 * MINUTE,
         sbreak: 5 * MINUTE,
         lbreak: 15 * MINUTE,
     },
@@ -93,7 +93,7 @@ const issuesDisplaySlice = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(bootstrapReducerAction, state => {
-            state.remainingTime = state.durations.work
+            state.remainingTime = getCurrentStageDuration(state)
         })
     },
 })

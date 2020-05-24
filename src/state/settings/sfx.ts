@@ -9,4 +9,4 @@ export const sfx = {
 }
 
 export const setSfxVolume = (value: number) =>
-    Object.keys(sfx).forEach(key => (sfx[key] = value))
+    Object.keys(sfx).forEach(key => (sfx[key].volume = value / 100))
