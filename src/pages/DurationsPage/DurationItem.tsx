@@ -34,7 +34,7 @@ export const DurationItem: React.FC<IProps> = ({
 
     useEffect(() => {
         cancel()
-    }, [])
+    }, [cancel])
 
     useEffect(() => {
         setValue(defaultValue)

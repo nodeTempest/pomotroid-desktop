@@ -30,7 +30,7 @@ export const RoundsChangeItem: React.FC<IProps> = ({
 
     useEffect(() => {
         cancel()
-    }, [])
+    }, [cancel])
 
     useEffect(() => {
         setValue(defaultValue)
