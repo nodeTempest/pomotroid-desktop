@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import moment from "moment"
-import { useRafLoop, useUpdate } from "react-use"
+import {
+    useRafLoop,
+    useUpdate,
+    useUpdateEffect,
+    useMount,
+    useUnmount,
+} from "react-use"
 
 import { theme } from "@styled"
-import { describeArc, arcAnimationFrequency } from "@utils"
+import { describeArc, calcDegPerSec } from "@utils"
 import { StagesType } from "@state"
-import { MINUTE } from "@constants"
+import { SECOND } from "@constants"
 
 interface IProps {
     stage: StagesType
-    timeMs: number
+    remainingTime: number
     paused: boolean
     currentStageDuration: number
 }
 
 export const Countdown: React.FC<IProps> = ({
     stage,
-    timeMs,
+    remainingTime,
     paused,
     currentStageDuration,
 }) => {
@@ -48,14 +54,29 @@ export const Countdown: React.FC<IProps> = ({
         update()
     }
 
-    useEffect(() => {
+    useMount(() => {
+        const frequency = calcDegPerSec(currentStageDuration + 1000)
+
+        setFrequency(frequency)
+        setAngle(((remainingTime + 1000) / SECOND) * frequency)
+
+        if (!paused) {
+            startAnimation()
+        }
+    })
+
+    useUnmount(() => {
+        stopAnimation()
+    })
+
+    useUpdateEffect(() => {
         paused ? stopAnimation() : startAnimation()
     }, [paused])
 
-    useEffect(() => {
-        setFrequency(arcAnimationFrequency(currentStageDuration + 1000))
+    useUpdateEffect(() => {
+        setFrequency(calcDegPerSec(currentStageDuration + 1000))
         setAngle(360)
-    }, [currentStageDuration])
+    }, [currentStageDuration, stage])
 
     const displayStageName =
         stage === "work"
@@ -89,7 +110,7 @@ export const Countdown: React.FC<IProps> = ({
                 fontSize="20"
                 fill={theme.palette.text.light}
             >
-                {moment.utc(timeMs).format("mm : ss")}
+                {moment.utc(remainingTime).format("mm : ss")}
             </text>
             <text
                 x="50"

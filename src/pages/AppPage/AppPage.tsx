@@ -57,7 +57,7 @@ export const AppPage = () => {
                 <Countdown
                     paused={paused}
                     stage={currentStage}
-                    timeMs={remainingTime}
+                    remainingTime={remainingTime}
                     currentStageDuration={currentStageDuration}
                 />
             </Box>
