@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 
 import { OpenMenuIcon } from "./OpenMenuIcon"
@@ -7,9 +7,22 @@ import { MinimizeWindowIcon } from "./MinimizeWindowIcon"
 import { Box } from "@styled"
 import { routes } from "@routing"
 
+const menuRoutes = routes.menu.next
+const defaultMenuPage = menuRoutes.durations.name
+
 export const NavBar: React.FC = () => {
     const location = useLocation()
     const onMenu = location.pathname.includes(routes.menu.name)
+
+    const [lastVisitedMenuTab, setLastVisitedMenuTab] = React.useState(
+        routes.menu.name + defaultMenuPage
+    )
+
+    useEffect(() => {
+        if (onMenu) {
+            setLastVisitedMenuTab(location.pathname)
+        }
+    }, [location, onMenu])
 
     return (
         <Box
@@ -21,7 +34,7 @@ export const NavBar: React.FC = () => {
             height={0.14}
         >
             <Box width={1 / 3}>
-                <Link to={onMenu ? routes.app.name : routes.menu.name}>
+                <Link to={onMenu ? routes.app.name : lastVisitedMenuTab}>
                     <OpenMenuIcon active={!onMenu} size={25} />
                 </Link>
             </Box>
