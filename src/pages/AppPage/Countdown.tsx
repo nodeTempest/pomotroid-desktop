@@ -74,9 +74,11 @@ export const Countdown: React.FC<IProps> = ({
     }, [paused])
 
     useUpdateEffect(() => {
-        setFrequency(calcDegPerSec(currentStageDuration + 1000))
-        setAngle(360)
-    }, [currentStageDuration, stage])
+        if (remainingTime === currentStageDuration) {
+            setFrequency(calcDegPerSec(currentStageDuration + 1000))
+            setAngle(360)
+        }
+    }, [currentStageDuration, stage, remainingTime])
 
     const displayStageName =
         stage === "work"
