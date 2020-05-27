@@ -11,8 +11,6 @@ export const AppLayout: React.FC = ({ children }) => {
             overflow="hidden"
             height={480}
             width={360}
-            ml={10}
-            mt={10}
             bgcolor="bg.dark"
             position="relative"
         >
