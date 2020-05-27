@@ -1,11 +1,16 @@
 import React, { useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
+import styled from "styled-components"
 
 import { OpenMenuIcon } from "./OpenMenuIcon"
 import { CloseWindowIcon } from "./CloseWindowIcon"
 import { MinimizeWindowIcon } from "./MinimizeWindowIcon"
 import { Box } from "@styled"
 import { routes } from "@routing"
+
+const DragArea = styled(Box)`
+    -webkit-app-region: drag;
+`
 
 const menuRoutes = routes.menu.next
 const defaultMenuPage = menuRoutes.durations.name
@@ -28,21 +33,29 @@ export const NavBar: React.FC = () => {
         <Box
             display="flex"
             justifyContent="space-between"
-            pt={4}
             px={4}
             alignItems="flex-start"
             height={0.14}
         >
-            <Box width={1 / 3}>
+            <Box pt={4}>
                 <Link to={onMenu ? routes.app.name : lastVisitedMenuTab}>
                     <OpenMenuIcon active={!onMenu} size={25} />
                 </Link>
             </Box>
-            <Box width={1 / 3} color="text.highlight" textAlign="center">
+            <DragArea
+                display="flex"
+                height={1}
+                flexGrow={1}
+                justifyContent="space-between"
+                color="text.highlight"
+                pt={4}
+            >
+                <Box ml={4} width={20} />
                 Pomotroid
-            </Box>
+                <Box width={0} />
+            </DragArea>
             <Box
-                width={1 / 3}
+                pt={4}
                 display="flex"
                 justifyContent="flex-end"
                 alignItems="flex-start"
