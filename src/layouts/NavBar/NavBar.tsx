@@ -5,8 +5,11 @@ import styled from "styled-components"
 import { OpenMenuIcon } from "./OpenMenuIcon"
 import { CloseWindowIcon } from "./CloseWindowIcon"
 import { MinimizeWindowIcon } from "./MinimizeWindowIcon"
+
 import { Box } from "@styled"
 import { routes } from "@routing"
+
+const remote = window.require("electron").remote
 
 const DragArea = styled(Box)`
     -webkit-app-region: drag;
@@ -28,6 +31,9 @@ export const NavBar: React.FC = () => {
             setLastVisitedMenuTab(location.pathname)
         }
     }, [location, onMenu])
+
+    const closeWindow = () => remote.getCurrentWindow().close()
+    const minimizeWindow = () => remote.getCurrentWindow().minimize()
 
     return (
         <Box
@@ -61,12 +67,12 @@ export const NavBar: React.FC = () => {
                 alignItems="flex-start"
             >
                 <Box mr={4}>
-                    <button>
+                    <button onClick={minimizeWindow}>
                         <MinimizeWindowIcon size={20} />
                     </button>
                 </Box>
 
-                <button>
+                <button onClick={closeWindow}>
                     <CloseWindowIcon size={20} />
                 </button>
             </Box>

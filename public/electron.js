@@ -14,6 +14,7 @@ function createWindow() {
         frame: false,
         webPreferences: {
             devTools: isDev,
+            nodeIntegration: true,
         },
     })
     mainWindow.loadURL(
