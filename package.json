@@ -1,8 +1,13 @@
 {
-    "name": "my-app",
+    "name": "pomotroid-desktop",
+    "description": "working time distributor",
+    "author": "nodeTempest",
     "version": "0.1.0",
-    "private": true,
-    "homepage": ".",
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nodeTempest/pomotroid-desktop"
+    },
     "dependencies": {
         "@material-ui/system": "^4.9.10",
         "@reduxjs/toolkit": "^1.3.6",
@@ -33,12 +38,40 @@
         "redux-saga": "^1.1.3",
         "styled-components": "^4.4.1"
     },
+    "devDependencies": {
+        "concurrently": "^5.2.0",
+        "cross-env": "^7.0.2",
+        "customize-cra": "^0.9.1",
+        "electron": "^9.0.0",
+        "electron-builder": "^22.7.0",
+        "eslint": "^6.7.2",
+        "husky": "^3.1.0",
+        "lint-staged": "^9.5.0",
+        "prettier": "^1.19",
+        "react-app-rewired": "^2.1.5",
+        "tslint": "^5.20.1",
+        "tslint-config-prettier": "^1.18.0",
+        "tslint-plugin-prettier": "^2.0.1",
+        "tslint-react": "^4.1.0",
+        "typescript": "^3.7.3",
+        "typescript-tslint-plugin": "^0.5.5",
+        "wait-on": "^5.0.0"
+    },
+    "homepage": "./",
+    "main": "public/electron.js",
     "scripts": {
         "lint": "tslint -p .",
         "format": "prettier \"./**/*.{js,jsx,ts,tsx,css,scss,json,md,html}\" --write",
-        "start": "react-app-rewired start",
-        "build": "react-app-rewired build",
-        "eject": "react-scripts eject"
+        "react-start": "react-app-rewired start",
+        "react-build": "react-app-rewired build",
+        "react-eject": "react-scripts eject",
+        "electron-build": "yarn react-build && yarn electron-builder",
+        "electron-start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
+    },
+    "build": {
+        "publish": {
+            "provider": "github"
+        }
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -66,24 +99,5 @@
             "prettier --write",
             "git add"
         ]
-    },
-    "devDependencies": {
-        "concurrently": "^5.2.0",
-        "cross-env": "^7.0.2",
-        "customize-cra": "^0.9.1",
-        "electron": "^9.0.0",
-        "electron-builder": "^22.7.0",
-        "eslint": "^6.7.2",
-        "husky": "^3.1.0",
-        "lint-staged": "^9.5.0",
-        "prettier": "^1.19",
-        "react-app-rewired": "^2.1.5",
-        "tslint": "^5.20.1",
-        "tslint-config-prettier": "^1.18.0",
-        "tslint-plugin-prettier": "^2.0.1",
-        "tslint-react": "^4.1.0",
-        "typescript": "^3.7.3",
-        "typescript-tslint-plugin": "^0.5.5",
-        "wait-on": "^5.0.0"
     }
 }
