@@ -2,6 +2,8 @@
     "compilerOptions": {
         "baseUrl": "./src",
         "paths": {
+            "@app/*": ["app/*"],
+            "@app": ["app/index.ts"],
             "@assets/*": ["assets/*"],
             "@assets": ["assets/index.ts"],
             "@constants/*": ["constants/*"],

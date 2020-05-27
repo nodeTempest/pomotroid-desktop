@@ -4,9 +4,8 @@ import { Route, Redirect, Switch, useLocation } from "react-router-dom"
 import { routes } from "@routing"
 import { AppPage, MenuPage } from "@pages"
 import { AppLayout } from "@layouts"
-import { AppContainer } from "./AppContainer"
 
-const AppEntry: React.FC = () => {
+export const AppEntry: React.FC = () => {
     const location = useLocation()
     return (
         <AppLayout>
@@ -18,9 +17,3 @@ const AppEntry: React.FC = () => {
         </AppLayout>
     )
 }
-
-export const App: React.FC = () => (
-    <AppContainer>
-        <AppEntry />
-    </AppContainer>
-)
