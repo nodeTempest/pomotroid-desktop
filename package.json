@@ -64,8 +64,8 @@
         }
     },
     "lint-staged": {
-        "./**/*.{ts,tsx}": "yarn lint --fix",
-        "./**/*.{ts,tsx,json,md,mdx,css,html,yml,yaml,scss,sass}": [
+        "./**/*.{js,jsx,ts,tsx}": "yarn lint --fix",
+        "./**/*.{js,jsx,ts,tsx,json,md,mdx,css,html,yml,yaml,scss,sass}": [
             "prettier --write",
             "git add"
         ]
