@@ -14,6 +14,8 @@
             "@pages": ["pages/index.ts"],
             "@routing/*": ["routing/*"],
             "@routing": ["routing/index.ts"],
+            "@services/*": ["services/*"],
+            "@services": ["services/index.ts"],
             "@state/*": ["state/*"],
             "@state": ["state/index.ts"],
             "@styled/*": ["styled/*"],

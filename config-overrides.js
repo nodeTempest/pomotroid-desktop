@@ -11,6 +11,7 @@ module.exports = override(
         "@layouts": resolvePath("src/layouts"),
         "@pages": resolvePath("src/pages"),
         "@routing": resolvePath("src/routing"),
+        "@services": resolvePath("src/services"),
         "@state": resolvePath("src/state"),
         "@styled": resolvePath("src/styled"),
         "@utils": resolvePath("src/utils"),
