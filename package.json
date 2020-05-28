@@ -72,6 +72,9 @@
     "build": {
         "publish": {
             "provider": "github"
+        },
+        "win": {
+            "icon": "build/favicon.ico"
         }
     },
     "eslintConfig": {
