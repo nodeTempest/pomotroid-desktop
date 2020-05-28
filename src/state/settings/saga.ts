@@ -4,7 +4,13 @@ import { REHYDRATE } from "redux-persist"
 
 import { RootStateType } from "@state"
 
-import { setVolume } from "./slice"
+import {
+    setVolume,
+    setAlwaysOnTop,
+    setDesktopNotifications,
+    setMinimizeToTray,
+    ISettings,
+} from "./slice"
 import { setSfxVolume } from "./sfx"
 
 export function* setVolumeWatcher() {
@@ -14,10 +20,36 @@ export function* setVolumeWatcher() {
     }
 }
 
+export function* alwaysOnTopWatcher() {
+    while (true) {
+        const action: PayloadAction<boolean> = yield take(setAlwaysOnTop)
+        // electron api
+    }
+}
+
+export function* desktopNotificationsWatcher() {
+    while (true) {
+        const action: PayloadAction<boolean> = yield take(
+            setDesktopNotifications
+        )
+        // electron api
+    }
+}
+
+export function* minimizeToTrayWatcher() {
+    while (true) {
+        const action: PayloadAction<boolean> = yield take(setMinimizeToTray)
+        // electron api
+    }
+}
+
 function* bottstrapReducerWorker() {
-    const volume: number = yield select(
-        (state: RootStateType) => state.settings.volume
-    )
+    const {
+        volume,
+        alwaysOnTop,
+        desktopNotifications,
+        minimizeToTray,
+    }: ISettings = yield select((state: RootStateType) => state.settings)
 
     setSfxVolume(volume)
 }
