@@ -12,6 +12,7 @@ import {
 
 import { PayloadAction } from "@reduxjs/toolkit"
 import { RootStateType, sfx } from "@state"
+import { drawTrayImg } from "@services"
 
 import {
     startCountdown,
@@ -26,7 +27,7 @@ import {
     IApp,
 } from "./slice"
 import { startTimer, clearTimer, timerIsOver } from "./middlewareActions"
-import { currentStageSelector } from "./selectors"
+import { currentStageSelector, currentStageDurationSelector } from "./selectors"
 
 const timerChannel = (ms: number) => {
     return eventChannel(emit => {
@@ -151,4 +152,32 @@ function* setDefaultsWorker() {
 
 export function* setDefaultsWatcher() {
     yield takeEvery(setDefaults, setDefaultsWorker)
+}
+
+export function* drawTrayImgWatcher() {
+    while (true) {
+        yield take([
+            updateRemainingTime,
+            nextStage,
+            resetCurrentStage,
+            changeDuration,
+            changeTotalRounds,
+            setDefaults,
+        ])
+        const remainingTime: number = yield select(
+            (state: RootStateType) => state.app.remainingTime
+        )
+        const currentStage: ReturnType<typeof currentStageSelector> = yield select(
+            currentStageSelector
+        )
+        const currentStageDuration: ReturnType<typeof currentStageDurationSelector> = yield select(
+            currentStageDurationSelector
+        )
+
+        yield call(
+            drawTrayImg,
+            currentStage,
+            (remainingTime / currentStageDuration) * 360
+        )
+    }
 }
