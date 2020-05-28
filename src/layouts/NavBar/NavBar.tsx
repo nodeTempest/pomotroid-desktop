@@ -56,7 +56,7 @@ export const NavBar: React.FC = () => {
                 color="text.highlight"
                 pt={4}
             >
-                <Box ml={4} width={20} />
+                <Box ml={4} width={15} />
                 Pomotroid
                 <Box width={0} />
             </DragArea>
