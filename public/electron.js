@@ -1,14 +1,7 @@
-const electron = require("electron")
+const { app, BrowserWindow, globalShortcut } = require("electron")
+
 const isDev = require("electron-is-dev")
 const path = require("path")
-const {
-    default: installExtension,
-    REDUX_DEVTOOLS,
-} = require("electron-devtools-installer")
-
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
-const globalShortcut = electron.globalShortcut
 
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
@@ -32,9 +25,16 @@ const createWindow = () => {
         mainWindow = null
     })
 
-    globalShortcut.register("f5", () => mainWindow.reload())
+    if (isDev) {
+        globalShortcut.register("f5", () => mainWindow.reload())
 
-    installExtension(REDUX_DEVTOOLS)
+        const {
+            default: installExtension,
+            REDUX_DEVTOOLS,
+        } = require("electron-devtools-installer")
+
+        installExtension(REDUX_DEVTOOLS)
+    }
 }
 
 app.on("ready", createWindow)
