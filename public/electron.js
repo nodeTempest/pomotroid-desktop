@@ -8,6 +8,7 @@ const createWindow = () => {
         width: 360,
         height: 480,
         frame: false,
+        show: false,
         resizable: isDev,
         webPreferences: {
             devTools: isDev,
@@ -23,6 +24,11 @@ const createWindow = () => {
 
     mainWindow.on("closed", () => {
         mainWindow = null
+    })
+
+    mainWindow.on("ready-to-show", () => {
+        mainWindow.show()
+        mainWindow.focus()
     })
 
     if (isDev) {
