@@ -30,7 +30,7 @@ const CheckCircle = styled.div<ICheckCircle>`
 interface ICheckBoxProps {
     checked: boolean
     text: string
-    onChange?: (checked: boolean) => void
+    onChange: (checked: boolean) => void
 }
 
 export const CheckBox: React.FC<ICheckBoxProps> = ({
@@ -41,9 +41,7 @@ export const CheckBox: React.FC<ICheckBoxProps> = ({
     return (
         <Box
             onClick={() => {
-                if (onChange) {
-                    onChange(!checked)
-                }
+                onChange(!checked)
             }}
             position="relative"
             bgcolor="bg.dark"
