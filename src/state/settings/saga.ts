@@ -1,4 +1,4 @@
-import { take, takeEvery, select } from "redux-saga/effects"
+import { take, takeEvery, select, put } from "redux-saga/effects"
 import { PayloadAction } from "@reduxjs/toolkit"
 import { REHYDRATE } from "redux-persist"
 
@@ -13,6 +13,8 @@ import {
 } from "./slice"
 import { setSfxVolume } from "./sfx"
 
+const remote = window.require("electron").remote
+
 export function* setVolumeWatcher() {
     while (true) {
         const action: PayloadAction<number> = yield take(setVolume)
@@ -23,7 +25,7 @@ export function* setVolumeWatcher() {
 export function* alwaysOnTopWatcher() {
     while (true) {
         const action: PayloadAction<boolean> = yield take(setAlwaysOnTop)
-        // electron api
+        remote.getCurrentWindow().setAlwaysOnTop(action.payload)
     }
 }
 
@@ -51,7 +53,8 @@ function* bottstrapReducerWorker() {
         minimizeToTray,
     }: ISettings = yield select((state: RootStateType) => state.settings)
 
-    setSfxVolume(volume)
+    yield put(setVolume(volume))
+    yield put(setAlwaysOnTop(alwaysOnTop))
 }
 
 export function* bottstrapReducerWatcher() {
