@@ -9,7 +9,7 @@ import {
 } from "react-use"
 
 import { theme } from "@styled"
-import { describeArc, calcDegPerSec } from "@utils"
+import { describeArcSvg, calcDegPerSec } from "@utils"
 import { StagesType } from "@state"
 import { SECOND } from "@constants"
 
@@ -93,13 +93,13 @@ export const Countdown: React.FC<IProps> = ({
         <svg viewBox="0 0 100 100" width="230" height="230">
             <path
                 strokeWidth={1}
-                d={describeArc(50, 50, 45, 0, 360)}
+                d={describeArcSvg(50, 50, 45, 0, 360)}
                 stroke={theme.palette.button.fg.dark}
                 fill="none"
             />
             <path
                 strokeWidth={4}
-                d={describeArc(50, 50, 45, 0, angle)}
+                d={describeArcSvg(50, 50, 45, 0, angle)}
                 stroke={theme.palette.stages[stage]}
                 fill="none"
                 strokeLinecap="round"

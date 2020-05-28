@@ -12,7 +12,7 @@ export const polarToCartesian = (
     }
 }
 
-export const describeArc = (
+export const describeArcSvg = (
     x: number,
     y: number,
     radius: number,
@@ -46,3 +46,19 @@ export const describeArc = (
 
     return d
 }
+
+export const degToPI = (deg: number) => (deg / 180) * Math.PI
+
+export const describeArcCanvas = (
+    x: number,
+    y: number,
+    radius: number,
+    startAngle: number,
+    endAngle: number
+): Parameters<CanvasRenderingContext2D["arc"]> => [
+    x,
+    y,
+    radius,
+    degToPI(startAngle - 90),
+    degToPI(endAngle - 90),
+]
