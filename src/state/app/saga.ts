@@ -11,7 +11,8 @@ import {
 } from "redux-saga/effects"
 
 import { PayloadAction } from "@reduxjs/toolkit"
-import { RootStateType, sfx, drawTrayImg } from "@state"
+import { RootStateType, drawTrayImg } from "@state"
+import { playStageSfx } from "@services"
 
 import {
     startCountdown,
@@ -26,7 +27,7 @@ import {
     IApp,
 } from "./slice"
 import { startTimer, clearTimer, timerIsOver } from "./middlewareActions"
-import { currentStageSelector, currentStageDurationSelector } from "./selectors"
+import { currentStageSelector } from "./selectors"
 
 const timerChannel = (ms: number) => {
     return eventChannel(emit => {
@@ -103,18 +104,11 @@ export function* resetCurrentStageWatcher() {
     yield takeEvery(resetCurrentStage, resetCurrentStageWorker)
 }
 
-function* nextStageWorker() {
-    yield put(resetCurrentStage())
-
-    const currentStage: ReturnType<typeof currentStageSelector> = yield select(
-        currentStageSelector
-    )
-
-    sfx[currentStage].play()
-}
-
 export function* nextStageWatcher() {
-    yield takeEvery(nextStage, nextStageWorker)
+    while (true) {
+        yield take(nextStage)
+        yield put(resetCurrentStage())
+    }
 }
 
 function* changeDurationWorker(action: PayloadAction<IChangeDuration>) {
@@ -145,12 +139,11 @@ export function* changeTotalRoundsWatcher() {
     yield takeEvery(changeTotalRounds, changeTotalRoundsWorker)
 }
 
-function* setDefaultsWorker() {
-    yield put(clearTimer())
-}
-
 export function* setDefaultsWatcher() {
-    yield takeEvery(setDefaults, setDefaultsWorker)
+    while (true) {
+        yield take(setDefaults)
+        yield put(clearTimer())
+    }
 }
 
 export function* drawTrayImgFlow() {
@@ -171,5 +164,13 @@ export function* drawTrayImgFlow() {
         if (minimized) {
             yield put(drawTrayImg())
         }
+    }
+}
+
+export function* playStageSfxFlow() {
+    while (true) {
+        yield take(nextStage)
+        const currentStage = yield select(currentStageSelector)
+        yield call(playStageSfx, currentStage)
     }
 }

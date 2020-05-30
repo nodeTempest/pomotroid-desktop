@@ -19,7 +19,7 @@ import {
     setMinimizeToTray,
     ISettings,
 } from "./slice"
-import { setSfxVolume } from "./sfx"
+import { setSfxVolume } from "@services"
 import {
     drawTrayImg as drawTrayImgAction,
     removeTray as removeTrayAction,
@@ -30,7 +30,7 @@ const remote = window.require("electron").remote
 export function* setVolumeWatcher() {
     while (true) {
         const action: PayloadAction<number> = yield take(setVolume)
-        setSfxVolume(action.payload)
+        yield call(setSfxVolume, action.payload)
     }
 }
 
