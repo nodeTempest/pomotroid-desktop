@@ -15,7 +15,6 @@ import {
 import {
     setVolume,
     setAlwaysOnTop,
-    setDesktopNotifications,
     setMinimizeToTray,
     ISettings,
 } from "./slice"
@@ -28,8 +27,6 @@ import {
     removeTray as removeTrayAction,
 } from "./middlewareActions"
 
-const remote = window.require("electron").remote
-
 export function* setVolumeWatcher() {
     while (true) {
         const action: PayloadAction<number> = yield take(setVolume)
@@ -41,15 +38,6 @@ export function* alwaysOnTopWatcher() {
     while (true) {
         const action: PayloadAction<boolean> = yield take(setAlwaysOnTop)
         yield call(setAlwaysOnTopService, action.payload)
-    }
-}
-
-export function* desktopNotificationsWatcher() {
-    while (true) {
-        const action: PayloadAction<boolean> = yield take(
-            setDesktopNotifications
-        )
-        // electron api
     }
 }
 
@@ -66,12 +54,9 @@ export function* minimizeToTrayWatcher() {
 }
 
 function* bottstrapReducerWorker() {
-    const {
-        volume,
-        alwaysOnTop,
-        desktopNotifications,
-        minimizeToTray,
-    }: ISettings = yield select((state: RootStateType) => state.settings)
+    const { volume, alwaysOnTop, minimizeToTray }: ISettings = yield select(
+        (state: RootStateType) => state.settings
+    )
 
     yield put(setVolume(volume))
     yield put(setAlwaysOnTop(alwaysOnTop))

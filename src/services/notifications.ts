@@ -1,5 +1,5 @@
 import { StagesType } from "@state"
-import { MINUTE, SECOND } from "@constants"
+import { MINUTE } from "@constants"
 
 const messages = {
     work: {
