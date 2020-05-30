@@ -12,7 +12,7 @@ import {
 
 import { PayloadAction } from "@reduxjs/toolkit"
 import { RootStateType, drawTrayImg } from "@state"
-import { playStageSfx } from "@services"
+import { playStageSfx, showNotification } from "@services"
 
 import {
     startCountdown,
@@ -27,7 +27,7 @@ import {
     IApp,
 } from "./slice"
 import { startTimer, clearTimer, timerIsOver } from "./middlewareActions"
-import { currentStageSelector } from "./selectors"
+import { currentStageSelector, currentStageDurationSelector } from "./selectors"
 
 const timerChannel = (ms: number) => {
     return eventChannel(emit => {
@@ -172,5 +172,23 @@ export function* playStageSfxFlow() {
         yield take(nextStage)
         const currentStage = yield select(currentStageSelector)
         yield call(playStageSfx, currentStage)
+    }
+}
+
+export function* notificationFlow() {
+    while (true) {
+        yield take(nextStage)
+        const notificationsAllowed: boolean = yield select(
+            (state: RootStateType) => state.settings.desktopNotifications
+        )
+
+        if (notificationsAllowed) {
+            const currentStage = yield select(currentStageSelector)
+            const currentStageDuration = yield select(
+                currentStageDurationSelector
+            )
+
+            yield call(showNotification, currentStage, currentStageDuration)
+        }
     }
 }

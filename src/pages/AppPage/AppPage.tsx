@@ -13,6 +13,7 @@ import {
     resetCurrentStage,
     setVolume,
 } from "@state"
+import { Box } from "@styled"
 
 import { Countdown } from "./Countdown"
 import { Rounds } from "./Rounds"
@@ -20,8 +21,6 @@ import { PlayButton } from "./PlayButton"
 import { ResetButton } from "./ResetButton"
 import { NextStageIcon } from "./NextStageIcon"
 import { Volume } from "./Volume"
-
-import { Box } from "@styled"
 
 export const AppPage = () => {
     const dispatch = useDispatch()
