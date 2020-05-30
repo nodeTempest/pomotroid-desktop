@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import { useSelector } from "react-redux"
 import { Link, useLocation } from "react-router-dom"
 import styled from "styled-components"
 
@@ -8,7 +9,8 @@ import { MinimizeWindowIcon } from "./MinimizeWindowIcon"
 
 import { Box } from "@styled"
 import { routes } from "@routing"
-import { closeWindow, minimizeWindow } from "@services"
+import { closeWindow, minimizeWindow, hideWindow } from "@services"
+import { RootStateType } from "@state"
 
 const DragArea = styled(Box)`
     -webkit-app-region: drag;
@@ -30,6 +32,13 @@ export const NavBar: React.FC = () => {
             setLastVisitedMenuTab(location.pathname)
         }
     }, [location, onMenu])
+
+    const minimizedToTray = useSelector(
+        (state: RootStateType) => state.settings.minimizeToTray
+    )
+
+    const handleCloseWindow = closeWindow
+    const handleMinimizeWindow = minimizedToTray ? hideWindow : minimizeWindow
 
     return (
         <Box
@@ -63,12 +72,12 @@ export const NavBar: React.FC = () => {
                 alignItems="flex-start"
             >
                 <Box mr={4}>
-                    <button onClick={() => minimizeWindow()}>
+                    <button onClick={handleMinimizeWindow}>
                         <MinimizeWindowIcon size={20} />
                     </button>
                 </Box>
 
-                <button onClick={() => closeWindow()}>
+                <button onClick={handleCloseWindow}>
                     <CloseWindowIcon size={20} />
                 </button>
             </Box>

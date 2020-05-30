@@ -53,6 +53,13 @@ const createWindow = () => {
     }
 }
 
+const createTray = img => {
+    tray = new Tray(img)
+    tray.on("click", () => {
+        mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show()
+    })
+}
+
 const removeTray = () => {
     if (tray) {
         tray.destroy()
@@ -70,7 +77,7 @@ ipcMain.on("set-tray-image", (_, base64) => {
     const img = nativeImage.createFromDataURL(base64)
 
     if (!tray) {
-        tray = new Tray(img)
+        createTray(img)
     } else {
         tray.setImage(img)
     }
