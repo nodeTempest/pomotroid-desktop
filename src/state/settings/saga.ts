@@ -19,7 +19,10 @@ import {
     setMinimizeToTray,
     ISettings,
 } from "./slice"
-import { setSfxVolume } from "@services"
+import {
+    setSfxVolume,
+    setAlwaysOnTop as setAlwaysOnTopService,
+} from "@services"
 import {
     drawTrayImg as drawTrayImgAction,
     removeTray as removeTrayAction,
@@ -37,7 +40,7 @@ export function* setVolumeWatcher() {
 export function* alwaysOnTopWatcher() {
     while (true) {
         const action: PayloadAction<boolean> = yield take(setAlwaysOnTop)
-        remote.getCurrentWindow().setAlwaysOnTop(action.payload)
+        yield call(setAlwaysOnTopService, action.payload)
     }
 }
 
