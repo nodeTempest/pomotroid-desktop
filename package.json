@@ -1,9 +1,14 @@
 {
-    "name": "pomotroid-desktop",
+    "name": "pomotroid",
     "description": "working time distributor",
-    "author": "nodeTempest",
+    "author": {
+        "email": "nodeTempest@gmail.com",
+        "name": "Topchyi Nikolay",
+        "url": "https://github.com/nodeTempest"
+    },
     "version": "0.1.0",
     "private": false,
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/nodeTempest/pomotroid-desktop"
@@ -70,11 +75,25 @@
         "electron-start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
     },
     "build": {
+        "productName": "Pomotroid",
         "publish": {
             "provider": "github"
         },
         "win": {
-            "icon": "build/favicon.ico"
+            "icon": "build/favicon.ico",
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64",
+                        "ia32"
+                    ]
+                }
+            ]
+        },
+        "nsis": {
+            "artifactName": "${productName} ${version} installer.${ext}",
+            "oneClick": true
         }
     },
     "eslintConfig": {

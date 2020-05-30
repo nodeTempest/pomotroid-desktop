@@ -10,8 +10,8 @@ export interface ISettings {
 const initialState: ISettings = {
     volume: 20,
     alwaysOnTop: false,
-    desktopNotifications: false,
-    minimizeToTray: false,
+    desktopNotifications: true,
+    minimizeToTray: true,
 }
 
 const issuesDisplaySlice = createSlice({
