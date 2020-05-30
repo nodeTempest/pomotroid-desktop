@@ -92,7 +92,7 @@
             ]
         },
         "nsis": {
-            "artifactName": "${productName} ${version} installer.${ext}",
+            "artifactName": "${productName} v${version} installer.${ext}",
             "oneClick": true
         }
     },
