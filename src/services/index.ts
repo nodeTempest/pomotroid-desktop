@@ -1,1 +1,1 @@
-export * from "./drawTrayImg"
+export * from "./tray"

@@ -11,8 +11,7 @@ import {
 } from "redux-saga/effects"
 
 import { PayloadAction } from "@reduxjs/toolkit"
-import { RootStateType, sfx } from "@state"
-import { drawTrayImg } from "@services"
+import { RootStateType, sfx, drawTrayImg } from "@state"
 
 import {
     startCountdown,
@@ -154,7 +153,7 @@ export function* setDefaultsWatcher() {
     yield takeEvery(setDefaults, setDefaultsWorker)
 }
 
-export function* drawTrayImgWatcher() {
+export function* drawTrayImgFlow() {
     while (true) {
         yield take([
             updateRemainingTime,
@@ -164,20 +163,13 @@ export function* drawTrayImgWatcher() {
             changeTotalRounds,
             setDefaults,
         ])
-        const remainingTime: number = yield select(
-            (state: RootStateType) => state.app.remainingTime
-        )
-        const currentStage: ReturnType<typeof currentStageSelector> = yield select(
-            currentStageSelector
-        )
-        const currentStageDuration: ReturnType<typeof currentStageDurationSelector> = yield select(
-            currentStageDurationSelector
+
+        const minimized: boolean = yield select(
+            (state: RootStateType) => state.settings.minimizeToTray
         )
 
-        yield call(
-            drawTrayImg,
-            currentStage,
-            (remainingTime / currentStageDuration) * 360
-        )
+        if (minimized) {
+            yield put(drawTrayImg())
+        }
     }
 }

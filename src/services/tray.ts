@@ -27,3 +27,7 @@ export const drawTrayImg = (stage: StagesType, degrees: number) => {
 
     ipcRenderer.send("set-tray-image", dataURL)
 }
+
+export const removeTray = () => {
+    ipcRenderer.send("remove-tray")
+}

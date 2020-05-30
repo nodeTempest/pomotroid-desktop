@@ -10,8 +10,11 @@ const {
 const isDev = require("electron-is-dev")
 const path = require("path")
 
+let mainWindow = null
+let tray = null
+
 const createWindow = () => {
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 360,
         height: 480,
         frame: false,
@@ -48,21 +51,29 @@ const createWindow = () => {
 
         installExtension(REDUX_DEVTOOLS)
     }
+}
 
-    const icon = nativeImage.createFromDataURL(
-        "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIGlkPSJMYXllcl8xIiBkYXRhLW5hbWU9IkxheWVyIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPg0KCTxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjMmYzODRiIiAvPg0KCTxjaXJjbGUNCgkJY3g9IjUwIg0KCQljeT0iNTAiDQoJCXI9IjI5Ig0KCQlmaWxsPSJub25lIg0KCQlzdHJva2U9IiNmZTRkNGMiDQoJCXN0cm9rZS13aWR0aD0iMTgiDQoJLz4NCjwvc3ZnPg=="
-    )
-
-    const tray = new Tray(icon)
-
-    ipcMain.on("set-tray-image", (_, base64) => {
-        const img = nativeImage.createFromDataURL(base64)
-        tray.setImage(img)
-    })
-
-    app.on("before-quit", () => tray.destroy())
+const removeTray = () => {
+    if (tray) {
+        tray.destroy()
+        tray = null
+    }
 }
 
 app.on("ready", createWindow)
 
 app.on("window-all-closed", () => app.quit())
+
+app.on("before-quit", removeTray)
+
+ipcMain.on("set-tray-image", (_, base64) => {
+    const img = nativeImage.createFromDataURL(base64)
+
+    if (!tray) {
+        tray = new Tray(img)
+    } else {
+        tray.setImage(img)
+    }
+})
+
+ipcMain.on("remove-tray", removeTray)
