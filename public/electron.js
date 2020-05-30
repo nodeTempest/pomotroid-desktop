@@ -5,6 +5,7 @@ const {
     globalShortcut,
     Tray,
     nativeImage,
+    Menu,
 } = require("electron")
 
 const isDev = require("electron-is-dev")
@@ -58,6 +59,12 @@ const createTray = img => {
     tray.on("click", () => {
         mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show()
     })
+    tray.setToolTip("Pomotroid\nClick to restore")
+    tray.setContextMenu(
+        Menu.buildFromTemplate([
+            { label: "Exit", type: "normal", role: "quit" },
+        ])
+    )
 }
 
 const removeTray = () => {
