@@ -4,11 +4,13 @@ import { REHYDRATE } from "redux-persist"
 
 import {
     RootStateType,
-    drawTrayImg as drawTrayImgAction,
     currentStageDurationSelector,
     currentStageSelector,
 } from "@state"
-import { removeTray, drawTrayImg as drawTrayImgService } from "@services"
+import {
+    removeTray as removeTrayService,
+    drawTrayImg as drawTrayImgService,
+} from "@services"
 
 import {
     setVolume,
@@ -18,6 +20,10 @@ import {
     ISettings,
 } from "./slice"
 import { setSfxVolume } from "./sfx"
+import {
+    drawTrayImg as drawTrayImgAction,
+    removeTray as removeTrayAction,
+} from "./middlewareActions"
 
 const remote = window.require("electron").remote
 
@@ -51,7 +57,7 @@ export function* minimizeToTrayWatcher() {
         if (action.payload === true) {
             yield put(drawTrayImgAction())
         } else {
-            yield call(removeTray)
+            yield put(removeTrayAction())
         }
     }
 }
@@ -93,4 +99,12 @@ function* drawTrayImgWorker() {
 
 export function* drawTrayImgWatcher() {
     yield takeEvery(drawTrayImgAction, drawTrayImgWorker)
+}
+
+function* removeTrayWorker() {
+    yield call(removeTrayService)
+}
+
+export function* removeTrayWatcher() {
+    yield takeEvery(removeTrayAction, removeTrayWorker)
 }
