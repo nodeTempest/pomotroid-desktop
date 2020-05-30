@@ -4,8 +4,8 @@
 *** 
 
 ### Warning: 
-#### App is configured to be run on Windows OS only.
-#### App is unsigned because it costs some $ so don't be afraid when you receieve security warning when downloading installer.
+#### App is configured to be run on Windows OS only (because i don't have possibility to test it for other operating systems =(
+#### App is unsigned because it costs some $ so please don't be afraid when you receieve security warning when downloading installer.
 #### App is completely malware free.
 
 ***
